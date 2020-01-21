@@ -1,15 +1,32 @@
+/*
+ * Engine class
+ * Taken from GBC GAME1011 SDL Template
+ * Editors:
+ * - Ryan Ethier
+ */
+
+//includes
 #include "Engine.h"
 #include <iostream>
 #define WIDTH 1024
 #define HEIGHT 768
 #define FPS 60
+
 using namespace std;
 
-//this is a test edit, please disregard me
+//constructor
+Engine::Engine() :m_bRunning(false)
+{
+	cout << "Engine class constructed!" << endl;
+}
 
-Engine::Engine() :m_bRunning(false) { cout << "Engine class constructed!" << endl; }
-Engine::~Engine() {}
+//deconstructor
+Engine::~Engine()
+{
+	
+}
 
+//methods
 bool Engine::Init(const char* title, int xpos, int ypos, int width, int height, int flags)
 {
 	cout << "Initializing game..." << endl;
@@ -90,7 +107,7 @@ void Engine::Update()
 
 void Engine::Render()
 {
-	//wile solely invoke the Render() of the FSM
+	//will solely invoke the Render() of the FSM
 	SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
 
 }
@@ -105,9 +122,9 @@ void Engine::Clean()
 
 int Engine::Run()
 {
-	if (m_bRunning) // What does this do and what can it prevent?
+	if (m_bRunning) 
 		return -1;
-	if (Init("GAME1007_SDL_Setup", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0) == false)
+	if (Init("Airlock", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0) == false)
 		return 1;
 	while (m_bRunning) // Main engine loop.
 	{
@@ -124,6 +141,6 @@ int Engine::Run()
 
 Engine& Engine::Instance() //static method that creates the instance
 {
-	static Engine instance; //Our static instance. Magic statics prevents this from executing more than once
+	static Engine instance;
 	return instance;
 }
