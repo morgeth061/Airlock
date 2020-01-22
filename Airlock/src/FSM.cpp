@@ -6,6 +6,7 @@
  */
 #include "FSM.h"
 #include "Engine.h"
+#include "TextureManager.h"
 #include <iostream>
 using namespace std;
 
@@ -91,6 +92,7 @@ TitleState::TitleState() {}
 void TitleState::Enter()
 {
 	cout << "Entering Title..." << endl;
+	TheTextureManager::Instance()->load("../Assets/textures/Airlock_Logo.png", "title", Engine::Instance().GetRenderer());
 }
 
 void TitleState::Update()
@@ -104,6 +106,7 @@ void TitleState::Render()
 	cout << "Rendering Title..." << endl;
 	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), 100, 100, 100, 255);
 	SDL_RenderClear(Engine::Instance().GetRenderer());
+	TheTextureManager::Instance()->draw("title", 1028/2, 768/2, Engine::Instance().GetRenderer(), true);
 	State::Render();
 }
 

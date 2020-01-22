@@ -23,11 +23,13 @@
     <ClCompile Include="..\src\FSM.cpp" />
     <ClCompile Include="..\src\Main.cpp" />
     <ClCompile Include="..\src\TextManager.cpp" />
+    <ClCompile Include="..\src\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Engine.h" />
     <ClInclude Include="..\src\FSM.h" />
     <ClInclude Include="..\src\TextManager.h" />
+    <ClInclude Include="..\src\TextureManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
