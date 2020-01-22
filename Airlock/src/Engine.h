@@ -10,6 +10,7 @@
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
+#include "FSM.h"
 
 class Engine
 {
@@ -20,7 +21,8 @@ private:
 	Uint32 m_start, m_end, m_delta, m_fps; // Fixed timestep variables.
 	SDL_Window* m_pWindow; // This represents the SDL window.
 	SDL_Renderer* m_pRenderer; // This represents the buffer to draw to.
-
+	FSM* m_pFSM;
+	
 	//methods
 private:
 	bool Init(const char* title, int xpos, int ypos, int width, int height, int flags);
@@ -37,4 +39,6 @@ public:
 	int Run();
 	static Engine& Instance();
 	bool KeyDown(SDL_Scancode c);
+	SDL_Renderer* GetRenderer();
+	FSM& GetFSM();
 };
