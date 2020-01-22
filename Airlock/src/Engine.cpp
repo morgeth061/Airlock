@@ -40,7 +40,10 @@ bool Engine::Init(const char* title, int xpos, int ypos, int width, int height, 
 			m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 			if (m_pRenderer != nullptr) // Renderer init success.
 			{
-
+				if (TTF_Init() >= 0) {
+					cout << "TTF INIT" << endl;
+				}
+				else return false;
 			}
 			else return false; // Renderer init fail.
 		}
@@ -49,7 +52,8 @@ bool Engine::Init(const char* title, int xpos, int ypos, int width, int height, 
 	else return false; // SDL init fail.
 	m_fps = (Uint32)round((1 / (double)FPS) * 1000); // Sets FPS in milliseconds and rounds.
 	m_iKeystates = SDL_GetKeyboardState(nullptr);
-
+	m_pFSM = new FSM();
+	m_pFSM->ChangeState(new TitleState());
 	m_bRunning = true; // Everything is okay, start the engine.
 	cout << "Init success!" << endl;
 	return true;
@@ -102,13 +106,12 @@ bool Engine::KeyDown(SDL_Scancode c)
 
 void Engine::Update()
 {
-	//will solely invoke the Update() of the FSM
+	m_pFSM->Update();
 }
 
 void Engine::Render()
 {
-	//will solely invoke the Render() of the FSM
-	SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
+	m_pFSM->Render();
 
 }
 
@@ -117,6 +120,7 @@ void Engine::Clean()
 	cout << "Cleaning game." << endl;
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_DestroyWindow(m_pWindow);
+	TTF_Quit();
 	SDL_Quit();
 }
 
@@ -144,3 +148,15 @@ Engine& Engine::Instance() //static method that creates the instance
 	static Engine instance;
 	return instance;
 }
+
+SDL_Renderer* Engine::GetRenderer()
+{
+	return m_pRenderer;
+}
+
+FSM& Engine::GetFSM()
+{
+	return *m_pFSM;
+}
+
+

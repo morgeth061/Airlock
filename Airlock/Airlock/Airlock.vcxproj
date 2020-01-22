@@ -20,10 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Engine.cpp" />
+    <ClCompile Include="..\src\FSM.cpp" />
     <ClCompile Include="..\src\Main.cpp" />
+    <ClCompile Include="..\src\TextManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Engine.h" />
+    <ClInclude Include="..\src\FSM.h" />
+    <ClInclude Include="..\src\TextManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
