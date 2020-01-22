@@ -1,3 +1,9 @@
+/*
+ * FSM header
+ * Taken from GBC GAME1017 SDL Template
+ * Editors:
+ * - Ryan Ethier
+ */
 #pragma once
 #include <vector>
 using namespace std;

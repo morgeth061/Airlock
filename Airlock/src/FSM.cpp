@@ -1,3 +1,9 @@
+/*
+ * FSM class
+ * Taken from GBC GAME1017 SDL Template
+ * Editors:
+ * - Ryan Ethier
+ */
 #include "FSM.h"
 #include "Engine.h"
 #include <iostream>
