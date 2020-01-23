@@ -1,6 +1,6 @@
 /*
  * Engine class
- * Taken from GBC GAME1011 SDL Template
+ * Adapted from GBC GAME1011 SDL Template
  * Editors:
  * - Ryan Ethier
  */

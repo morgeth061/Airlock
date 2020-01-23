@@ -1,6 +1,6 @@
 /*
  * Texture Manager class
- * Taken from GBC GAME3001 SDL Template
+ * Adapted from GBC GAME3001 SDL Template
  * Editors:
  * - Ryan Ethier
  */

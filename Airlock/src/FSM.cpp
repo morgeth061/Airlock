@@ -1,42 +1,57 @@
 /*
  * FSM class
- * Taken from GBC GAME1017 SDL Template
+ * Adapted from GBC GAME1017 SDL Template
  * Editors:
  * - Ryan Ethier
  */
+
+//includes
 #include "FSM.h"
 #include "Engine.h"
 #include "TextureManager.h"
 #include <iostream>
+
 using namespace std;
 
-// Begin State.
+
+//GENERAL
+
+
+//begin current state
 void State::Render()
 {
 	SDL_RenderPresent(Engine::Instance().GetRenderer());
 }
 
-void State::Resume() {}
-// End State.
-
-// Begin PauseState.
-PauseState::PauseState() {}
-
-void PauseState::Enter()
+void State::Resume()
 {
-	cout << "Entering Pause..." << endl;
+	
+}
+//end current state
+
+/*
+ * PAUSE STATE
+ */
+
+PauseState::PauseState() //ctor. of pause state
+{
+	
 }
 
-void PauseState::Update()
+void PauseState::Enter() //"on enter" for pause state
 {
-	if (Engine::Instance().KeyDown(SDL_SCANCODE_R))
+	cout << "Entering Pause State" << endl;
+}
+
+void PauseState::Update() //update for pause state
+{
+	if (Engine::Instance().KeyDown(SDL_SCANCODE_RETURN))
 		Engine::Instance().GetFSM().PopState();
 }
 
-void PauseState::Render()
+void PauseState::Render() //render for pause state
 {
-	cout << "Rendering Pause..." << endl;
-	Engine::Instance().GetFSM().GetStates().front()->Render(); // Invoke Render of GameState.
+	Engine::Instance().GetFSM().GetStates().front()->Render();
 	SDL_SetRenderDrawBlendMode(Engine::Instance().GetRenderer(), SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), 0, 0, 255, 128);
 	SDL_Rect rect = { 256, 128, 512, 512 };
@@ -44,21 +59,27 @@ void PauseState::Render()
 	State::Render();
 }
 
-void PauseState::Exit()
+void PauseState::Exit() //"on exit" for pause state
 {
 	cout << "Exiting Pause..." << endl;
 }
-// End PauseState.
+//end of pause state
 
-// Begin GameState.
-GameState::GameState() {}
+/*
+ * GAME STATE
+ */
 
-void GameState::Enter()
+GameState::GameState() //ctor. of game state
+{
+	
+}
+
+void GameState::Enter() //"on enter" of game state
 {
 	cout << "Entering Game..." << endl;
 }
 
-void GameState::Update()
+void GameState::Update() //update for game state
 {
 	if (Engine::Instance().KeyDown(SDL_SCANCODE_P))
 		Engine::Instance().GetFSM().PushState(new PauseState());
@@ -66,59 +87,78 @@ void GameState::Update()
 		Engine::Instance().GetFSM().ChangeState(new TitleState());
 }
 
-void GameState::Render()
+void GameState::Render() //render for game state
 {
-	cout << "Rendering Game..." << endl;
 	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), 0, 255, 0, 255);
 	SDL_RenderClear(Engine::Instance().GetRenderer());
 	if (dynamic_cast<GameState*>(Engine::Instance().GetFSM().GetStates().back()))
 		State::Render();
 }
 
-void GameState::Exit()
+void GameState::Exit() //"on exit" for game state
 {
 	cout << "Exiting Game..." << endl;
 }
 
-void GameState::Resume()
+void GameState::Resume() //on resume from pause
 {
 	cout << "Resuming Game..." << endl;
 }
 // End GameState.
 
-// Begin TitleState.
-TitleState::TitleState() {}
+/*
+ * TITLE STATE
+ */
 
-void TitleState::Enter()
+// Begin TitleState.
+TitleState::TitleState() //ctor. for title state
 {
-	cout << "Entering Title..." << endl;
-	TheTextureManager::Instance()->load("../Assets/textures/Airlock_Logo.png", "title", Engine::Instance().GetRenderer());
+	
 }
 
-void TitleState::Update()
+void TitleState::Enter() //"on enter" for title state
 {
-	if (Engine::Instance().KeyDown(SDL_SCANCODE_N))
+	cout << "Entering Title..." << endl;
+	Texture::Instance()->load("../Assets/textures/Airlock_Logo.png", "title", Engine::Instance().GetRenderer());
+	Texture::Instance()->load("../Assets/textures/Background.png", "background", Engine::Instance().GetRenderer());
+	Texture::Instance()->load("../Assets/textures/Begin_Game.png", "begin", Engine::Instance().GetRenderer());
+}
+
+void TitleState::Update() //update for title state
+{
+	if (Engine::Instance().KeyDown(SDL_SCANCODE_RETURN))
 		Engine::Instance().GetFSM().ChangeState(new GameState());
 }
 
-void TitleState::Render()
+void TitleState::Render() //render for title state
 {
-	cout << "Rendering Title..." << endl;
 	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), 100, 100, 100, 255);
 	SDL_RenderClear(Engine::Instance().GetRenderer());
-	TheTextureManager::Instance()->draw("title", 1028/2, 768/2, Engine::Instance().GetRenderer(), true);
+	Texture::Instance()->draw("background", 0, 0, Engine::Instance().GetRenderer(), false);
+	Texture::Instance()->draw("title", (1028/2)-7, 768/3, Engine::Instance().GetRenderer(), true);
+	Texture::Instance()->draw("begin", 1028 / 2, 768 / 2, Engine::Instance().GetRenderer(), true);
 	State::Render();
 }
 
-void TitleState::Exit()
+void TitleState::Exit() //"on exit" for title state
 {
 	cout << "Exiting Title..." << endl;
 }
 // End TitleState.
 
 // Begin FSM.
-FSM::FSM() {}
-FSM::~FSM() {}
+
+//FSM constructor
+FSM::FSM()
+{
+	
+}
+
+//FSM deconstructor
+FSM::~FSM()
+{
+	
+}
 
 void FSM::Update()
 {
@@ -153,10 +193,11 @@ void FSM::PushState(State* pState)
 
 void FSM::PopState() // e.g. PauseState to GameState.
 {
+	//end of state
 	if (!m_vStates.empty())
 	{
-		m_vStates.back()->Exit(); // Invokes the Exit of the current state.
-		delete m_vStates.back(); // Deallocates current state.
+		m_vStates.back()->Exit();
+		delete m_vStates.back();
 		m_vStates.back() = nullptr;
 		m_vStates.pop_back();
 	}
@@ -165,10 +206,11 @@ void FSM::PopState() // e.g. PauseState to GameState.
 
 void FSM::Clean()
 {
+	//cleanup
 	while (!m_vStates.empty())
 	{
-		m_vStates.back()->Exit(); // Invokes the Exit of the current state.
-		delete m_vStates.back(); // Deallocates current state.
+		m_vStates.back()->Exit();
+		delete m_vStates.back();
 		m_vStates.back() = nullptr;
 		m_vStates.pop_back();
 	}
