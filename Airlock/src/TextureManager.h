@@ -1,13 +1,13 @@
 /*
  * Texture Manager header file
- * Taken from GBC GAME3001 SDL Template
+ * Adapted from GBC GAME3001 SDL Template
  * Editors:
  * - Ryan Ethier
  */
 
 #pragma once
-#ifndef __TextureManager__
-#define __TextureManager__
+#ifndef __TEXTURE_MANAGER__
+#define __TEXTURE_MANAGER__
 
 // Core Libraries
 #include <iostream>
@@ -16,13 +16,14 @@
 
 //#include <glm\vec2.hpp>
 
-// SDL Libraries
+//SDL
 #include<SDL.h>
 #include<SDL_image.h>
 
 
 class TextureManager {
 public:
+	//Singleton
 	static TextureManager* Instance()
 	{
 		if (s_pInstance == 0)
@@ -55,14 +56,20 @@ public:
 
 private:
 
+	//constructor
 	TextureManager();
+
+	//deconstructor
 	~TextureManager();
 
+	//texture map
 	std::map<std::string, SDL_Texture*> m_textureMap;
 
+	//singleton
 	static TextureManager* s_pInstance;
 };
 
-typedef TextureManager TheTextureManager;
+//definition
+typedef TextureManager Texture;
 
-#endif /* defined(__TextureManager__) */
+#endif /* defined(__TEXTURE_MANAGER__) */
