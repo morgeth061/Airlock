@@ -14,7 +14,7 @@
 #include <string>
 #include <map> 
 
-//#include <glm\vec2.hpp>
+#include <glm\vec2.hpp>
 
 //SDL
 #include<SDL.h>
@@ -48,7 +48,7 @@ public:
 	void drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* pRenderer, double angle, int alpha, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	void drawFrame(std::string id, int x, int y, int currentRow, int currentFrame, SDL_Renderer* pRenderer, double angle, int alpha, bool centered = false, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-	//glm::vec2 getTextureSize(std::string id);
+	glm::vec2 getTextureSize(std::string id);
 
 	void setAlpha(std::string id, Uint8 newAlpha);
 
