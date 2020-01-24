@@ -213,17 +213,17 @@ void TextureManager::drawFrame(std::string id, int x, int y, int currentRow, int
 	SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, angle, 0, flip);
 }
 
-//glm::vec2 TextureManager::getTextureSize(std::string id)
-//{
-//	int width, height;
-//	SDL_QueryTexture(m_textureMap[id], NULL, NULL, &width, &height);
-//	glm::vec2 size;
-//
-//	size.x = width;
-//	size.y = height;
-//
-//	return size;
-//}
+glm::vec2 TextureManager::getTextureSize(std::string id)
+{
+	int width, height;
+	SDL_QueryTexture(m_textureMap[id], NULL, NULL, &width, &height);
+	glm::vec2 size;
+
+	size.x = width;
+	size.y = height;
+
+	return size;
+}
 
 void TextureManager::setAlpha(std::string id, Uint8 newAlpha)
 {

@@ -3,11 +3,14 @@
  * Adapted from GBC GAME1017 SDL Template
  * Editors:
  * - Ryan Ethier
+ * - Sojung (Serena) Lee - Jan/23/2020
+		- 
  */
 
 //includes
 #include "FSM.h"
 #include "Engine.h"
+#include "Game.h"
 #include "TextureManager.h"
 #include <iostream>
 
@@ -71,7 +74,7 @@ void PauseState::Exit() //"on exit" for pause state
 
 GameState::GameState() //ctor. of game state
 {
-	
+	Game::Instance()->init("Airlock", 0, 0, 1920, 1080, false);
 }
 
 void GameState::Enter() //"on enter" of game state
@@ -81,6 +84,12 @@ void GameState::Enter() //"on enter" of game state
 
 void GameState::Update() //update for game state
 {
+	while (TheGame::Instance()->running())
+	{
+		TheGame::Instance()->handleEvents();
+		TheGame::Instance()->update();
+		TheGame::Instance()->render();
+	}
 	if (Engine::Instance().KeyDown(SDL_SCANCODE_P))
 		Engine::Instance().GetFSM().PushState(new PauseState());
 	else if (Engine::Instance().KeyDown(SDL_SCANCODE_X))
@@ -97,6 +106,7 @@ void GameState::Render() //render for game state
 
 void GameState::Exit() //"on exit" for game state
 {
+	TheGame::Instance()->clean();
 	cout << "Exiting Game..." << endl;
 }
 
