@@ -164,4 +164,5 @@ FSM& Engine::GetFSM()
 void Engine::SetGameWon()
 {
 	m_bRunning = false;
+	Clean();
 }
