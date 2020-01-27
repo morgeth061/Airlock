@@ -74,13 +74,13 @@ void PauseState::Exit() //"on exit" for pause state
 
 GameState::GameState() //ctor. of game state
 {
-	Game::Instance()->init("Airlock", 0, 0, 1024, 768, false);
+	Game::Instance()->init("Airlock", 0, 0, 928, 480, false);
 }
 
 void GameState::Enter() //"on enter" of game state
 {
 	cout << "Entering Game..." << endl;
-	Texture::Instance()->load("../Assets/textures/FP_Level1.png", "level1Map", Engine::Instance().GetRenderer());
+	Texture::Instance()->load("../Assets/textures/FP_Level1.png", "Level1", TheGame::Instance()->getRenderer());
 }
 
 void GameState::Update() //update for game state
@@ -102,7 +102,7 @@ void GameState::Render() //render for game state
 {
 	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), 0, 255, 0, 255);
 	SDL_RenderClear(Engine::Instance().GetRenderer());
-	Texture::Instance()->draw("level1Map", 0, 0, Engine::Instance().GetRenderer(), false);
+	//Texture::Instance()->draw("level1Map", 0, 0, Engine::Instance().GetRenderer(), false);
 	if (dynamic_cast<GameState*>(Engine::Instance().GetFSM().GetStates().back()))
 		State::Render();
 }

@@ -115,9 +115,9 @@ void Enemy::setTarget(glm::vec2 newTarget)
 
 void Enemy::m_checkBounds()
 {
-	if (getPosition().x > 1920)
+	if (getPosition().x > 928)
 	{
-		setPosition(glm::vec2(1920.0f, getPosition().y));
+		setPosition(glm::vec2(928.0f, getPosition().y));
 	}
 
 	if (getPosition().x < 0)
@@ -125,9 +125,9 @@ void Enemy::m_checkBounds()
 		setPosition(glm::vec2(5.0f, getPosition().y));
 	}
 
-	if (getPosition().y > 1080)
+	if (getPosition().y > 480)
 	{
-		setPosition(glm::vec2(getPosition().x, 1080.0f));
+		setPosition(glm::vec2(getPosition().x, 480.0f));
 	}
 
 	if (getPosition().y < 0)
@@ -156,7 +156,7 @@ void Enemy::m_checkArrival()
 {
 	if (getSteeringState() != IDLE)
 	{
-		if (Util::distance(getPosition(), m_target) <= 2.0f)
+		if (Util::distance(getPosition(), m_target) <= 0.0005)
 		{
 			setSteeringState(IDLE);
 		}
