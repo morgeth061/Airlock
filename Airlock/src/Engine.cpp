@@ -143,6 +143,7 @@ int Engine::Run()
 	return 0;
 }
 
+
 Engine& Engine::Instance() //static method that creates the instance
 {
 	static Engine instance;
@@ -160,3 +161,7 @@ FSM& Engine::GetFSM()
 }
 
 
+void Engine::SetGameWon()
+{
+	m_bRunning = false;
+}
