@@ -1,2 +1,45 @@
-﻿  FSM.cpp
+﻿  Enemy.cpp
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(27,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(27,15): warning C4244:         with
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(27,15): warning C4244:         [
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(27,15): warning C4244:             T=float
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(27,15): warning C4244:         ]
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(28,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(28,16): warning C4244:         with
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(28,16): warning C4244:         [
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(28,16): warning C4244:             T=float
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(28,16): warning C4244:         ]
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(51,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(51,17): warning C4244:         with
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(51,17): warning C4244:         [
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(51,17): warning C4244:             T=float
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(51,17): warning C4244:         ]
+  Target.cpp
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(52,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(52,17): warning C4244:         with
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(52,17): warning C4244:         [
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(52,17): warning C4244:             T=float
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Enemy.cpp(52,17): warning C4244:         ]
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(24,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(24,15): warning C4244:         with
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(24,15): warning C4244:         [
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(24,15): warning C4244:             T=float
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(24,15): warning C4244:         ]
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(25,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(25,16): warning C4244:         with
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(25,16): warning C4244:         [
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(25,16): warning C4244:             T=float
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(25,16): warning C4244:         ]
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(38,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(38,17): warning C4244:         with
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(38,17): warning C4244:         [
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(38,17): warning C4244:             T=float
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(38,17): warning C4244:         ]
+  Generating Code...
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(39,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(39,17): warning C4244:         with
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(39,17): warning C4244:         [
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(39,17): warning C4244:             T=float
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Target.cpp(39,17): warning C4244:         ]
+  LINK : C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\Debug\Airlock.exe not found or not built by the last incremental link; performing full link
   Airlock.vcxproj -> C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\Debug\Airlock.exe

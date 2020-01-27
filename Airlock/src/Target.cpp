@@ -23,7 +23,7 @@ Target::Target()
 	glm::vec2 size = Texture::Instance()->getTextureSize("circle");
 	setWidth(size.x);
 	setHeight(size.y);
-	setPosition(glm::vec2(600.0f, 1000.0f)); //changes original position
+	setPosition(glm::vec2(192.0f, 384.0f)); //changes original position
 	setVelocity(glm::vec2(0, 0));
 	setIsColliding(false);
 	setType(GameObjectType::TARGET);
@@ -61,9 +61,9 @@ void Target::m_move()
 void Target::m_checkBounds()
 {
 
-	if (getPosition().x > 1920)
+	if (getPosition().x > 928)
 	{
-		setPosition(glm::vec2(1920.0f, getPosition().y));
+		setPosition(glm::vec2(928.0f, getPosition().y));
 	}
 
 	if (getPosition().x < 0)
@@ -71,9 +71,9 @@ void Target::m_checkBounds()
 		setPosition(glm::vec2(0.0f, getPosition().y));
 	}
 
-	if (getPosition().y > 1080)
+	if (getPosition().y > 480)
 	{
-		setPosition(glm::vec2(getPosition().x, 1080.0f));
+		setPosition(glm::vec2(getPosition().x, 480.0f));
 	}
 
 	if (getPosition().y < 0)
