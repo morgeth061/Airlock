@@ -15,6 +15,34 @@ Description:
 #include "Target.h"
 #include "Game.h"
 
+/*Array represents grid-based game map with a width of 29 cells and a height of 15 cells.
+0 -> Ground, will be walked on by player during regular play
+1 -> Forrest, impassable
+3 -> Level end/exit, will look like ground and end level*/
+int level1[15][29] = { {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+					   {1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1},
+					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
+					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
+					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
+					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
+					   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
+					   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
+					   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
+					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
+					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
+					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
+					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
+					   {1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1},
+					   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1} };
+bool isWon = false;
+
+
+bool getWinCondition()
+{
+	return isWon;
+}
+
+
 Target::Target()
 {
 	Texture::Instance()->load("../Assets/textures/Circle.png",
@@ -54,8 +82,22 @@ void Target::clean()
 
 void Target::m_move()
 {
-	glm::vec2 newPosition = getPosition() + getVelocity() * 1.0f;
-	setPosition(newPosition);
+	//integers representing the new X and Y coordinates.
+	int newX = (getPosition().x+getVelocity().x)/32;
+	int newY = (getPosition().y + getVelocity().y)/32;
+
+	//checks if new coordinates are ground the player can walk on
+	if (level1[newY][newX]==0)
+	{
+		glm::vec2 newPosition = getPosition() + getVelocity() * 1.0f;
+		setPosition(newPosition);
+	}
+	else if(level1[newY][newX]==3)
+	{
+		glm::vec2 newPosition = getPosition() + getVelocity() * 1.0f;
+		setPosition(newPosition);
+		isWon = true;
+	}
 }
 
 void Target::m_checkBounds()
