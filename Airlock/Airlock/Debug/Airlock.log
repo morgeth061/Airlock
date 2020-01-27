@@ -1,34 +1,34 @@
-﻿  Engine.cpp
+﻿  Main.cpp
   Target.cpp
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(53,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(53,15): warning C4244:         with
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(53,15): warning C4244:         [
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(53,15): warning C4244:             T=float
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(53,15): warning C4244:         ]
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(54,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(54,16): warning C4244:         with
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(54,16): warning C4244:         [
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(54,16): warning C4244:             T=float
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(54,16): warning C4244:         ]
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(67,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(67,17): warning C4244:         with
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(67,17): warning C4244:         [
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(67,17): warning C4244:             T=float
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(67,17): warning C4244:         ]
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(68,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(68,17): warning C4244:         with
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(68,17): warning C4244:         [
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(68,17): warning C4244:             T=float
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(68,17): warning C4244:         ]
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(87,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(87,11): warning C4244:         with
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(87,11): warning C4244:         [
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(87,11): warning C4244:             T=float
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(87,11): warning C4244:         ]
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(46,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(46,15): warning C4244:         with
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(46,15): warning C4244:         [
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(46,15): warning C4244:             T=float
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(46,15): warning C4244:         ]
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(47,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(47,16): warning C4244:         with
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(47,16): warning C4244:         [
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(47,16): warning C4244:             T=float
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(47,16): warning C4244:         ]
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(60,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(60,17): warning C4244:         with
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(60,17): warning C4244:         [
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(60,17): warning C4244:             T=float
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(60,17): warning C4244:         ]
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(61,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(61,17): warning C4244:         with
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(61,17): warning C4244:         [
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(61,17): warning C4244:             T=float
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(61,17): warning C4244:         ]
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(80,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(80,11): warning C4244:         with
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(80,11): warning C4244:         [
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(80,11): warning C4244:             T=float
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(80,11): warning C4244:         ]
   Generating Code...
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(88,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(88,11): warning C4244:         with
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(88,11): warning C4244:         [
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(88,11): warning C4244:             T=float
-C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(88,11): warning C4244:         ]
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(81,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(81,11): warning C4244:         with
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(81,11): warning C4244:         [
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(81,11): warning C4244:             T=float
+C:\Users\oliet\source\repos\Airlock\Airlock\src\Target.cpp(81,11): warning C4244:         ]
   Airlock.vcxproj -> C:\Users\oliet\source\repos\Airlock\Airlock\Debug\Airlock.exe
