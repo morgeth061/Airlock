@@ -90,6 +90,7 @@ void GameState::Update() //update for game state
 		TheGame::Instance()->handleEvents();
 		TheGame::Instance()->update();
 		TheGame::Instance()->render();
+
 	}
 	if (Engine::Instance().KeyDown(SDL_SCANCODE_P))
 		Engine::Instance().GetFSM().PushState(new PauseState());
@@ -101,11 +102,7 @@ void GameState::Render() //render for game state
 {
 	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), 0, 255, 0, 255);
 	SDL_RenderClear(Engine::Instance().GetRenderer());
-
-	Texture::Instance()->load("../Assets/textures/enemy1.png", "Enemy", TheGame::Instance()->getRenderer());
-
-	//State::Render();
-
+	//Texture::Instance()->draw("level1Map", 0, 0, Engine::Instance().GetRenderer(), false);
 	if (dynamic_cast<GameState*>(Engine::Instance().GetFSM().GetStates().back()))
 		State::Render();
 }

@@ -44,13 +44,13 @@ void Game::createGameObjects()
 
 	for (int count = 0; count < numofEnemies; count++)
 		m_pEnemy[count] = new Enemy();
-
+	
 	m_pEnemy[0]->setPosition(glm::vec2(192.0f, 160.0f));
 	m_pEnemy[1]->setPosition(glm::vec2(464.0f, 240.0f));
 	m_pEnemy[2]->setPosition(glm::vec2(736.0f, 320.0f));
-	m_pEnemy[0]->setMaxSpeed(0.25f);
-	m_pEnemy[1]->setMaxSpeed(0.50f);
-	m_pEnemy[2]->setMaxSpeed(0.75f);
+	m_pEnemy[0]->setMaxSpeed(0.04f);
+	m_pEnemy[1]->setMaxSpeed(0.05f);
+	m_pEnemy[2]->setMaxSpeed(0.03f);
 
 	m_pTarget = new Target();
 }
@@ -115,12 +115,11 @@ void Game::render()
 	SDL_RenderClear(m_pRenderer); // clear the renderer to the draw colour
 
 	Texture::Instance()->draw("Level1", 0, 0, TheGame::Instance()->getRenderer(), false);
-	
-	for (int count = 0; count < numofEnemies; count++)
-		m_pEnemy[count]->draw();
 
 	m_pTarget->draw();
 
+	for (int count = 0; count < numofEnemies; count++)
+		m_pEnemy[count]->draw();
 
 	SDL_RenderPresent(m_pRenderer); // draw to the screen
 }

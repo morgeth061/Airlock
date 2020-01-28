@@ -41,4 +41,5 @@ public:
 	bool KeyDown(SDL_Scancode c);
 	SDL_Renderer* GetRenderer();
 	FSM& GetFSM();
+	void SetGameWon();
 };
