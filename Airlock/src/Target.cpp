@@ -17,7 +17,7 @@ Description:
 
 Target::Target()
 {
-	Texture::Instance()->load("../Assets/textures/Circle.png",
+	Texture::Instance()->load("../Assets/textures/player.png",
 		"circle", TheGame::Instance()->getRenderer());
 
 	glm::vec2 size = Texture::Instance()->getTextureSize("circle");
