@@ -13,11 +13,19 @@ Description:
 		- Default : SEEK state
 		- 1 = SEEK state
 **/
+
+/**
+Author: Sojung (Serena) Lee
+Date: Jan/31/2020
+Description:
+	- Added minerals (createGameObjects, render, update handleEvents)
+**/
 	
 #include "Game.h"
 #include "Util.h"
 
 const int numofEnemies = 3;
+const int numofMinerals = 2;
 
 Game* Game::s_pInstance = 0;
 
@@ -44,7 +52,15 @@ void Game::createGameObjects()
 
 	for (int count = 0; count < numofEnemies; count++)
 		m_pEnemy[count] = new Enemy();
-	
+
+	for (int count = 0; count < numofMinerals; count++)
+	{
+		m_pMinerals[count] = new Minerals();
+	}
+
+	m_pMinerals[0]->setPosition(glm::vec2(192.0f, 96.0f));
+	m_pMinerals[1]->setPosition(glm::vec2(736, 416.0f));
+
 	m_pEnemy[0]->setPosition(glm::vec2(192.0f, 160.0f));
 	m_pEnemy[1]->setPosition(glm::vec2(464.0f, 240.0f));
 	m_pEnemy[2]->setPosition(glm::vec2(736.0f, 320.0f));
@@ -121,6 +137,9 @@ void Game::render()
 	for (int count = 0; count < numofEnemies; count++)
 		m_pEnemy[count]->draw();
 
+	for (int count = 0; count < numofMinerals; count++)
+		m_pMinerals[count]->draw();
+
 	SDL_RenderPresent(m_pRenderer); // draw to the screen
 }
 
@@ -131,6 +150,13 @@ void Game::update()
 	{
 		Collision::squaredRadiusCheck(m_pTarget, m_pEnemy[count]);
 		m_pEnemy[count]->update();
+	}
+	for (int count = 0; count < numofMinerals; count++)
+	{
+		if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
+		{
+			m_pMinerals[count]->update();
+		}
 	}
 	m_pTarget->update();
 
@@ -235,6 +261,13 @@ void Game::handleEvents()
 				{
 					m_pEnemy[count]->setSteeringState(SteeringState::SEEK);
 					m_pEnemy[count]->setTarget(m_pTarget->getPosition());
+				}
+			}
+			for (int count = 0; count < numofEnemies; count++)
+			{
+				if (m_pMinerals[count]->getIsColliding() == true)
+				{
+					m_pMinerals[count]->setPosition(glm::vec2(2000.0f, 2000.0f));
 				}
 			}
 
