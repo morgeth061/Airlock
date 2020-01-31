@@ -57,6 +57,9 @@
     <ClCompile Include="..\src\Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Minerals.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Engine.h">
@@ -85,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="..\src\Target.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Minerals.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Game.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

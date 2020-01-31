@@ -11,6 +11,13 @@ Description:
 					then cout << "ENEMY COLLISION" 
 **/
 
+/**
+Author: Sojung (Serena) Lee
+Date: Jan/31/2020
+Description:
+	- Added squareRadiansCheckObjects (for minerals or other game items only) --> has different (Smaller) radius than enemies
+**/
+
 #include "CollisionManager.h"
 #include "Game.h"
 
@@ -44,6 +51,31 @@ bool CollisionManager::squaredRadiusCheck(GameObject * object1, GameObject * obj
 				break;
 			case ENEMY:
 				std::cout << "ENEMY COLLISION" << std::endl;
+				break;
+			default:
+				std::cout << "Collision with unknown type!" << std::endl;
+				break;
+			}
+
+			return true;
+		}
+		return false;
+	}
+}
+bool CollisionManager::squaredRadiusCheckObjects(GameObject* object1, GameObject* object2)
+{
+	glm::vec2 P1 = object1->getPosition();
+	glm::vec2 P2 = object2->getPosition();
+	float halfHeights = (object1->getHeight() + object2->getHeight()) * 0.3;
+	if (CollisionManager::squaredDistance(P1, P2) < (halfHeights * halfHeights)) {
+		if (!object2->getIsColliding()) {
+
+			object2->setIsColliding(true);
+
+			switch (object2->getType()) {
+			case MINERALS:
+				//setPosition(glm::vec2(2000.0f, 2000.0f));
+				std::cout << "Minerals gone" << std::endl;
 				break;
 			default:
 				std::cout << "Collision with unknown type!" << std::endl;

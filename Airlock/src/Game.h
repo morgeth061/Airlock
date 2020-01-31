@@ -16,6 +16,7 @@
 // Game Objects
 #include "Enemy.h"
 #include "Target.h"
+#include "Minerals.h"
 
 class Game
 {
@@ -52,6 +53,7 @@ public:
 	SDL_Renderer* getRenderer();
 	Enemy* m_pEnemy[3];
 	Target* m_pTarget;
+	Minerals* m_pMinerals[2];
 private:
 	Game();
 	~Game();
