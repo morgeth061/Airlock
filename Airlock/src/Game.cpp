@@ -12,13 +12,11 @@ Description:
 		- WASD for target/player movement
 		- Default : SEEK state
 		- 1 = SEEK state
-**/
-
-/**
 Author: Sojung (Serena) Lee
 Date: Jan/31/2020
 Description:
-	- Added minerals (createGameObjects, render, update handleEvents)
+	- Added minerals (createGameObjects, render, update handleEvents) with Robert's Updated Assets
+	- handleEvents : Collision detection (e.g. what happens if player collides with minerals? enemies?)
 **/
 	
 #include "Game.h"
@@ -58,15 +56,15 @@ void Game::createGameObjects()
 		m_pMinerals[count] = new Minerals();
 	}
 
-	m_pMinerals[0]->setPosition(glm::vec2(192.0f, 96.0f));
-	m_pMinerals[1]->setPosition(glm::vec2(736, 416.0f));
+	m_pMinerals[0]->setPosition(glm::vec2(384.0f, 192.0f));
+	m_pMinerals[1]->setPosition(glm::vec2(1472.0f, 832.0f));
 
-	m_pEnemy[0]->setPosition(glm::vec2(192.0f, 160.0f));
-	m_pEnemy[1]->setPosition(glm::vec2(464.0f, 240.0f));
-	m_pEnemy[2]->setPosition(glm::vec2(736.0f, 320.0f));
-	m_pEnemy[0]->setMaxSpeed(0.04f);
-	m_pEnemy[1]->setMaxSpeed(0.05f);
-	m_pEnemy[2]->setMaxSpeed(0.03f);
+	m_pEnemy[0]->setPosition(glm::vec2(384.0f, 320.0f));
+	m_pEnemy[1]->setPosition(glm::vec2(960.0f, 480.0f));
+	m_pEnemy[2]->setPosition(glm::vec2(1472.0f, 640.0f));
+	m_pEnemy[0]->setMaxSpeed(0.40f);
+	m_pEnemy[1]->setMaxSpeed(0.50f);
+	m_pEnemy[2]->setMaxSpeed(0.60f);
 
 	m_pTarget = new Target();
 }
@@ -255,6 +253,7 @@ void Game::handleEvents()
 				break;
 			}
 		default:
+			//If enemy collide with player... what happens?
 			for (int count = 0; count < numofEnemies; count++)
 			{
 				if (m_pEnemy[count]->getIsColliding() == true)
@@ -263,7 +262,8 @@ void Game::handleEvents()
 					m_pEnemy[count]->setTarget(m_pTarget->getPosition());
 				}
 			}
-			for (int count = 0; count < numofEnemies; count++)
+			//If minerals collide with player.... what happens (add inventory?)
+			for (int count = 0; count < numofMinerals; count++) 
 			{
 				if (m_pMinerals[count]->getIsColliding() == true)
 				{

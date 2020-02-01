@@ -74,7 +74,6 @@ bool CollisionManager::squaredRadiusCheckObjects(GameObject* object1, GameObject
 
 			switch (object2->getType()) {
 			case MINERALS:
-				//setPosition(glm::vec2(2000.0f, 2000.0f));
 				std::cout << "Minerals gone" << std::endl;
 				break;
 			default:

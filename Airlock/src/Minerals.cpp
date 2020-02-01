@@ -7,6 +7,7 @@ Description:
 	- created mineral object
 	- placed mineral (Quartz1.png) into game state (screen)
 	- Based on Enemy class
+	- changed minerals icon (quartz) to larger resolution
 **/
 
 #include "Minerals.h"

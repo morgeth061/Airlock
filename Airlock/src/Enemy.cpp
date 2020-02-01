@@ -115,26 +115,26 @@ void Enemy::setTarget(glm::vec2 newTarget)
 
 void Enemy::m_checkBounds()
 {
-	if (getPosition().x > 928)
+
+	if (getPosition().x > 1856)
 	{
-		setPosition(glm::vec2(928.0f, getPosition().y));
+		setPosition(glm::vec2(1856.0f, getPosition().y));
 	}
 
 	if (getPosition().x < 0)
 	{
-		setPosition(glm::vec2(5.0f, getPosition().y));
+		setPosition(glm::vec2(0.0f, getPosition().y));
 	}
 
-	if (getPosition().y > 480)
+	if (getPosition().y > 960)
 	{
-		setPosition(glm::vec2(getPosition().x, 480.0f));
+		setPosition(glm::vec2(getPosition().x, 960.0f));
 	}
 
 	if (getPosition().y < 0)
 	{
 		setPosition(glm::vec2(getPosition().x, 5.0f));
 	}
-
 }
 
 void Enemy::m_reset()

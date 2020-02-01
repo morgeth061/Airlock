@@ -1,114 +1,12 @@
-﻿  CollisionManager.cpp
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(22,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(23,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(62,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Enemy.cpp
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(27,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(28,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(51,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(52,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-  FSM.cpp
-  Game.cpp
-D:\School\Github\Airlock\Airlock\src\Game.cpp(178,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(179,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-  Minerals.cpp
-D:\School\Github\Airlock\Airlock\src\Minerals.cpp(11,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Minerals.cpp(12,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Minerals.cpp(25,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Minerals.cpp(26,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-  Target.cpp
-D:\School\Github\Airlock\Airlock\src\Target.cpp(46,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(47,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(60,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(61,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(80,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(81,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-  TextManager.cpp
-  Util.cpp
-D:\School\Github\Airlock\Airlock\src\Util.cpp(231,15): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Util.cpp(232,15): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Util.cpp(248,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(57): warning C4715: 'CollisionManager::squaredRadiusCheck': not all control paths return a value
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(82): warning C4715: 'CollisionManager::squaredRadiusCheckObjects': not all control paths return a value
-  Airlock.vcxproj -> D:\School\Github\Airlock\Airlock\Debug\Airlock.exe
+﻿  Game.cpp
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(185,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(185,36): warning C4244:         with
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(185,36): warning C4244:         [
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(185,36): warning C4244:             T=float
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(185,36): warning C4244:         ]
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(186,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(186,36): warning C4244:         with
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(186,36): warning C4244:         [
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(186,36): warning C4244:             T=float
+C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(186,36): warning C4244:         ]
+  Airlock.vcxproj -> C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\Debug\Airlock.exe
