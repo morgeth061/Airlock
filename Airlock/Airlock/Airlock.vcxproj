@@ -25,6 +25,7 @@
     <ClCompile Include="..\src\FSM.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\GameObject.cpp" />
+    <ClCompile Include="..\src\Level.cpp" />
     <ClCompile Include="..\src\Main.cpp" />
     <ClCompile Include="..\src\Minerals.cpp" />
     <ClCompile Include="..\src\Target.cpp" />
@@ -39,6 +40,8 @@
     <ClInclude Include="..\src\FSM.h" />
     <ClInclude Include="..\src\Game.h" />
     <ClInclude Include="..\src\GameObjectType.h" />
+    <ClInclude Include="..\src\Level.h" />
+    <ClInclude Include="..\src\LevelNumber.h" />
     <ClInclude Include="..\src\Minerals.h" />
     <ClInclude Include="..\src\SteeringState.h" />
     <ClInclude Include="..\src\Target.h" />

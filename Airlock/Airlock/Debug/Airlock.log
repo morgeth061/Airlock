@@ -1,12 +1,1 @@
-﻿  Game.cpp
-C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(185,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
-C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(185,36): warning C4244:         with
-C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(185,36): warning C4244:         [
-C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(185,36): warning C4244:             T=float
-C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(185,36): warning C4244:         ]
-C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(186,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
-C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(186,36): warning C4244:         with
-C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(186,36): warning C4244:         [
-C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(186,36): warning C4244:             T=float
-C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\src\Game.cpp(186,36): warning C4244:         ]
-  Airlock.vcxproj -> C:\Users\Sojung Lee\Documents\GitHub\Airlock\Airlock\Debug\Airlock.exe
+﻿  Airlock.vcxproj -> D:\OneDrive\Documents\GitHub\Airlock\Airlock\Debug\Airlock.exe
