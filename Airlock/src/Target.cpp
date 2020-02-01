@@ -10,37 +10,35 @@ Description:
 	- Defines Target draw, render, checkState, update, clean, move, check bounds functions
 	- Able to change speed --> using m_move
 	- Able to change their boundaries (move within certain area) --> using checkBounds
+Author: Ryan Ethier
+Date: Jan/31/2020
+Description:
+	- Added Level Class implementation
 **/
 
 #include "Target.h"
 #include "Game.h"
 #include "Engine.h"
-
-/*Array represents grid-based game map with a width of 29 cells and a height of 15 cells.
-0 -> Ground, will be walked on by player during regular play
-1 -> Forrest, impassable
-3 -> Level end/exit, will look like ground and end level*/
-int level1[15][29] = { {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-					   {1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1},
-					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
-					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
-					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
-					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
-					   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-					   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-					   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
-					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
-					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
-					   {1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1},
-					   {1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1},
-					   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-
+#include "Level.h"
+#include "GameObjectType.h"
 
 Target::Target()
 {
 	Texture::Instance()->load("../Assets/textures/Circle.png",
 		"circle", TheGame::Instance()->getRenderer());
+
+	//generates level & collision
+	levelSelect = Level();
+	levelArray = levelSelect.getLevel();
+
+	for (int i = 0; i < 15; i++)
+	{
+		for (int j = 0; j < 29; j++)
+		{
+			cout << levelArray[i][j];
+		}
+		cout << endl;
+	}
 
 	glm::vec2 size = Texture::Instance()->getTextureSize("circle");
 	setWidth(size.x);
@@ -77,16 +75,19 @@ void Target::clean()
 void Target::m_move()
 {
 	//integers representing the new X and Y coordinates.
-	int newX = (getPosition().x+getVelocity().x)/64;
+	int newX = (getPosition().x + getVelocity().x)/64;
 	int newY = (getPosition().y + getVelocity().y)/64;
 
 	//checks if new coordinates are ground the player can walk on
-	if (level1[newY][newX]==0)
+
+	cout << newY << " " << newX << " " << levelArray[newY][newX] << endl;
+	
+	if (levelArray[newY][newX]==0)
 	{
 		glm::vec2 newPosition = getPosition() + getVelocity() * 0.1f;
 		setPosition(newPosition);
 	}
-	else if(level1[newY][newX]==3)
+	else if(levelArray[newY][newX]==3)
 	{
 		glm::vec2 newPosition = getPosition() + getVelocity() * 0.1f;
 		setPosition(newPosition);

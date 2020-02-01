@@ -3,14 +3,17 @@
 #define __LEVEL__
 
 #include "LevelNumber.h"
-#include <vector>
+#include <array>
 
 using namespace std;
+
+typedef array<int, 29> row_type;
+typedef array<row_type, 15> array_type;
 
 class Level
 {
 private:
-	int Level1[15][29];
+	array_type level1Array;	
 
 public:
 	//ctor.
@@ -21,9 +24,7 @@ public:
 	//setters
 
 	//getters
-	vector<vector<int>> getLevel(int level);
-	
-
+	array_type& getLevel();
 	
 };
 

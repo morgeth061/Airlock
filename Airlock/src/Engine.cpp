@@ -140,6 +140,7 @@ int Engine::Run()
 			Sleep();
 	}
 	Clean();
+	system("pause");
 	return 0;
 }
 
