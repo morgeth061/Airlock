@@ -4,7 +4,7 @@
  * Editors:
  * - Ryan Ethier
  * - Sojung (Serena) Lee - Jan/23/2020
-		- 
+		- Updated background image with Robert's updated asset (larger resolution)
  */
 
 //includes
@@ -16,9 +16,7 @@
 
 using namespace std;
 
-
 //GENERAL
-
 
 //begin current state
 void State::Render()
@@ -74,7 +72,7 @@ void PauseState::Exit() //"on exit" for pause state
 
 GameState::GameState() //ctor. of game state
 {
-	Game::Instance()->init("Airlock", 0, 0, 928, 480, false);
+	Game::Instance()->init("Airlock", 0, 0, 1856, 960, false);
 }
 
 void GameState::Enter() //"on enter" of game state

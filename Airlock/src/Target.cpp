@@ -10,6 +10,10 @@ Description:
 	- Defines Target draw, render, checkState, update, clean, move, check bounds functions
 	- Able to change speed --> using m_move
 	- Able to change their boundaries (move within certain area) --> using checkBounds
+Author: Sojung (Serena) Lee
+Date: Jan/31/2020
+Description:
+	- Changed screen boundaries
 **/
 
 #include "Target.h"
@@ -45,7 +49,7 @@ Target::Target()
 	glm::vec2 size = Texture::Instance()->getTextureSize("circle");
 	setWidth(size.x);
 	setHeight(size.y);
-	setPosition(glm::vec2(192.0f, 384.0f)); //changes original position
+	setPosition(glm::vec2(384.0f, 768.0f)); //changes original position
 	setVelocity(glm::vec2(0, 0));
 	setIsColliding(false);
 	setType(GameObjectType::TARGET);
@@ -77,18 +81,18 @@ void Target::clean()
 void Target::m_move()
 {
 	//integers representing the new X and Y coordinates.
-	int newX = (getPosition().x+getVelocity().x)/32;
-	int newY = (getPosition().y + getVelocity().y)/32;
+	int newX = (getPosition().x + getVelocity().x)/64;
+	int newY = (getPosition().y + getVelocity().y)/64;
 
 	//checks if new coordinates are ground the player can walk on
 	if (level1[newY][newX]==0)
 	{
-		glm::vec2 newPosition = getPosition() + getVelocity() * 0.1f;
+		glm::vec2 newPosition = getPosition() + getVelocity() * 1.0f;
 		setPosition(newPosition);
 	}
 	else if(level1[newY][newX]==3)
 	{
-		glm::vec2 newPosition = getPosition() + getVelocity() * 0.1f;
+		glm::vec2 newPosition = getPosition() + getVelocity() * 1.0f;
 		setPosition(newPosition);
 		Engine::Instance().SetGameWon();
 	}
@@ -97,9 +101,9 @@ void Target::m_move()
 void Target::m_checkBounds()
 {
 
-	if (getPosition().x > 928)
+	if (getPosition().x > 1856)
 	{
-		setPosition(glm::vec2(928.0f, getPosition().y));
+		setPosition(glm::vec2(1856.0f, getPosition().y));
 	}
 
 	if (getPosition().x < 0)
@@ -107,9 +111,9 @@ void Target::m_checkBounds()
 		setPosition(glm::vec2(0.0f, getPosition().y));
 	}
 
-	if (getPosition().y > 480)
+	if (getPosition().y > 960)
 	{
-		setPosition(glm::vec2(getPosition().x, 480.0f));
+		setPosition(glm::vec2(getPosition().x, 960.0f));
 	}
 
 	if (getPosition().y < 0)
