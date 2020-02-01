@@ -77,8 +77,8 @@ void Target::clean()
 void Target::m_move()
 {
 	//integers representing the new X and Y coordinates.
-	int newX = (getPosition().x+getVelocity().x)/32;
-	int newY = (getPosition().y + getVelocity().y)/32;
+	int newX = (getPosition().x+getVelocity().x)/64;
+	int newY = (getPosition().y + getVelocity().y)/64;
 
 	//checks if new coordinates are ground the player can walk on
 	if (level1[newY][newX]==0)
@@ -97,7 +97,7 @@ void Target::m_move()
 void Target::m_checkBounds()
 {
 
-	if (getPosition().x > 928)
+	if (getPosition().x > 1856)
 	{
 		setPosition(glm::vec2(928.0f, getPosition().y));
 	}
@@ -107,7 +107,7 @@ void Target::m_checkBounds()
 		setPosition(glm::vec2(0.0f, getPosition().y));
 	}
 
-	if (getPosition().y > 480)
+	if (getPosition().y > 960)
 	{
 		setPosition(glm::vec2(getPosition().x, 480.0f));
 	}
