@@ -3,9 +3,11 @@
  * Adapted from GBC GAME1011 SDL Template
  * Editors:
  * - Ryan Ethier
+  * - Sojung (Serena) Lee - Feb/1/2020
+		- updated setGameWon (added exit code)
  */
 
-//includes
+ //includes
 #include "Engine.h"
 #include <iostream>
 #define WIDTH 1024
@@ -23,7 +25,7 @@ Engine::Engine() :m_bRunning(false)
 //deconstructor
 Engine::~Engine()
 {
-	
+
 }
 
 //methods
@@ -126,7 +128,7 @@ void Engine::Clean()
 
 int Engine::Run()
 {
-	if (m_bRunning) 
+	if (m_bRunning)
 		return -1;
 	if (Init("Airlock", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0) == false)
 		return 1;
@@ -166,4 +168,5 @@ void Engine::SetGameWon()
 {
 	m_bRunning = false;
 	Clean();
+	exit(EXIT_SUCCESS);
 }
