@@ -17,8 +17,13 @@ Date: Jan/31/2020
 Description:
 	- Added minerals (createGameObjects, render, update handleEvents) with Robert's Updated Assets
 	- handleEvents : Collision detection (e.g. what happens if player collides with minerals? enemies?)
+Author: Sojung (Serena) Lee
+Date: Feb/1/2020
+Description:
+	- changed enemy speed
+	- updated handleEvents (ESC button -> added exit code)
 **/
-	
+
 #include "Game.h"
 #include "Util.h"
 
@@ -62,9 +67,9 @@ void Game::createGameObjects()
 	m_pEnemy[0]->setPosition(glm::vec2(384.0f, 320.0f));
 	m_pEnemy[1]->setPosition(glm::vec2(960.0f, 480.0f));
 	m_pEnemy[2]->setPosition(glm::vec2(1472.0f, 640.0f));
-	m_pEnemy[0]->setMaxSpeed(0.40f);
-	m_pEnemy[1]->setMaxSpeed(0.50f);
-	m_pEnemy[2]->setMaxSpeed(0.60f);
+	m_pEnemy[0]->setMaxSpeed(0.60f);
+	m_pEnemy[1]->setMaxSpeed(0.70f);
+	m_pEnemy[2]->setMaxSpeed(0.80f);
 
 	m_pTarget = new Target();
 }
@@ -187,6 +192,8 @@ void Game::handleEvents()
 			switch (event.key.keysym.sym) {
 			case SDLK_ESCAPE:
 				m_bRunning = false;
+				clean();
+				exit(EXIT_SUCCESS);
 				break;
 			case SDLK_w:
 				m_pTarget->setVelocity(glm::vec2(m_pTarget->getVelocity().x, -1.0f));
@@ -263,7 +270,7 @@ void Game::handleEvents()
 				}
 			}
 			//If minerals collide with player.... what happens (add inventory?)
-			for (int count = 0; count < numofMinerals; count++) 
+			for (int count = 0; count < numofMinerals; count++)
 			{
 				if (m_pMinerals[count]->getIsColliding() == true)
 				{

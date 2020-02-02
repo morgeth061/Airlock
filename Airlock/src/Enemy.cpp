@@ -123,7 +123,7 @@ void Enemy::m_checkBounds()
 
 	if (getPosition().x < 0)
 	{
-		setPosition(glm::vec2(0.0f, getPosition().y));
+		setPosition(glm::vec2(5.0f, getPosition().y));
 	}
 
 	if (getPosition().y > 960)
