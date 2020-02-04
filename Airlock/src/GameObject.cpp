@@ -75,6 +75,11 @@ SteeringState GameObject::getSteeringState()
 	return m_state;
 }
 
+SDL_RendererFlip GameObject::getFlip()
+{
+	return m_flipType;
+}
+
 
 void GameObject::setPosition(glm::vec2 newPosition)
 {
@@ -114,4 +119,9 @@ void GameObject::setSteeringState(SteeringState newState)
 void GameObject::setAcceleration(glm::vec2 newAcceleration)
 {
 	m_acceleration = newAcceleration;
+}
+
+void GameObject::setFlip(SDL_RendererFlip flipType)
+{
+	m_flipType = flipType;
 }

@@ -28,8 +28,12 @@ Description:
 
 Target::Target()
 {
-	Texture::Instance()->load("../Assets/textures/player.png",
-		"circle", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/Player_SMG_Walking_Sheet.png", "player", TheGame::Instance()->getRenderer());
+	m_iSprite = 0;
+	m_iSpriteMax = 0;
+	m_iFrame = 0;
+	m_iFrameMax = 4;
+
 
 	//generates level & collision
 	levelSelect = Level();
@@ -44,13 +48,15 @@ Target::Target()
 		cout << endl;
 	}
 
-	glm::vec2 size = Texture::Instance()->getTextureSize("circle");
+	glm::vec2 size = Texture::Instance()->getTextureSize("player");
 	setWidth(size.x);
 	setHeight(size.y);
 	setPosition(glm::vec2(384.0f, 768.0f)); //changes original position
 	setVelocity(glm::vec2(0, 0));
 	setIsColliding(false);
 	setType(GameObjectType::TARGET);
+	setFlip(SDL_FLIP_HORIZONTAL);
+	SetIdle();
 }
 
 Target::~Target()
@@ -61,15 +67,41 @@ void Target::draw()
 {
 	int xComponent = getPosition().x;
 	int yComponent = getPosition().y;
-	Texture::Instance()->draw("circle", xComponent, yComponent,
-		TheGame::Instance()->getRenderer(), true);
+	//Texture::Instance()->draw("player", xComponent, yComponent, TheGame::Instance()->getRenderer(), true);
+	Texture::Instance()->drawFrame("player", xComponent-64, yComponent-64, 128, 128, 1, m_iFrame, TheGame::Instance()->getRenderer(), getFlip());
+}
+
+
+void Target::animate()
+{
+
+	m_iFrame++;
+	if (m_iFrame == m_iFrameMax)
+	{
+		m_iFrame = 0;
+		m_iSprite++;
+		if (m_iSprite == m_iSpriteMax)
+			m_iSprite = 0;
+		m_rSrc.x = m_rSrc.w * static_cast<int>((SDL_GetTicks() / 500) % m_iFrameMax);
+	}
+
+}
+
+void Target::SetIdle()
+{
+	m_rSrc.y = 0;
+	m_iFrame = 0;
+	m_iSprite = 0;
 }
 
 void Target::update()
 {
+	//this->animate();
+	//m_rSrc.x = (m_rSrc.w * m_iSprite); // Update animation.
+	//m_rSrc.x = m_rSrc.w * static_cast<int>((SDL_GetTicks() / 500) % m_iFrameMax);
+
 	m_move();
 	m_checkBounds();
-
 }
 
 void Target::clean()
@@ -79,8 +111,8 @@ void Target::clean()
 void Target::m_move()
 {
 	//integers representing the new X and Y coordinates.
-	int newX = (getPosition().x + getVelocity().x) / 64;
-	int newY = (getPosition().y + getVelocity().y) / 64;
+	int newX = (getPosition().x + getVelocity().x) / (64);
+	int newY = (getPosition().y + getVelocity().y) / (62); //changed to better fit screen resolution (SL)
 
 	//checks if new coordinates are ground the player can walk on
 
@@ -88,12 +120,12 @@ void Target::m_move()
 
 	if (levelArray[newY][newX] == 0)
 	{
-		glm::vec2 newPosition = getPosition() + getVelocity() * 0.9f;
+		glm::vec2 newPosition = getPosition() + getVelocity() * 1.0f;
 		setPosition(newPosition);
 	}
 	else if (levelArray[newY][newX] == 3)
 	{
-		glm::vec2 newPosition = getPosition() + getVelocity() * 0.9f;
+		glm::vec2 newPosition = getPosition() + getVelocity() * 1.0f;
 		setPosition(newPosition);
 		Engine::Instance().SetGameWon();
 	}
@@ -101,7 +133,7 @@ void Target::m_move()
 
 void Target::m_checkBounds()
 {
-
+	
 	if (getPosition().x > 1856)
 	{
 		setPosition(glm::vec2(1856.0f, getPosition().y));

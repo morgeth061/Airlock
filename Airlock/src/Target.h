@@ -18,6 +18,18 @@ public:
 	virtual void draw() override;
 	virtual void update() override;
 	virtual void clean() override;
+
+	virtual void animate();
+	virtual void SetIdle();
+
+protected:
+	int m_iSprite = 0,	// Which sprite to display for animation.
+		m_iSpriteMax,	// How many sprites total.
+		m_iFrame = 0,	// Frame counter.
+		m_iFrameMax;	// Number of frames per sprite.
+	SDL_Rect m_rSrc;	// Rectangle for source pixels.
+	SDL_FRect m_rDst;	// Rectangle for destination window.
+
 private:
 	void m_move();
 

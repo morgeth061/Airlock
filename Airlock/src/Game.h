@@ -54,6 +54,8 @@ public:
 	Enemy* m_pEnemy[3];
 	Target* m_pTarget;
 	Minerals* m_pMinerals[2];
+
+	bool KeyDown(SDL_Scancode c);
 private:
 	Game();
 	~Game();
@@ -71,6 +73,7 @@ private:
 
 	glm::vec2 m_mousePosition;
 
+	const Uint8* m_iKeystates; // Keyboard state container.
 };
 
 typedef Game TheGame;

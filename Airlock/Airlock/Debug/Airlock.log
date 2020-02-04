@@ -1,2 +1,32 @@
-﻿  Engine.cpp
+﻿  Target.cpp
+D:\School\Github\Airlock\Airlock\src\Target.cpp(52,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Target.cpp(53,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Target.cpp(68,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Target.cpp(69,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Target.cpp(114,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Target.cpp(115,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
   Airlock.vcxproj -> D:\School\Github\Airlock\Airlock\Debug\Airlock.exe
