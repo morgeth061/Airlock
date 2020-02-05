@@ -4,6 +4,7 @@
 
 #include "GameObject.h"
 #include "TextureManager.h"
+#include "Level.h"
 
 #include <string>
 
@@ -32,6 +33,9 @@ private:
 public:
 	Enemy();
 	~Enemy();
+
+	Level levelSelect;
+	array_type levelArray;
 
 	// Inherited via GameObject
 	void draw() override;

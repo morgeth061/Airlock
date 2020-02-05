@@ -111,21 +111,30 @@ void Target::clean()
 void Target::m_move()
 {
 	//integers representing the new X and Y coordinates.
-	int newX = (getPosition().x + getVelocity().x) / (64);
-	int newY = (getPosition().y + getVelocity().y) / (62); //changed to better fit screen resolution (SL)
+	int newX = (getPosition().x + getVelocity().x) / 64;
+	int newY = (getPosition().y + getVelocity().y) / 64;
 
 	//checks if new coordinates are ground the player can walk on
 
-	cout << newY << " " << newX << " " << levelArray[newY][newX] << endl;
+
+	glm::vec2 newPosition = getPosition() + getVelocity() * 0.9f;
 
 	if (levelArray[newY][newX] == 0)
 	{
-		glm::vec2 newPosition = getPosition() + getVelocity() * 1.0f;
+		if ((levelArray[(getPosition().y + getVelocity().y + 32) / 64][newX] == 1) || (levelArray[newY][(getPosition().x + getVelocity().x + 8) / 64] == 1) || (levelArray[newY][(getPosition().x + getVelocity().x - 8) / 64] == 1))
+		{
+			newPosition = getPosition();
+		}
+		setPosition(newPosition);
+	}
+	else if (levelArray[newY][newX] == 1)
+	{
+		newPosition = getPosition();
 		setPosition(newPosition);
 	}
 	else if (levelArray[newY][newX] == 3)
 	{
-		glm::vec2 newPosition = getPosition() + getVelocity() * 1.0f;
+		newPosition = getPosition() + getVelocity() * 0.9f;
 		setPosition(newPosition);
 		Engine::Instance().SetGameWon();
 	}

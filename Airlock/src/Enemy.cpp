@@ -16,6 +16,7 @@ Description:
 #include "Game.h"
 #include "Util.h"
 #include "GLM/gtx/rotate_vector.hpp"
+#include "Engine.h"
 
 
 Enemy::Enemy()
@@ -23,6 +24,9 @@ Enemy::Enemy()
 	Texture::Instance()->load("../Assets/textures/enemy1.png",
 		"Enemy", TheGame::Instance()->getRenderer());
 
+	levelSelect = Level();
+	levelArray = levelSelect.getLevel();
+	
 	glm::vec2 size = Texture::Instance()->getTextureSize("Enemy");
 	setWidth(size.x);
 	setHeight(size.y);
@@ -91,6 +95,15 @@ void Enemy::turnLeft()
 void Enemy::m_move()
 {
 	glm::vec2 newPosition = getPosition() + getVelocity() * m_maxSpeed;
+	int newX = (getPosition().x + getVelocity().x) / 64;
+	int newY = (getPosition().y + getVelocity().y) / 64;
+
+	cout << endl << "got here" << endl;
+	if (levelArray[(newPosition.y + 12) / 64][newX] == 1 || levelArray[newY][(newPosition.x + 4) / 64] == 1 || levelArray[newY][(newPosition.x - 4) / 64] == 1)
+	{
+		cout << endl << "a" << endl;
+		newPosition = getPosition();
+	}
 	setPosition(newPosition);
 }
 
