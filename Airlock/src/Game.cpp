@@ -26,6 +26,7 @@ Description:
 
 #include "Game.h"
 #include "Util.h"
+#define FPS 60
 
 const int numofEnemies = 3;
 const int numofMinerals = 2;
@@ -174,6 +175,18 @@ void Game::clean()
 	SDL_Quit();
 }
 
+bool Game::KeyDown(SDL_Scancode c)
+{
+	if (m_iKeystates != nullptr)
+	{
+		if (m_iKeystates[c] == 1)
+			return true;
+		else
+			return false;
+	}
+	return false;
+}
+
 void Game::handleEvents()
 {
 	SDL_Event event;
@@ -203,9 +216,11 @@ void Game::handleEvents()
 				break;
 			case SDLK_a:
 				m_pTarget->setVelocity(glm::vec2(-1.0f, m_pTarget->getVelocity().y));
+				m_pTarget->setFlip(SDL_FLIP_NONE);
 				break;
 			case SDLK_d:
 				m_pTarget->setVelocity(glm::vec2(1.0f, m_pTarget->getVelocity().y));
+				m_pTarget->setFlip(SDL_FLIP_HORIZONTAL);
 				break;
 			case SDLK_0:
 				for (int count = 0; count < numofEnemies; count++)
@@ -237,29 +252,36 @@ void Game::handleEvents()
 		case SDL_KEYUP:
 			switch (event.key.keysym.sym) {
 			case SDLK_w:
+
 				if (m_pTarget->getVelocity().y < 0.0f) {
 					m_pTarget->setVelocity(glm::vec2(m_pTarget->getVelocity().x, 0.0f));
+					m_pTarget->SetIdle();
 				}
 				break;
-
 			case SDLK_s:
+
 				if (m_pTarget->getVelocity().y > 0.0f) {
 					m_pTarget->setVelocity(glm::vec2(m_pTarget->getVelocity().x, 0.0f));
+					m_pTarget->SetIdle();
 				}
 				break;
-
 			case SDLK_a:
+
 				if (m_pTarget->getVelocity().x < 0.0f) {
 					m_pTarget->setVelocity(glm::vec2(0.0f, m_pTarget->getVelocity().y));
+					m_pTarget->SetIdle();
 				}
 				break;
 			case SDLK_d:
+
 				if (m_pTarget->getVelocity().x > 0.0f) {
 					m_pTarget->setVelocity(glm::vec2(0.0f, m_pTarget->getVelocity().y));
+					m_pTarget->SetIdle();
 				}
 				break;
 			}
 		default:
+			m_pTarget->animate();
 			//If enemy collide with player... what happens?
 			for (int count = 0; count < numofEnemies; count++)
 			{

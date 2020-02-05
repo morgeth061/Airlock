@@ -39,6 +39,7 @@
     <ClInclude Include="..\src\Engine.h" />
     <ClInclude Include="..\src\FSM.h" />
     <ClInclude Include="..\src\Game.h" />
+    <ClInclude Include="..\src\GameObject.h" />
     <ClInclude Include="..\src\GameObjectType.h" />
     <ClInclude Include="..\src\Level.h" />
     <ClInclude Include="..\src\LevelNumber.h" />

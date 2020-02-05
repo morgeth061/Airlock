@@ -4,6 +4,7 @@
 
 #include <glm\vec2.hpp>
 #include <string>
+#include <SDL.h>
 
 #include "GameObjectType.h"
 #include "SteeringState.h"
@@ -33,6 +34,7 @@ public:
 	bool getIsColliding();
 	GameObjectType getType();
 	SteeringState getSteeringState();
+	SDL_RendererFlip getFlip();
 
 	// setters for common variables
 	void setPosition(glm::vec2 newPosition);
@@ -43,6 +45,7 @@ public:
 	void setType(GameObjectType newType);
 	void setSteeringState(SteeringState newState);
 	void setAcceleration(glm::vec2 newAcceleration);
+	void setFlip(SDL_RendererFlip flipType);
 
 
 private:
@@ -50,6 +53,7 @@ private:
 	glm::vec2 m_position;
 	glm::vec2 m_rotation;
 	glm::vec2 m_scale;
+
 
 	// movement variables
 	glm::vec2 m_velocity;
@@ -64,6 +68,7 @@ private:
 	int m_currentFrame;
 	int m_numFrames;
 	std::string m_textureID;
+	SDL_RendererFlip m_flipType;
 
 	// collision variables
 	bool m_isColliding;
