@@ -18,6 +18,10 @@ Author: Sojung (Serena) Lee
 Date: Feb/1/2020
 Description:
 	- Changed player's sprite, original position, boundaries, and speed
+	Author: Ryan Ethier
+Date: Feb/08/2020
+Description:
+	- Changed Level Class Implementation to use pointers
 **/
 
 #include "Target.h"
@@ -36,14 +40,15 @@ Target::Target()
 
 
 	//generates level & collision
-	levelSelect = Level();
-	levelArray = levelSelect.getLevel();
+	m_levelSelect = Level();
+	m_levelPtr = m_levelSelect.getLevel();
+	m_levelArray = *m_levelPtr;
 
 	for (int i = 0; i < 15; i++)
 	{
 		for (int j = 0; j < 29; j++)
 		{
-			cout << levelArray[i][j];
+			cout << &m_levelArray[i][j];
 		}
 		cout << endl;
 	}
@@ -114,25 +119,27 @@ void Target::m_move()
 	int newX = (getPosition().x + getVelocity().x) / 64;
 	int newY = (getPosition().y + getVelocity().y) / 64;
 
+	array_type currentArray = m_levelArray;
+
 	//checks if new coordinates are ground the player can walk on
 
 
 	glm::vec2 newPosition = getPosition() + getVelocity() * 0.9f;
 
-	if (levelArray[newY][newX] == 0)
+	if (currentArray[newY][newX] == 0)
 	{
-		if ((levelArray[(getPosition().y + getVelocity().y + 32) / 64][newX] == 1) || (levelArray[newY][(getPosition().x + getVelocity().x + 8) / 64] == 1) || (levelArray[newY][(getPosition().x + getVelocity().x - 8) / 64] == 1))
+		if ((currentArray[(getPosition().y + getVelocity().y + 32) / 64][newX] == 1) || (currentArray[newY][(getPosition().x + getVelocity().x + 8) / 64] == 1) || (currentArray[newY][(getPosition().x + getVelocity().x - 8) / 64] == 1))
 		{
 			newPosition = getPosition();
 		}
 		setPosition(newPosition);
 	}
-	else if (levelArray[newY][newX] == 1)
+	else if (currentArray[newY][newX] == 1)
 	{
 		newPosition = getPosition();
 		setPosition(newPosition);
 	}
-	else if (levelArray[newY][newX] == 3)
+	else if (currentArray[newY][newX] == 3)
 	{
 		newPosition = getPosition() + getVelocity() * 0.9f;
 		setPosition(newPosition);
