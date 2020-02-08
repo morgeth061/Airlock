@@ -11,8 +11,9 @@ public:
 	Target();
 	~Target();
 
-	Level levelSelect;
-	array_type levelArray;
+	Level m_levelSelect;
+	array_type* m_levelPtr;
+	array_type m_levelArray;
 
 	// Inherited via GameObject
 	virtual void draw() override;

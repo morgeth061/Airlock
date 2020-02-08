@@ -35,6 +35,7 @@ public:
 	~Enemy();
 
 	Level levelSelect;
+	array_type* levelPtr;
 	array_type levelArray;
 
 	// Inherited via GameObject
