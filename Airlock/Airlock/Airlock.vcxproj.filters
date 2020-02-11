@@ -86,9 +86,6 @@
     <ClInclude Include="..\src\CollisionManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Enemy.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Target.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -106,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="..\src\GameObject.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Enemy.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

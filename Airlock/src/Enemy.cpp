@@ -43,7 +43,12 @@ Enemy::Enemy()
 	m_turnSpeed = 2.0f;
 	m_steerForce = 0.1f;
 
-	//Texture::Instance()->setColour("Enemy", 255, 255, 0);
+	// set up health, name, and attack damage
+	m_enemyHealth = 100;
+	m_enemyName = "Fairies";
+	m_enemyAtkDmg = 20;
+
+
 }
 
 
@@ -99,7 +104,7 @@ void Enemy::m_move()
 	int newX = (getPosition().x + getVelocity().x) / 64;
 	int newY = (getPosition().y + getVelocity().y) / 64;
 
-	cout << endl << "got here" << endl;
+	//cout << endl << "got here" << endl;
 	if (levelArray[(newPosition.y + 12) / 64][newX] == 1 || levelArray[newY][(newPosition.x + 4) / 64] == 1 || levelArray[newY][(newPosition.x - 4) / 64] == 1)
 	{
 		cout << endl << "a" << endl;
@@ -118,10 +123,13 @@ float Enemy::getMaxSpeed()
 	return m_maxSpeed;
 }
 
+
+
 void Enemy::setMaxSpeed(float newMaxSpeed)
 {
 	m_maxSpeed = newMaxSpeed;
 }
+
 void Enemy::setTarget(glm::vec2 newTarget)
 {
 	m_target = newTarget;
@@ -175,4 +183,39 @@ void Enemy::m_checkArrival()
 			setSteeringState(IDLE);
 		}
 	}
+}
+int Enemy::getEnemyHealth()
+{
+	return m_enemyHealth;
+}
+
+string Enemy::getEnemyName()
+{
+	return m_enemyName;
+}
+
+int Enemy::getEnemyAtkDmg()
+{
+	return m_enemyAtkDmg;
+}
+bool Enemy::getEnemyDeath()
+{
+	return m_enemyDeath;
+}
+void Enemy::setEnemyHealth(int health)
+{
+	m_enemyHealth = health;
+}
+void Enemy::setEnemyName(string name)
+{
+	m_enemyName = name;
+}
+void Enemy::setEnemyAtkDmg(int damage)
+{
+	m_enemyAtkDmg = damage;
+}
+
+void Enemy::setEnemyDeath(bool death)
+{
+	m_enemyDeath = death;
 }

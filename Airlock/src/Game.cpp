@@ -159,11 +159,15 @@ void Game::update()
 	{
 		if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
 		{
+			//testing player's health functions (will remove in future updates)
+			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() + 50);
+			cout << "\nGAINED: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
+
 			m_pMinerals[count]->update();
 		}
 	}
 	m_pTarget->update();
-
+	attack();
 }
 
 void Game::clean()
@@ -173,6 +177,25 @@ void Game::clean()
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_DestroyWindow(m_pWindow);
 	SDL_Quit();
+}
+int countEnemies = 0;
+int countMinerals = 0;
+void Game::attack()
+{
+	if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pEnemy[countEnemies]))
+	{
+		// if player collides with enemies, player's health depletes a certain amount (enemy's attack damage)
+		m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() - m_pEnemy[countEnemies]->getEnemyAtkDmg());
+		cout << "LOST: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
+		countEnemies++;
+	}
+	if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[countMinerals]))
+	{
+		//testing player's health functions (will remove in future updates)
+		m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() + 50);
+		cout << "\nGAINED: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
+		countMinerals++;
+	}
 }
 
 bool Game::KeyDown(SDL_Scancode c)
@@ -290,6 +313,7 @@ void Game::handleEvents()
 					m_pEnemy[count]->setSteeringState(SteeringState::SEEK);
 					m_pEnemy[count]->setTarget(m_pTarget->getPosition());
 				}
+
 			}
 			//If minerals collide with player.... what happens (add inventory?)
 			for (int count = 0; count < numofMinerals; count++)
@@ -297,6 +321,7 @@ void Game::handleEvents()
 				if (m_pMinerals[count]->getIsColliding() == true)
 				{
 					m_pMinerals[count]->setPosition(glm::vec2(2000.0f, 2000.0f));
+
 				}
 			}
 

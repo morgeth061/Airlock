@@ -62,6 +62,13 @@ Target::Target()
 	setType(GameObjectType::TARGET);
 	setFlip(SDL_FLIP_HORIZONTAL);
 	SetIdle();
+
+	// set up health, name, and attack damage
+	m_playerName = "Robo"; //temp-name
+	m_playerHealth = 250;
+	m_playerAtkDmg = 50;
+	m_playerDeath = false;
+
 }
 
 Target::~Target()
@@ -99,6 +106,8 @@ void Target::SetIdle()
 	m_iSprite = 0;
 }
 
+
+
 void Target::update()
 {
 	//this->animate();
@@ -107,6 +116,7 @@ void Target::update()
 
 	m_move();
 	m_checkBounds();
+	m_playerKilled();
 }
 
 void Target::clean()
@@ -172,7 +182,60 @@ void Target::m_checkBounds()
 
 }
 
+
+
 void Target::m_reset()
 {
 	setIsColliding(false);
 }
+
+void Target::setPlayerHealth(int health)
+{
+	m_playerHealth = health;
+}
+
+void Target::setPlayerName(string name)
+{
+	m_playerName = name;
+}
+
+void Target::setPlayerAtkDmg(int damage)
+{
+	m_playerAtkDmg = damage;
+}
+
+void Target::setPlayerDeath(bool death)
+{
+	m_playerDeath = death;
+}
+
+void Target::m_playerKilled()
+{
+	if (m_playerHealth <= 0)
+	{
+		m_playerDeath = true;
+		setPosition(glm::vec2(2000.0f, 2000.0f));
+	}
+}
+
+int Target::getPlayerHealth()
+{
+	return m_playerHealth;
+}
+
+string Target::getPlayerName()
+{
+	return m_playerName;
+}
+
+int Target::getPlayerAtkDmg()
+{
+	return m_playerAtkDmg;
+}
+
+bool Target::getPlayerStatus()
+{
+	return m_playerDeath;
+}
+
+
