@@ -10,6 +10,12 @@ Description:
 	- Draws enemies (using Assets)
 	- MAkes enemy stay within boundaries --> using checkBounds function
 		- e.g.) If enemy reaches negative Y axis, then set y axis = 0
+Author:Sojung (Serena) Lee
+Date: Feb/11/2020
+Description:
+	 - added Hit get & set functions (bool)
+	 - added get & set functions for name, damage, and health
+	 - added Enemy resized (sent on Feb 5)
 **/
 
 #include "Enemy.h"
@@ -36,6 +42,7 @@ Enemy::Enemy()
 	setAcceleration(glm::vec2(0.0f, 0.0f));
 	//m_reset();
 	setIsColliding(false);
+	setIsHit(false);
 	setType(GameObjectType::ENEMY);
 	setSteeringState(SteeringState::IDLE);
 	m_maxSpeed = 1.0f;
@@ -43,7 +50,11 @@ Enemy::Enemy()
 	m_turnSpeed = 2.0f;
 	m_steerForce = 0.1f;
 
-	//Texture::Instance()->setColour("Enemy", 255, 255, 0);
+	// set up health, name, and attack damage (PLEASE CHANGE ONCE DETAILS ARE FINALIZED)
+	setEnemyHealth(100);
+	setEnemyName("Fairies");
+	setEnemyAtkDmg(20);
+	setEnemyDeath(false);
 }
 
 
@@ -56,8 +67,7 @@ void Enemy::draw()
 	int xComponent = getPosition().x;
 	int yComponent = getPosition().y;
 
-	Texture::Instance()->draw("Enemy", xComponent, yComponent,
-		TheGame::Instance()->getRenderer(), m_currentDirection, 255, true);
+	Texture::Instance()->draw("Enemy", xComponent, yComponent, TheGame::Instance()->getRenderer(), m_currentDirection, 255, true);
 }
 
 void Enemy::m_checkState()
@@ -99,10 +109,10 @@ void Enemy::m_move()
 	int newX = (getPosition().x + getVelocity().x) / 64;
 	int newY = (getPosition().y + getVelocity().y) / 64;
 
-	cout << endl << "got here" << endl;
+	//cout << endl << "got here" << endl;
 	if (levelArray[(newPosition.y + 12) / 64][newX] == 1 || levelArray[newY][(newPosition.x + 4) / 64] == 1 || levelArray[newY][(newPosition.x - 4) / 64] == 1)
 	{
-		cout << endl << "a" << endl;
+		//cout << endl << "a" << endl;
 		newPosition = getPosition();
 	}
 	setPosition(newPosition);
@@ -118,10 +128,13 @@ float Enemy::getMaxSpeed()
 	return m_maxSpeed;
 }
 
+
+
 void Enemy::setMaxSpeed(float newMaxSpeed)
 {
 	m_maxSpeed = newMaxSpeed;
 }
+
 void Enemy::setTarget(glm::vec2 newTarget)
 {
 	m_target = newTarget;
@@ -176,3 +189,39 @@ void Enemy::m_checkArrival()
 		}
 	}
 }
+int Enemy::getEnemyHealth()
+{
+	return m_enemyHealth;
+}
+
+string Enemy::getEnemyName()
+{
+	return m_enemyName;
+}
+
+int Enemy::getEnemyAtkDmg()
+{
+	return m_enemyAtkDmg;
+}
+bool Enemy::getEnemyDeath()
+{
+	return m_enemyDeath;
+}
+void Enemy::setEnemyHealth(int health)
+{
+	m_enemyHealth = health;
+}
+void Enemy::setEnemyName(string name)
+{
+	m_enemyName = name;
+}
+void Enemy::setEnemyAtkDmg(int damage)
+{
+	m_enemyAtkDmg = damage;
+}
+
+void Enemy::setEnemyDeath(bool death)
+{
+	m_enemyDeath = death;
+}
+

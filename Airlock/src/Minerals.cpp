@@ -8,6 +8,11 @@ Description:
 	- placed mineral (Quartz1.png) into game state (screen)
 	- Based on Enemy class
 	- changed minerals icon (quartz) to larger resolution
+Minerals class
+Author: Sojung (Serena) Lee
+Date: Feb/11/2020
+Description:
+	- Added hit functions & set to false
 **/
 
 #include "Minerals.h"
@@ -25,6 +30,7 @@ Minerals::Minerals()
 	setPosition(glm::vec2(192.0f, 96.0f)); //changes original position
 	setVelocity(glm::vec2(0, 0));
 	setIsColliding(false);
+	setIsHit(false);
 	setType(GameObjectType::MINERALS);
 }
 
@@ -42,9 +48,7 @@ void Minerals::draw()
 
 void Minerals::update()
 {
-	//m_move();
-	//m_checkBounds();
-	//clean();
+
 }
 
 void Minerals::clean()
@@ -55,4 +59,5 @@ void Minerals::clean()
 void Minerals::m_reset()
 {
 	setIsColliding(false);
+	setIsHit(false);
 }

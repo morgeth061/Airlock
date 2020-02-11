@@ -73,7 +73,7 @@ void PauseState::Exit() //"on exit" for pause state
 GameState::GameState() //ctor. of game state
 {
 	//Game::Instance()->init("Airlock", 0, 0, 1856, 960, false);
-	Game::Instance()->init("Airlock", 0, 0, 1856, 960, true);
+	Game::Instance()->init("Airlock", 0, 0, 1856, 960, false);
 }
 
 void GameState::Enter() //"on enter" of game state

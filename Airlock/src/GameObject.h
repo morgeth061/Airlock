@@ -32,6 +32,7 @@ public:
 	int getWidth();
 	int getHeight();
 	bool getIsColliding();
+	bool getIsHit();
 	GameObjectType getType();
 	SteeringState getSteeringState();
 	SDL_RendererFlip getFlip();
@@ -42,6 +43,7 @@ public:
 	void setHeight(int newHeight);
 	void setVelocity(glm::vec2 newVelocity);
 	void setIsColliding(bool collision);
+	void setIsHit(bool hit);
 	void setType(GameObjectType newType);
 	void setSteeringState(SteeringState newState);
 	void setAcceleration(glm::vec2 newAcceleration);
@@ -72,6 +74,7 @@ private:
 
 	// collision variables
 	bool m_isColliding;
+	bool m_isHit;
 	GameObjectType m_type;
 	SteeringState m_state;
 };
