@@ -98,7 +98,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, bo
 
 		// if succeeded create our window
 		m_pWindow = SDL_CreateWindow(title, xpos, ypos, height, width, flags);
-
+		
 		// if window creation successful create our renderer
 		if (m_pWindow != 0)
 		{
@@ -192,7 +192,8 @@ void Game::enemyAttack()
 			// if player collides with enemies, player's health depletes a certain amount (enemy's attack damage)
 			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() - m_pEnemy[count]->getEnemyAtkDmg());
 			cout << "LOST: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
-			cout << "\nEnemy " << count << " = getIsHit()->" << m_pEnemy[count]->getIsHit() << endl;
+			//cout << "\nEnemy " << count << " = getIsHit()->" << m_pEnemy[count]->getIsHit() << endl;
+			m_pTarget->m_playerKilled();
 		}
 	}
 }
@@ -333,12 +334,11 @@ void Game::handleEvents()
 					m_pEnemy[count]->setIsHit(false);
 				}
 			}
-
-
+			
 			//If minerals collide with player.... what happens (add inventory?)
 			for (int count = 0; count < numofMinerals; count++)
 			{
-				if (m_pMinerals[count]->getIsHit() == true)
+				if (m_pMinerals[count]->getIsHit() == true && CollisionManager::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
 				{
 					m_pMinerals[count]->setPosition(glm::vec2(2000.0f, 2000.0f));
 				}

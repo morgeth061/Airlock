@@ -15,6 +15,7 @@ Date: Feb/11/2020
 Description:
 	 - added Hit get & set functions (bool)
 	 - added get & set functions for name, damage, and health
+	 - added Enemy resized (sent on Feb 5)
 **/
 
 #include "Enemy.h"
@@ -67,8 +68,7 @@ void Enemy::draw()
 	int xComponent = getPosition().x;
 	int yComponent = getPosition().y;
 
-	Texture::Instance()->draw("Enemy", xComponent, yComponent,
-		TheGame::Instance()->getRenderer(), m_currentDirection, 255, true);
+	Texture::Instance()->draw("Enemy", xComponent, yComponent, TheGame::Instance()->getRenderer(), m_currentDirection, 255, true);
 }
 
 void Enemy::m_checkState()

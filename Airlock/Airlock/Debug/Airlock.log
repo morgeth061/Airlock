@@ -1,10 +1,10 @@
 ﻿  Game.cpp
-D:\School\Github\Airlock\Airlock\src\Game.cpp(230,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+D:\School\Github\Airlock\Airlock\src\Game.cpp(241,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(231,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+D:\School\Github\Airlock\Airlock\src\Game.cpp(242,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
           with
           [
               T=float

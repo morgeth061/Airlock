@@ -40,7 +40,7 @@ bool CollisionManager::squaredRadiusCheck(GameObject * object1, GameObject * obj
 {
 	glm::vec2 P1 = object1->getPosition();
 	glm::vec2 P2 = object2->getPosition();
-	int halfHeights = (object1->getHeight() + object2->getHeight()) * 2;
+	int halfHeights = (object1->getHeight() + object2->getHeight()) * 1;
 
 	//if (glm::distance(P1, P2) < halfHeights) {
 
@@ -69,7 +69,7 @@ bool CollisionManager::squaredRadiusCheckObjects(GameObject* object1, GameObject
 {
 	glm::vec2 P1 = object1->getPosition();
 	glm::vec2 P2 = object2->getPosition();
-	float halfHeights = (object1->getHeight() + object2->getHeight()) * 0.3;
+	float halfHeights = (object1->getHeight() + object2->getHeight()) * 0.2;
 	if (CollisionManager::squaredDistance(P1, P2) < (halfHeights * halfHeights)) {
 		if (!object2->getIsHit()) {
 

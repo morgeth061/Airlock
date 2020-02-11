@@ -121,7 +121,7 @@ void Target::update()
 
 	m_move();
 	m_checkBounds();
-	m_playerKilled();
+
 }
 
 void Target::clean()
@@ -220,6 +220,7 @@ void Target::m_playerKilled()
 	{
 		m_playerDeath = true;
 		cout << "player died" << endl;
+		exit(EXIT_SUCCESS);
 	}
 }
 
