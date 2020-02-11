@@ -43,6 +43,8 @@ protected:
 	SDL_Rect m_rSrc;	// Rectangle for source pixels.
 	SDL_FRect m_rDst;	// Rectangle for destination window.
 
+	const static int Size;
+
 private:
 	void m_move();
 

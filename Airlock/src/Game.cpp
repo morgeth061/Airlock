@@ -29,6 +29,11 @@ Description:
 		- Once inventory is added, replace adding health to adding inventory function
 	- Added enemyAttack (when player hits enemy, health is decreased)
 	- handleEvents -> default -> enemy's hit bool is set to false
+Author : Fisayo Akinsulire
+Date: Feb/11/2020
+Description:
+	- Added bullets(render, update, handleEvents)
+	- Added timer to the bullets so they couldnt be spammed
 **/
 
 #include "Game.h"
@@ -52,6 +57,8 @@ SDL_Renderer* Game::getRenderer()
 
 Game::Game()
 {
+	bulletFrame = 0;
+	bulletFrameMax = 120;
 }
 
 Game::~Game()
@@ -145,6 +152,12 @@ void Game::render()
 
 	m_pTarget->draw();
 
+	/*m_pBullet->render();*/
+
+/*SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);*/
+	for (int i = 0; i < BullVec.size(); i++)
+		BullVec[i]->render();
+
 	for (int count = 0; count < numofEnemies; count++)
 		m_pEnemy[count]->draw();
 
@@ -171,7 +184,25 @@ void Game::update()
 		}
 	}
 	m_pTarget->update();
-	//attack();
+	for (int i = 0; i < BullVec.size(); i++)
+	{
+		BullVec[i]->update();
+		if (BullVec[i]->active == false)
+		{
+			delete BullVec[i];
+			BullVec[i] = nullptr;
+		}
+	}
+	if (!BullVec.empty())
+	{
+		BullVec.erase(remove(BullVec.begin(), BullVec.end(), nullptr), BullVec.end());
+		BullVec.shrink_to_fit();
+	}
+	bulletFrame++;
+	if (bulletFrame >= bulletFrameMax)
+	{
+		bulletFrame = bulletFrameMax;
+	}
 }
 
 void Game::clean()
@@ -286,6 +317,12 @@ void Game::handleEvents()
 					m_pEnemy[count]->turnLeft();
 				}
 				break;
+			case SDLK_SPACE:
+				if (bulletFrame == bulletFrameMax)
+				{
+					BullVec.push_back(new Bullet(Game::Instance()->getTargetPosition().x, Game::Instance()->getTargetPosition().y));
+					bulletFrame = 0;
+				}
 			}
 			break;
 		case SDL_KEYUP:

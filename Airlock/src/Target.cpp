@@ -35,6 +35,8 @@ Description:
 #include "Level.h"
 #include "GameObjectType.h"
 
+const int Target::Size = 7;
+
 Target::Target()
 {
 	Texture::Instance()->load("../Assets/textures/Player_SMG_Walking_Sheet.png", "player", TheGame::Instance()->getRenderer());
@@ -67,6 +69,7 @@ Target::Target()
 	setType(GameObjectType::TARGET);
 	setFlip(SDL_FLIP_HORIZONTAL);
 	SetIdle();
+	int inventory[Size];
 
 	// set up health, name, and attack damage
 	setPlayerName("Astro");

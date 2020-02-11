@@ -17,6 +17,7 @@
 #include "Enemy.h"
 #include "Target.h"
 #include "Minerals.h"
+#include "Bullet.h"
 
 class Game
 {
@@ -57,7 +58,8 @@ public:
 	Enemy* m_pEnemy[3];
 	Target* m_pTarget;
 	Minerals* m_pMinerals[2];
-
+	Bullet* m_pBullet;
+	
 	bool KeyDown(SDL_Scancode c);
 private:
 	Game();
@@ -66,7 +68,11 @@ private:
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
 
+	vector<Bullet*> BullVec;
+
 	int m_currentFrame;
+	int bulletFrame;
+	int bulletFrameMax;
 
 	bool m_bRunning;
 
