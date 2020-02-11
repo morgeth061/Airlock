@@ -69,10 +69,10 @@ Target::Target()
 	SetIdle();
 
 	// set up health, name, and attack damage
-	m_playerName = "Robo"; //temp-name
-	m_playerHealth = 250;
-	m_playerAtkDmg = 50;
-	m_playerDeath = false;
+	setPlayerName("Astro");
+	setPlayerHealth(250);
+	setPlayerAtkDmg(50);
+	setPlayerDeath(false);
 
 }
 

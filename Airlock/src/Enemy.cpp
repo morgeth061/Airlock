@@ -50,12 +50,11 @@ Enemy::Enemy()
 	m_turnSpeed = 2.0f;
 	m_steerForce = 0.1f;
 
-	// set up health, name, and attack damage
-	m_enemyHealth = 100;
-	m_enemyName = "Fairies";
-	m_enemyAtkDmg = 20;
-
-
+	// set up health, name, and attack damage (PLEASE CHANGE ONCE DETAILS ARE FINALIZED)
+	setEnemyHealth(100);
+	setEnemyName("Fairies");
+	setEnemyAtkDmg(20);
+	setEnemyDeath(false);
 }
 
 
@@ -226,6 +225,3 @@ void Enemy::setEnemyDeath(bool death)
 	m_enemyDeath = death;
 }
 
-void Enemy::enemyUpdate()
-{
-}
