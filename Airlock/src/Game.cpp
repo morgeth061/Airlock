@@ -22,13 +22,11 @@ Date: Feb/1/2020
 Description:
 	- changed enemy speed
 	- updated handleEvents (ESC button -> added exit code)
-Author: Sojung (Serena) Lee
+Author : Fisayo Akinsulire
 Date: Feb/11/2020
 Description:
-	- Added objectPickUp (when player picks mineral, health is added) TEST FUNCTION
-		- Once inventory is added, replace adding health to adding inventory function
-	- Added enemyAttack (when player hits enemy, health is decreased)
-	- handleEvents -> default -> enemy's hit bool is set to false
+	- Added bullets(render, update, handleEvents)
+	- Added timer to the bullets so they couldnt be spammed
 **/
 
 #include "Game.h"
@@ -52,6 +50,8 @@ SDL_Renderer* Game::getRenderer()
 
 Game::Game()
 {
+	bulletFrame = 0;
+	bulletFrameMax = 120;
 }
 
 Game::~Game()
@@ -80,6 +80,7 @@ void Game::createGameObjects()
 	m_pEnemy[2]->setMaxSpeed(0.80f);
 
 	m_pTarget = new Target();
+
 }
 
 bool Game::init(const char* title, int xpos, int ypos, int height, int width, bool fullscreen)
@@ -98,7 +99,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, bo
 
 		// if succeeded create our window
 		m_pWindow = SDL_CreateWindow(title, xpos, ypos, height, width, flags);
-		
+
 		// if window creation successful create our renderer
 		if (m_pWindow != 0)
 		{
@@ -144,6 +145,11 @@ void Game::render()
 	Texture::Instance()->draw("Level1", 0, 0, TheGame::Instance()->getRenderer(), false);
 
 	m_pTarget->draw();
+	/*m_pBullet->render();*/
+
+	/*SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);*/
+	for (int i = 0; i < BullVec.size(); i++)
+		BullVec[i]->render();
 
 	for (int count = 0; count < numofEnemies; count++)
 		m_pEnemy[count]->draw();
@@ -159,7 +165,6 @@ void Game::update()
 
 	for (int count = 0; count < numofEnemies; count++)
 	{
-		Collision::squaredRadiusCheckObjects(m_pTarget, m_pEnemy[count]);
 		Collision::squaredRadiusCheck(m_pTarget, m_pEnemy[count]);
 		m_pEnemy[count]->update();
 	}
@@ -167,11 +172,30 @@ void Game::update()
 	{
 		if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
 		{
-			//m_pMinerals[count]->update();
+			m_pMinerals[count]->update();
 		}
 	}
 	m_pTarget->update();
-	//attack();
+	for (int i = 0; i < BullVec.size(); i++)
+	{
+		BullVec[i]->update();
+		if (BullVec[i]->active == false)
+		{
+			delete BullVec[i];
+			BullVec[i] = nullptr;
+		}
+	}
+	if (!BullVec.empty())
+	{
+		BullVec.erase(remove(BullVec.begin(), BullVec.end(), nullptr), BullVec.end());
+		BullVec.shrink_to_fit();
+	}
+	bulletFrame++;
+	if (bulletFrame >= bulletFrameMax)
+	{
+		bulletFrame = bulletFrameMax;
+	}
+
 }
 
 void Game::clean()
@@ -181,35 +205,6 @@ void Game::clean()
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_DestroyWindow(m_pWindow);
 	SDL_Quit();
-}
-
-void Game::enemyAttack()
-{
-	for (int count = 0; count < numofEnemies; count++)
-	{
-		if (m_pEnemy[count]->getIsHit() == true)
-		{
-			// if player collides with enemies, player's health depletes a certain amount (enemy's attack damage)
-			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() - m_pEnemy[count]->getEnemyAtkDmg());
-			cout << "LOST: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
-			//cout << "\nEnemy " << count << " = getIsHit()->" << m_pEnemy[count]->getIsHit() << endl;
-			m_pTarget->m_playerKilled();
-		}
-	}
-}
-
-void Game::objectPickUp()
-{
-	for (int count = 0; count < numofMinerals; count++)
-	{
-		if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
-		{
-			//testing player's health functions (will remove in future updates)
-			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() + 50);
-			cout << "GAINED: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
-
-		}
-	}
 }
 
 bool Game::KeyDown(SDL_Scancode c)
@@ -261,8 +256,6 @@ void Game::handleEvents()
 				break;
 			case SDLK_0:
 				for (int count = 0; count < numofEnemies; count++)
-
-
 				{
 					m_pEnemy[count]->setSteeringState(SteeringState::IDLE);
 				}
@@ -286,6 +279,17 @@ void Game::handleEvents()
 					m_pEnemy[count]->turnLeft();
 				}
 				break;
+			case SDLK_SPACE:
+				if (bulletFrame == bulletFrameMax)
+				{
+					BullVec.push_back(new Bullet(Game::Instance()->getTargetPosition().x, Game::Instance()->getTargetPosition().y));
+					bulletFrame = 0;
+				}
+
+
+
+				break;
+
 			}
 			break;
 		case SDL_KEYUP:
@@ -321,7 +325,7 @@ void Game::handleEvents()
 			}
 		default:
 			m_pTarget->animate();
-			//If enemy collide with player... what happens?			
+			//If enemy collide with player... what happens?
 			for (int count = 0; count < numofEnemies; count++)
 			{
 				if (m_pEnemy[count]->getIsColliding() == true)
@@ -329,21 +333,15 @@ void Game::handleEvents()
 					m_pEnemy[count]->setSteeringState(SteeringState::SEEK);
 					m_pEnemy[count]->setTarget(m_pTarget->getPosition());
 				}
-				if (m_pEnemy[count]->getIsHit() == true && CollisionManager::squaredRadiusCheckObjects(m_pTarget, m_pEnemy[count]))
-				{
-					m_pEnemy[count]->setIsHit(false);
-				}
 			}
-			
 			//If minerals collide with player.... what happens (add inventory?)
 			for (int count = 0; count < numofMinerals; count++)
 			{
-				if (m_pMinerals[count]->getIsHit() == true && CollisionManager::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
+				if (m_pMinerals[count]->getIsColliding() == true)
 				{
 					m_pMinerals[count]->setPosition(glm::vec2(2000.0f, 2000.0f));
 				}
 			}
-
 
 			break;
 		}
