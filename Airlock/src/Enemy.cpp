@@ -10,6 +10,11 @@ Description:
 	- Draws enemies (using Assets)
 	- MAkes enemy stay within boundaries --> using checkBounds function
 		- e.g.) If enemy reaches negative Y axis, then set y axis = 0
+Author:Sojung (Serena) Lee
+Date: Feb/11/2020
+Description:
+	 - added Hit get & set functions (bool)
+	 - added get & set functions for name, damage, and health
 **/
 
 #include "Enemy.h"
@@ -36,6 +41,7 @@ Enemy::Enemy()
 	setAcceleration(glm::vec2(0.0f, 0.0f));
 	//m_reset();
 	setIsColliding(false);
+	setIsHit(false);
 	setType(GameObjectType::ENEMY);
 	setSteeringState(SteeringState::IDLE);
 	m_maxSpeed = 1.0f;
@@ -107,7 +113,7 @@ void Enemy::m_move()
 	//cout << endl << "got here" << endl;
 	if (levelArray[(newPosition.y + 12) / 64][newX] == 1 || levelArray[newY][(newPosition.x + 4) / 64] == 1 || levelArray[newY][(newPosition.x - 4) / 64] == 1)
 	{
-		cout << endl << "a" << endl;
+		//cout << endl << "a" << endl;
 		newPosition = getPosition();
 	}
 	setPosition(newPosition);
@@ -218,4 +224,8 @@ void Enemy::setEnemyAtkDmg(int damage)
 void Enemy::setEnemyDeath(bool death)
 {
 	m_enemyDeath = death;
+}
+
+void Enemy::enemyUpdate()
+{
 }

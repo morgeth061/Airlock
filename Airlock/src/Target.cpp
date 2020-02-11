@@ -18,10 +18,15 @@ Author: Sojung (Serena) Lee
 Date: Feb/1/2020
 Description:
 	- Changed player's sprite, original position, boundaries, and speed
-	Author: Ryan Ethier
+Author: Ryan Ethier
 Date: Feb/08/2020
 Description:
 	- Changed Level Class Implementation to use pointers
+Author:Sojung (Serena) Lee
+Date: Feb/11/2020
+Description:
+	 - added Hit get & set functions (bool)
+	 - added get & set functions for name, damage, and health
 **/
 
 #include "Target.h"
@@ -214,7 +219,7 @@ void Target::m_playerKilled()
 	if (m_playerHealth <= 0)
 	{
 		m_playerDeath = true;
-		setPosition(glm::vec2(2000.0f, 2000.0f));
+		cout << "player died" << endl;
 	}
 }
 

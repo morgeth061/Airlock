@@ -68,5 +68,7 @@ public:
 	void setEnemyAtkDmg(int);
 	void setEnemyDeath(bool);
 
+	void enemyUpdate();
+
 };
 #endif // defined (__Enemy__)

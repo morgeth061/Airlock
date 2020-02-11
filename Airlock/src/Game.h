@@ -44,7 +44,8 @@ public:
 	void handleEvents();
 	void clean();
 
-	void attack();
+	void enemyAttack();
+	void objectPickUp();
 
 	// a function to access the private running variable
 	bool running() { return m_bRunning; }
