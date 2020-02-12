@@ -1,3 +1,4 @@
+
 #pragma once
 #ifndef __Game__
 #define __Game__
@@ -17,6 +18,7 @@
 #include "Enemy.h"
 #include "Target.h"
 #include "Minerals.h"
+#include "Bullet.h"
 
 class Game
 {
@@ -44,9 +46,6 @@ public:
 	void handleEvents();
 	void clean();
 
-	void enemyAttack();
-	void objectPickUp();
-
 	// a function to access the private running variable
 	bool running() { return m_bRunning; }
 
@@ -57,6 +56,7 @@ public:
 	Enemy* m_pEnemy[3];
 	Target* m_pTarget;
 	Minerals* m_pMinerals[2];
+	Bullet* m_pBullet;
 
 	bool KeyDown(SDL_Scancode c);
 private:
@@ -65,8 +65,11 @@ private:
 
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
+	vector<Bullet*> BullVec;
 
 	int m_currentFrame;
+	int bulletFrame;
+	int bulletFrameMax;
 
 	bool m_bRunning;
 
