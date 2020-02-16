@@ -14,10 +14,6 @@ Descripton:
 #include "Game.h"
 #define WIDTH 1024
 
-
-
-
-
 Bullet::Bullet(int x, int y)
 {
 	m_dst = { x - 2, y - 2 , 4,4 };
@@ -25,7 +21,6 @@ Bullet::Bullet(int x, int y)
 		headRight = true;
 	else
 		headRight = false;
-
 }
 
 Bullet::~Bullet()
@@ -40,14 +35,11 @@ void Bullet::update()
 		m_dst.x -= speed;
 	if (m_dst.x > WIDTH)
 		active = false;
-
-
 }
 
 void Bullet::render()
 {
 	SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), 255, 0, 0, 255);
 	SDL_RenderFillRect(Game::Instance()->getRenderer(), &m_dst);
-
 }
 

@@ -6,8 +6,6 @@
 #include "TextureManager.h"
 #include "Level.h"
 
-
-
 class Target : public GameObject {
 public:
 	Target();
@@ -25,9 +23,17 @@ public:
 	virtual void animate();
 	virtual void SetIdle();
 
+	void setPlayerHealth(int);
+	void setPlayerName(string);
+	void setPlayerAtkDmg(int);
+	void setPlayerDeath(bool);
 
+	void m_playerKilled();
 
-
+	int getPlayerHealth();
+	string getPlayerName();
+	int getPlayerAtkDmg();
+	bool getPlayerStatus();
 
 protected:
 	int m_iSprite = 0,	// Which sprite to display for animation.
@@ -36,15 +42,21 @@ protected:
 		m_iFrameMax;	// Number of frames per sprite.
 	SDL_Rect m_rSrc;	// Rectangle for source pixels.
 	SDL_FRect m_rDst;	// Rectangle for destination window.
+
 	const static int Size;
 
 private:
-	int m_TargetHealth();
 	void m_move();
 
 	void m_checkBounds();
 
 	void m_reset();
+
+	int m_playerHealth;
+	string m_playerName;
+	int m_playerAtkDmg;
+
+	bool m_playerDeath;
 };
 
 #endif /* defined (__Target__) */

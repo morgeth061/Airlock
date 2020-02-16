@@ -18,10 +18,15 @@ Author: Sojung (Serena) Lee
 Date: Feb/1/2020
 Description:
 	- Changed player's sprite, original position, boundaries, and speed
-	Author: Ryan Ethier
+Author: Ryan Ethier
 Date: Feb/08/2020
 Description:
 	- Changed Level Class Implementation to use pointers
+Author:Sojung (Serena) Lee
+Date: Feb/11/2020
+Description:
+	 - added Hit get & set functions (bool)
+	 - added get & set functions for name, damage, and health
 **/
 
 #include "Target.h"
@@ -66,7 +71,11 @@ Target::Target()
 	SetIdle();
 	int inventory[Size];
 
-
+	// set up health, name, and attack damage
+	setPlayerName("Astro");
+	setPlayerHealth(250);
+	setPlayerAtkDmg(50);
+	setPlayerDeath(false);
 
 }
 
@@ -105,6 +114,8 @@ void Target::SetIdle()
 	m_iSprite = 0;
 }
 
+
+
 void Target::update()
 {
 	//this->animate();
@@ -113,6 +124,7 @@ void Target::update()
 
 	m_move();
 	m_checkBounds();
+
 }
 
 void Target::clean()
@@ -178,7 +190,61 @@ void Target::m_checkBounds()
 
 }
 
+
+
 void Target::m_reset()
 {
 	setIsColliding(false);
 }
+
+void Target::setPlayerHealth(int health)
+{
+	m_playerHealth = health;
+}
+
+void Target::setPlayerName(string name)
+{
+	m_playerName = name;
+}
+
+void Target::setPlayerAtkDmg(int damage)
+{
+	m_playerAtkDmg = damage;
+}
+
+void Target::setPlayerDeath(bool death)
+{
+	m_playerDeath = death;
+}
+
+void Target::m_playerKilled()
+{
+	if (m_playerHealth <= 0)
+	{
+		m_playerDeath = true;
+		cout << "player died" << endl;
+		exit(EXIT_SUCCESS);
+	}
+}
+
+int Target::getPlayerHealth()
+{
+	return m_playerHealth;
+}
+
+string Target::getPlayerName()
+{
+	return m_playerName;
+}
+
+int Target::getPlayerAtkDmg()
+{
+	return m_playerAtkDmg;
+}
+
+bool Target::getPlayerStatus()
+{
+	return m_playerDeath;
+}
+
+

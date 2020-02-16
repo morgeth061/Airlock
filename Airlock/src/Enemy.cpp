@@ -33,7 +33,7 @@ Enemy::Enemy()
 	levelSelect = Level();
 	levelPtr = levelSelect.getLevel();
 	levelArray = *levelPtr;
-	
+
 	glm::vec2 size = Texture::Instance()->getTextureSize("Enemy");
 	setWidth(size.x);
 	setHeight(size.y);

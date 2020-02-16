@@ -1,12 +1,39 @@
-﻿  Game.cpp
-D:\School\Github\Airlock\Airlock\src\Game.cpp(241,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+﻿  CollisionManager.cpp
+D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(32,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(242,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(33,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
+D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(72,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Game.cpp
+D:\School\Github\Airlock\Airlock\src\Game.cpp(158,20): warning C4018: '<': signed/unsigned mismatch
+D:\School\Github\Airlock\Airlock\src\Game.cpp(187,20): warning C4018: '<': signed/unsigned mismatch
+D:\School\Github\Airlock\Airlock\src\Game.cpp(269,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Game.cpp(270,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Game.cpp(323,113): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Game.cpp(323,72): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Generating Code...
+D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(97): warning C4715: 'CollisionManager::squaredRadiusCheckObjects': not all control paths return a value
+D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(67): warning C4715: 'CollisionManager::squaredRadiusCheck': not all control paths return a value
   Airlock.vcxproj -> D:\School\Github\Airlock\Airlock\Debug\Airlock.exe
