@@ -41,5 +41,6 @@ void Bullet::render()
 {
 	SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), 255, 0, 0, 255);
 	SDL_RenderFillRect(Game::Instance()->getRenderer(), &m_dst);
+
 }
 

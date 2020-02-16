@@ -1,3 +1,4 @@
+
 #pragma once
 #ifndef __Game__
 #define __Game__
@@ -45,9 +46,6 @@ public:
 	void handleEvents();
 	void clean();
 
-	void enemyAttack();
-	void objectPickUp();
-
 	// a function to access the private running variable
 	bool running() { return m_bRunning; }
 
@@ -59,7 +57,7 @@ public:
 	Target* m_pTarget;
 	Minerals* m_pMinerals[2];
 	Bullet* m_pBullet;
-	
+
 	bool KeyDown(SDL_Scancode c);
 private:
 	Game();
@@ -67,6 +65,7 @@ private:
 
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
+	vector<Bullet*> BullVec;
 
 	vector<Bullet*> BullVec;
 
