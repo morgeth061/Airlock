@@ -45,6 +45,8 @@ Target::Target()
 	m_iFrame = 0;
 	m_iFrameMax = 4;
 
+	m_playerSpawn = glm::vec2(384.0f, 768.0f);
+
 
 	//generates level & collision
 	m_levelSelect = Level();
@@ -63,7 +65,7 @@ Target::Target()
 	glm::vec2 size = Texture::Instance()->getTextureSize("player");
 	setWidth(size.x);
 	setHeight(size.y);
-	setPosition(glm::vec2(384.0f, 768.0f)); //changes original position
+	setPosition(m_playerSpawn); //changes original position
 	setVelocity(glm::vec2(0, 0));
 	setIsColliding(false);
 	setType(GameObjectType::TARGET);
@@ -122,6 +124,8 @@ void Target::update()
 	//m_rSrc.x = (m_rSrc.w * m_iSprite); // Update animation.
 	//m_rSrc.x = m_rSrc.w * static_cast<int>((SDL_GetTicks() / 500) % m_iFrameMax);
 
+	//cout << m_playerHealth << endl;
+	
 	m_move();
 	m_checkBounds();
 
@@ -217,13 +221,18 @@ void Target::setPlayerDeath(bool death)
 	m_playerDeath = death;
 }
 
+void Target::setPlayerSpawn(glm::vec2 spawn)
+{
+	m_playerSpawn = spawn;
+}
+
 void Target::m_playerKilled()
 {
 	if (m_playerHealth <= 0)
 	{
 		m_playerDeath = true;
 		cout << "player died" << endl;
-		exit(EXIT_SUCCESS);
+		//exit(EXIT_SUCCESS);
 	}
 }
 
@@ -245,6 +254,11 @@ int Target::getPlayerAtkDmg()
 bool Target::getPlayerStatus()
 {
 	return m_playerDeath;
+}
+
+glm::vec2 Target::getPlayerSpawn()
+{
+	return m_playerSpawn;
 }
 
 

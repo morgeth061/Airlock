@@ -38,6 +38,10 @@ Author:Sojung (Serena) Lee
 Date: Feb/16/2020
 Description:
 	 - slowed enemy speed for easier ranged combat
+Author:Ryan Ethier
+Date: Feb/16/2020
+Description:
+	 - Allowed for level reset and respawn
 **/
 
 #include "Game.h"
@@ -80,12 +84,23 @@ void Game::createGameObjects()
 		m_pMinerals[count] = new Minerals();
 	}
 
-	m_pMinerals[0]->setPosition(glm::vec2(384.0f, 192.0f));
-	m_pMinerals[1]->setPosition(glm::vec2(1472.0f, 832.0f));
+	m_pMinerals[0]->setSpawnPoint(glm::vec2(384.0f, 192.0f));
+	m_pMinerals[1]->setSpawnPoint(glm::vec2(1472.0f, 832.0f));
 
-	m_pEnemy[0]->setPosition(glm::vec2(384.0f, 320.0f));
-	m_pEnemy[1]->setPosition(glm::vec2(960.0f, 480.0f));
-	m_pEnemy[2]->setPosition(glm::vec2(1472.0f, 640.0f));
+	m_pEnemy[0]->setEnemySpawn(glm::vec2(384.0f, 320.0f));
+	m_pEnemy[1]->setEnemySpawn(glm::vec2(960.0f, 480.0f));
+	m_pEnemy[2]->setEnemySpawn(glm::vec2(1472.0f, 640.0f));
+
+	for (int i = 0; i < numofEnemies; i++)
+	{
+		m_pEnemy[i]->setPosition(m_pEnemy[i]->getEnemySpawn());
+	}
+
+	for (int i = 0; i < numofMinerals; i++)
+	{
+		m_pMinerals[i]->setPosition(m_pMinerals[i]->getSpawnPoint());
+	}
+	
 	m_pEnemy[0]->setMaxSpeed(0.40f);
 	m_pEnemy[1]->setMaxSpeed(0.50f);
 	m_pEnemy[2]->setMaxSpeed(0.60f);
@@ -207,6 +222,29 @@ void Game::update()
 	{
 		bulletFrame = bulletFrameMax;
 	}
+
+	//player death/respawn
+	if(m_pTarget->getPlayerStatus() == true)
+	{
+		m_pTarget->setPlayerDeath(false);
+		m_pTarget->setPlayerHealth(250);
+		m_pTarget->setPosition(m_pTarget->getPlayerSpawn());
+
+		for (int count = 0; count < numofEnemies; count++)
+		{
+			if (m_pEnemy[count]->getEnemyDeath() == true)
+			{
+				m_pEnemy[count]->setEnemyDeath(false);
+			}
+			
+			m_pEnemy[count]->m_reset();
+		}
+
+		for (int count = 0; count < numofMinerals; count++)
+		{
+			m_pMinerals[count]->m_reset();
+		}
+	}
 }
 
 void Game::clean()
@@ -306,6 +344,9 @@ void Game::handleEvents()
 					m_pEnemy[count]->setSteeringState(SteeringState::SEEK);
 					m_pEnemy[count]->setTarget(m_pTarget->getPosition());
 				}
+				break;
+			case SDLK_2:
+				m_pTarget->setPlayerDeath(true);
 				break;
 			case SDLK_RIGHT:
 				for (int count = 0; count < numofEnemies; count++)
