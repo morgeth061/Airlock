@@ -27,6 +27,7 @@ public:
 	void setPlayerName(string);
 	void setPlayerAtkDmg(int);
 	void setPlayerDeath(bool);
+	void setPlayerSpawn(glm::vec2);
 
 	void m_playerKilled();
 
@@ -34,6 +35,7 @@ public:
 	string getPlayerName();
 	int getPlayerAtkDmg();
 	bool getPlayerStatus();
+	glm::vec2 getPlayerSpawn();
 
 protected:
 	int m_iSprite = 0,	// Which sprite to display for animation.
@@ -55,6 +57,8 @@ private:
 	int m_playerHealth;
 	string m_playerName;
 	int m_playerAtkDmg;
+
+	glm::vec2 m_playerSpawn;
 
 	bool m_playerDeath;
 };

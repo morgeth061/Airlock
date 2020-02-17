@@ -16,6 +16,10 @@ Description:
 	 - added Hit get & set functions (bool)
 	 - added get & set functions for name, damage, and health
 	 - added Enemy resized (sent on Feb 5)
+Author:Ryan Ethier
+Date: Feb/16/2020
+Description:
+	 - Added spawn point variable for enemy re-spawning
 **/
 
 #include "Enemy.h"
@@ -166,6 +170,10 @@ void Enemy::m_checkBounds()
 
 void Enemy::m_reset()
 {
+	setEnemyHealth(100);
+	setPosition(getEnemySpawn());
+	setSteeringState(IDLE);
+	setIsColliding(false);
 }
 
 
@@ -207,6 +215,12 @@ bool Enemy::getEnemyDeath()
 {
 	return m_enemyDeath;
 }
+
+glm::vec2 Enemy::getEnemySpawn()
+{
+	return m_enemySpawnPoint;
+}
+
 void Enemy::setEnemyHealth(int health)
 {
 	m_enemyHealth = health;
@@ -223,5 +237,10 @@ void Enemy::setEnemyAtkDmg(int damage)
 void Enemy::setEnemyDeath(bool death)
 {
 	m_enemyDeath = death;
+}
+
+void Enemy::setEnemySpawn(glm::vec2 spawn)
+{
+	m_enemySpawnPoint = spawn;
 }
 

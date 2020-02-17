@@ -1,39 +1,46 @@
-﻿  CollisionManager.cpp
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(32,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(33,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(72,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Game.cpp
-D:\School\Github\Airlock\Airlock\src\Game.cpp(158,20): warning C4018: '<': signed/unsigned mismatch
-D:\School\Github\Airlock\Airlock\src\Game.cpp(187,20): warning C4018: '<': signed/unsigned mismatch
-D:\School\Github\Airlock\Airlock\src\Game.cpp(269,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(270,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(323,113): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(323,72): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
+﻿  Game.cpp
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(177,20): warning C4018:  '<': signed/unsigned mismatch
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(206,20): warning C4018:  '<': signed/unsigned mismatch
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(311,36): warning C4244:  '=': conversion from 'Sint32' to 'T', possible loss of data
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(311,36): warning C4244:         with
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(311,36): warning C4244:         [
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(311,36): warning C4244:             T=float
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(311,36): warning C4244:         ]
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(312,36): warning C4244:  '=': conversion from 'Sint32' to 'T', possible loss of data
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(312,36): warning C4244:         with
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(312,36): warning C4244:         [
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(312,36): warning C4244:             T=float
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(312,36): warning C4244:         ]
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(366,113): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(366,113): warning C4244:         with
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(366,113): warning C4244:         [
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(366,113): warning C4244:             T=float
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(366,113): warning C4244:         ]
+  Minerals.cpp
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(366,72): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(366,72): warning C4244:         with
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(366,72): warning C4244:         [
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(366,72): warning C4244:             T=float
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(366,72): warning C4244:         ]
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(28,15): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(28,15): warning C4244:         with
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(28,15): warning C4244:         [
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(28,15): warning C4244:             T=float
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(28,15): warning C4244:         ]
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(29,16): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(29,16): warning C4244:         with
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(29,16): warning C4244:         [
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(29,16): warning C4244:             T=float
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(29,16): warning C4244:         ]
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(43,17): warning C4244:  'initializing': conversion from 'T' to 'int', possible loss of data
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(43,17): warning C4244:         with
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(43,17): warning C4244:         [
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(43,17): warning C4244:             T=float
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(43,17): warning C4244:         ]
   Generating Code...
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(97): warning C4715: 'CollisionManager::squaredRadiusCheckObjects': not all control paths return a value
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(67): warning C4715: 'CollisionManager::squaredRadiusCheck': not all control paths return a value
-  Airlock.vcxproj -> D:\School\Github\Airlock\Airlock\Debug\Airlock.exe
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(44,17): warning C4244:  'initializing': conversion from 'T' to 'int', possible loss of data
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(44,17): warning C4244:         with
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(44,17): warning C4244:         [
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(44,17): warning C4244:             T=float
+D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Minerals.cpp(44,17): warning C4244:         ]
+  Airlock.vcxproj -> D:\OneDrive\Documents\GitHub\Airlock\Airlock\Debug\Airlock.exe

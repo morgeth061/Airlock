@@ -27,7 +27,7 @@ Minerals::Minerals()
 	glm::vec2 size = Texture::Instance()->getTextureSize("minerals");
 	setWidth(size.x);
 	setHeight(size.y);
-	setPosition(glm::vec2(192.0f, 96.0f)); //changes original position
+	//setPosition(glm::vec2(192.0f, 96.0f)); //changes original position
 	setVelocity(glm::vec2(0, 0));
 	setIsColliding(false);
 	setIsHit(false);
@@ -48,11 +48,21 @@ void Minerals::draw()
 
 void Minerals::update()
 {
-
+	
 }
 
 void Minerals::clean()
 {
+}
+
+void Minerals::setSpawnPoint(glm::vec2 spawn)
+{
+	m_mineralSpawnPoint = spawn;
+}
+
+glm::vec2 Minerals::getSpawnPoint()
+{
+	return m_mineralSpawnPoint;
 }
 
 
@@ -60,4 +70,6 @@ void Minerals::m_reset()
 {
 	setIsColliding(false);
 	setIsHit(false);
+	setPosition(m_mineralSpawnPoint);
+	cout << getIsColliding() << " " << getIsHit() << endl;
 }
