@@ -217,9 +217,7 @@ void Game::update()
 	//player death/respawn
 	if(m_pTarget->getPlayerStatus() == true)
 	{
-		m_pTarget->setPlayerDeath(false);
-		m_pTarget->setPlayerHealth(250);
-		m_pTarget->setPosition(m_pTarget->getPlayerSpawn());
+		m_pTarget->m_reset();
 
 		for (int count = 0; count < numofEnemies; count++)
 		{
@@ -292,6 +290,7 @@ bool Game::KeyDown(SDL_Scancode c)
 	return false;
 }
 
+//Handle Keyboard/Mouse Input, Collision, etc...
 void Game::handleEvents()
 {
 	SDL_Event event;

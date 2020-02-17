@@ -1,3 +1,7 @@
+/*
+ * TARGET (Player) CLASS
+ * - Deals with all player functions
+ */
 #include "Target.h"
 #include "Game.h"
 #include "Engine.h"
@@ -6,14 +10,18 @@
 
 const int Target::Size = 7;
 
+//Target Ctor.
 Target::Target()
 {
+	//Animation init
 	Texture::Instance()->load("../Assets/textures/Player_SMG_Walking_Sheet.png", "player", TheGame::Instance()->getRenderer());
 	m_iSprite = 0;
 	m_iSpriteMax = 0;
 	m_iFrame = 0;
 	m_iFrameMax = 4;
 
+	//Set Player Spawn
+	//DEFAULT
 	m_playerSpawn = glm::vec2(384.0f, 768.0f);
 
 
@@ -31,6 +39,7 @@ Target::Target()
 		cout << endl;
 	}
 
+	//Player Init
 	glm::vec2 size = Texture::Instance()->getTextureSize("player");
 	setWidth(size.x);
 	setHeight(size.y);
@@ -42,7 +51,7 @@ Target::Target()
 	SetIdle();
 	int inventory[Size];
 
-	// set up health, name, and attack damage
+	//Set up health, name, and attack damage
 	setPlayerName("Astro");
 	setPlayerHealth(250);
 	setPlayerAtkDmg(50);
@@ -50,19 +59,20 @@ Target::Target()
 
 }
 
+//Target De-Ctor.
 Target::~Target()
 {
 }
 
+//Draw to Buffer
 void Target::draw()
 {
 	int xComponent = getPosition().x;
 	int yComponent = getPosition().y;
-	//Texture::Instance()->draw("player", xComponent, yComponent, TheGame::Instance()->getRenderer(), true);
 	Texture::Instance()->drawFrame("player", xComponent - 64, yComponent - 64, 128, 128, 1, m_iFrame, TheGame::Instance()->getRenderer(), getFlip());
 }
 
-
+//Animate player
 void Target::animate()
 {
 
@@ -78,6 +88,7 @@ void Target::animate()
 
 }
 
+//Idle Animation
 void Target::SetIdle()
 {
 	m_rSrc.y = 0;
@@ -85,8 +96,7 @@ void Target::SetIdle()
 	m_iSprite = 0;
 }
 
-
-
+//Update Method
 void Target::update()
 {
 	//this->animate();
@@ -100,10 +110,12 @@ void Target::update()
 
 }
 
+//Clean on exit
 void Target::clean()
 {
 }
 
+//Move player
 void Target::m_move()
 {
 	//integers representing the new X and Y coordinates.
@@ -112,12 +124,10 @@ void Target::m_move()
 
 	array_type currentArray = m_levelArray;
 
-	//checks if new coordinates are ground the player can walk on
-
-
+	//Checks if new coordinates are ground the player can walk on
 	glm::vec2 newPosition = getPosition() + getVelocity() * 0.9f;
 
-	if (currentArray[newY][newX] == 0)
+	if (currentArray[newY][newX] == 0) //Tile is traversable
 	{
 		if ((currentArray[(getPosition().y + getVelocity().y + 32) / 64][newX] == 1) || (currentArray[newY][(getPosition().x + getVelocity().x + 8) / 64] == 1) || (currentArray[newY][(getPosition().x + getVelocity().x - 8) / 64] == 1))
 		{
@@ -125,12 +135,12 @@ void Target::m_move()
 		}
 		setPosition(newPosition);
 	}
-	else if (currentArray[newY][newX] == 1)
+	else if (currentArray[newY][newX] == 1) //Tile is not traversable
 	{
 		newPosition = getPosition();
 		setPosition(newPosition);
 	}
-	else if (currentArray[newY][newX] == 3)
+	else if (currentArray[newY][newX] == 3) //Tile is an Exit Tile
 	{
 		newPosition = getPosition() + getVelocity() * 0.9f;
 		setPosition(newPosition);
@@ -138,6 +148,7 @@ void Target::m_move()
 	}
 }
 
+//Check collision with Window Edges
 void Target::m_checkBounds()
 {
 
@@ -163,38 +174,46 @@ void Target::m_checkBounds()
 
 }
 
-
-
+//Resets player status
 void Target::m_reset()
 {
+	setPlayerDeath(false);
+	setPlayerHealth(250);
+	setPosition(getPlayerSpawn());
 	setIsColliding(false);
 }
 
+//Setter for player health
 void Target::setPlayerHealth(int health)
 {
 	m_playerHealth = health;
 }
 
+//Setter for player name
 void Target::setPlayerName(string name)
 {
 	m_playerName = name;
 }
 
+//Setter for player attack damage
 void Target::setPlayerAtkDmg(int damage)
 {
 	m_playerAtkDmg = damage;
 }
 
+//Setter for player death
 void Target::setPlayerDeath(bool death)
 {
 	m_playerDeath = death;
 }
 
+//Setter for player spawn point
 void Target::setPlayerSpawn(glm::vec2 spawn)
 {
 	m_playerSpawn = spawn;
 }
 
+//Checker for player death
 void Target::m_playerKilled()
 {
 	if (m_playerHealth <= 0)
@@ -205,26 +224,31 @@ void Target::m_playerKilled()
 	}
 }
 
+//Getter for player health
 int Target::getPlayerHealth()
 {
 	return m_playerHealth;
 }
 
+//Getter for player name
 string Target::getPlayerName()
 {
 	return m_playerName;
 }
 
+//Getter for player attack damage
 int Target::getPlayerAtkDmg()
 {
 	return m_playerAtkDmg;
 }
 
+//Getter for player status (Alive/Dead)
 bool Target::getPlayerStatus()
 {
 	return m_playerDeath;
 }
 
+//Getter for player spawn point
 glm::vec2 Target::getPlayerSpawn()
 {
 	return m_playerSpawn;
