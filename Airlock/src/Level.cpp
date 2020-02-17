@@ -1,13 +1,3 @@
-/**
-Level class
-Author: Ryan Ethier
-Date: Feb/08/2020
-Description:
-	- Returns desired level grid
-	
-**/
-
-
 #include "Level.h"
 using namespace std;
 

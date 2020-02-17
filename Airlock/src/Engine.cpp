@@ -1,13 +1,4 @@
-/*
- * Engine class
- * Adapted from GBC GAME1011 SDL Template
- * Editors:
- * - Ryan Ethier
-  * - Sojung (Serena) Lee - Feb/1/2020
-		- updated setGameWon (added exit code)
- */
-
- //includes
+//includes
 #include "Engine.h"
 #include <iostream>
 #define WIDTH 1024

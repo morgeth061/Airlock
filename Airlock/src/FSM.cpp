@@ -1,12 +1,3 @@
-/*
- * FSM class
- * Adapted from GBC GAME1017 SDL Template
- * Editors:
- * - Ryan Ethier
- * - Sojung (Serena) Lee - Jan/23/2020
-		- Updated background image with Robert's updated asset (larger resolution)
- */
-
 //includes
 #include "FSM.h"
 #include "Engine.h"

@@ -1,20 +1,3 @@
-/**
-Minerals class
-Author: Sojung (Serena) Lee
-Date: Jan/31/2020
-Description:
-	- Added minerals class
-	- created mineral object
-	- placed mineral (Quartz1.png) into game state (screen)
-	- Based on Enemy class
-	- changed minerals icon (quartz) to larger resolution
-Minerals class
-Author: Sojung (Serena) Lee
-Date: Feb/11/2020
-Description:
-	- Added hit functions & set to false
-**/
-
 #include "Minerals.h"
 #include "Game.h"
 #include "Engine.h"
