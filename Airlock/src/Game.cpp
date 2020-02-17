@@ -1,91 +1,57 @@
-/**
-Game class
-Author: Sojung (Serena) Lee
-Date: Jan/23/2020
-Description:
-	- Definitions for Game methods
-	- Created Game Objects (e.g. Array of 3 enemies, single target/player)
-	- Intializes the Game window, render, update, clean
-	- Setup for Player movements (handleEvents)
-	- Setup Automatic SEEK state if player/target is within range (handleEvents : default)
-	- Setup for Button functions
-		- WASD for target/player movement
-		- Default : SEEK state
-		- 1 = SEEK state
-Author: Sojung (Serena) Lee
-Date: Jan/31/2020
-Description:
-	- Added minerals (createGameObjects, render, update handleEvents) with Robert's Updated Assets
-	- handleEvents : Collision detection (e.g. what happens if player collides with minerals? enemies?)
-Author: Sojung (Serena) Lee
-Date: Feb/1/2020
-Description:
-	- changed enemy speed
-	- updated handleEvents (ESC button -> added exit code)
-Author: Sojung (Serena) Lee
-Date: Feb/11/2020
-Description:
-	- Added objectPickUp (when player picks mineral, health is added) TEST FUNCTION
-		- Once inventory is added, replace adding health to adding inventory function
-	- Added enemyAttack (when player hits enemy, health is decreased)
-	- handleEvents -> default -> enemy's hit bool is set to false
-Author : Fisayo Akinsulire
-Date: Feb/11/2020
-Description:
-	- Added bullets(render, update, handleEvents)
-	- Added timer to the bullets so they couldnt be spammed
-Author:Sojung (Serena) Lee
-Date: Feb/16/2020
-Description:
-	 - slowed enemy speed for easier ranged combat
-Author:Ryan Ethier
-Date: Feb/16/2020
-Description:
-	 - Allowed for level reset and respawn
-**/
+/*
+ * GAME CLASS
+ * - Runs game, selects level based off of FSM, etc...
+ */
 
+//Includes
 #include "Game.h"
-#include "Util.h"
+
+//Defines
 #define FPS 60
 
 const int numofEnemies = 3;
 const int numofMinerals = 2;
 
+//Singleton
 Game* Game::s_pInstance = 0;
 
+//Returns player position
 glm::vec2 Game::getTargetPosition()
 {
 	return m_pTarget->getPosition();
 }
 
+//Returns renderer
 SDL_Renderer* Game::getRenderer()
 {
 	return m_pRenderer;
 }
 
+//ctor.
 Game::Game()
 {
 	bulletFrame = 0;
 	bulletFrameMax = 120;
 }
 
+//de-ctor.
 Game::~Game()
 {
 }
 
+//Creates Game Objects
 void Game::createGameObjects()
 {
 
+	//**********
+	//LEVEL 1
+	//**********
+	
+	//Creates enemies for Level 1
 	for (int count = 0; count < numofEnemies; count++)
-		m_pEnemy[count] = new Enemy();
-
-	for (int count = 0; count < numofMinerals; count++)
 	{
-		m_pMinerals[count] = new Minerals();
+		m_pEnemy[count] = new Enemy();
 	}
-
-	m_pMinerals[0]->setSpawnPoint(glm::vec2(384.0f, 192.0f));
-	m_pMinerals[1]->setSpawnPoint(glm::vec2(1472.0f, 832.0f));
 
 	m_pEnemy[0]->setEnemySpawn(glm::vec2(384.0f, 320.0f));
 	m_pEnemy[1]->setEnemySpawn(glm::vec2(960.0f, 480.0f));
@@ -96,18 +62,30 @@ void Game::createGameObjects()
 		m_pEnemy[i]->setPosition(m_pEnemy[i]->getEnemySpawn());
 	}
 
+	//Creates minerals for Level 1
+	for (int count = 0; count < numofMinerals; count++)
+	{
+		m_pMinerals[count] = new Minerals();
+	}
+
+	m_pMinerals[0]->setSpawnPoint(glm::vec2(384.0f, 192.0f));
+	m_pMinerals[1]->setSpawnPoint(glm::vec2(1472.0f, 832.0f));
+
 	for (int i = 0; i < numofMinerals; i++)
 	{
 		m_pMinerals[i]->setPosition(m_pMinerals[i]->getSpawnPoint());
 	}
-	
+
+	//Set Speed for Enemies
 	m_pEnemy[0]->setMaxSpeed(0.40f);
 	m_pEnemy[1]->setMaxSpeed(0.50f);
 	m_pEnemy[2]->setMaxSpeed(0.60f);
 
+	//Creates player
 	m_pTarget = new Target();
 }
 
+//Game Initialization
 bool Game::init(const char* title, int xpos, int ypos, int height, int width, bool fullscreen)
 {
 	int flags = 0;
@@ -163,38 +141,48 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, bo
 	return true;
 }
 
+//Render game objects
 void Game::render()
 {
-	SDL_RenderClear(m_pRenderer); // clear the renderer to the draw colour
+	SDL_RenderClear(m_pRenderer);
 
+	//**********
+	//LEVEL 1
+	//**********
+	
 	Texture::Instance()->draw("Level1", 0, 0, TheGame::Instance()->getRenderer(), false);
 
+	//Draw player
 	m_pTarget->draw();
 
-	/*m_pBullet->render();*/
-
-/*SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);*/
+	//Draw Bullets
 	for (int i = 0; i < BullVec.size(); i++)
 		BullVec[i]->render();
 
+	//Draw Enemies
 	for (int count = 0; count < numofEnemies; count++)
 		m_pEnemy[count]->draw();
 
+	//Draw Minerals
 	for (int count = 0; count < numofMinerals; count++)
 		m_pMinerals[count]->draw();
 
-	SDL_RenderPresent(m_pRenderer); // draw to the screen
+	//Draw to the screen
+	SDL_RenderPresent(m_pRenderer);
 }
 
+//Update function for the game
 void Game::update()
 {
-
+	//Check for enemy/player collision
 	for (int count = 0; count < numofEnemies; count++)
 	{
 		Collision::squaredRadiusCheckObjects(m_pTarget, m_pEnemy[count]);
 		Collision::squaredRadiusCheck(m_pTarget, m_pEnemy[count]);
 		m_pEnemy[count]->update();
 	}
+
+	//Check for mineral/player collision
 	for (int count = 0; count < numofMinerals; count++)
 	{
 		if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
@@ -202,7 +190,10 @@ void Game::update()
 			//m_pMinerals[count]->update();
 		}
 	}
+	
 	m_pTarget->update();
+
+	//Check if bullet needs to be de-spawned
 	for (int i = 0; i < BullVec.size(); i++)
 	{
 		BullVec[i]->update();
@@ -247,6 +238,7 @@ void Game::update()
 	}
 }
 
+//Clean game on exit
 void Game::clean()
 {
 	std::cout << "cleaning game" << std::endl;
@@ -256,6 +248,7 @@ void Game::clean()
 	SDL_Quit();
 }
 
+//Enemy attack function -> Reduces player health
 void Game::enemyAttack()
 {
 	for (int count = 0; count < numofEnemies; count++)
@@ -271,6 +264,7 @@ void Game::enemyAttack()
 	}
 }
 
+//Player picks up object
 void Game::objectPickUp()
 {
 	for (int count = 0; count < numofMinerals; count++)
@@ -285,6 +279,7 @@ void Game::objectPickUp()
 	}
 }
 
+//Checks for keyboard/mouse input
 bool Game::KeyDown(SDL_Scancode c)
 {
 	if (m_iKeystates != nullptr)

@@ -1,11 +1,3 @@
-/*Bullet Class
-Fisayo Akinsulire
-Date: Feb/10/2020
-Descripton:
-		-Added Bullet functionalitly
-
-*/
-
 #include <iostream>
 #include<vector>
 #include<algorithm>

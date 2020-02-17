@@ -1,27 +1,3 @@
-/**
-Enemy class
-Author: Sojung (Serena) Lee
-Date: Jan/23/2020
-Description:
-	- Definitions for Enemy methods
-	- Adapted from GBC GAME3001 Template v4 (using "ship.cpp")
-	- Creates enemy constructor
-	- Defines enemy draw, render, checkState, update, clean, move, max speed, check bounds, seek, check arrival functions
-	- Draws enemies (using Assets)
-	- MAkes enemy stay within boundaries --> using checkBounds function
-		- e.g.) If enemy reaches negative Y axis, then set y axis = 0
-Author:Sojung (Serena) Lee
-Date: Feb/11/2020
-Description:
-	 - added Hit get & set functions (bool)
-	 - added get & set functions for name, damage, and health
-	 - added Enemy resized (sent on Feb 5)
-Author:Ryan Ethier
-Date: Feb/16/2020
-Description:
-	 - Added spawn point variable for enemy re-spawning
-**/
-
 #include "Enemy.h"
 #include "Game.h"
 #include "Util.h"

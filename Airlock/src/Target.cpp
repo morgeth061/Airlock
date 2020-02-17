@@ -1,34 +1,3 @@
-/**
-Target class
-Author: Sojung (Serena) Lee
-Date: Jan/23/2020
-Description:
-	- Target means Player (same thing, but different title)
-	- Definitions for Target methods
-	- Adapted from GBC GAME3001 Template v4 (using "target.cpp")
-	- Creates Target constructor
-	- Defines Target draw, render, checkState, update, clean, move, check bounds functions
-	- Able to change speed --> using m_move
-	- Able to change their boundaries (move within certain area) --> using checkBounds
-Author: Ryan Ethier
-Date: Jan/31/2020
-Description:
-	- Added Level Class implementation
-Author: Sojung (Serena) Lee
-Date: Feb/1/2020
-Description:
-	- Changed player's sprite, original position, boundaries, and speed
-Author: Ryan Ethier
-Date: Feb/08/2020
-Description:
-	- Changed Level Class Implementation to use pointers
-Author:Sojung (Serena) Lee
-Date: Feb/11/2020
-Description:
-	 - added Hit get & set functions (bool)
-	 - added get & set functions for name, damage, and health
-**/
-
 #include "Target.h"
 #include "Game.h"
 #include "Engine.h"
