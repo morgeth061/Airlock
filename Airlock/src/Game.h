@@ -52,6 +52,7 @@ public:
 	//Public Game Methods
 	void enemyAttack();
 	void objectPickUp();
+	void playerAttack();
 
 	bool running()
 	{

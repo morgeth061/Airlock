@@ -1,26 +1,3 @@
-/**
-Collision Manager class
-Author: Sojung (Serena) Lee
-Date: Jan/23/2020
-Description:
-	- Definitions for Collision Manager
-	- Adapted from GBC GAME3001 Template v3
-	- Checks collision box around game object --> using squaredRadiusCheck
-		- if object is colliding with .... (switch statement) CASE: ______
-		- e.g.) if target/player (object) is colliding with.... (switch statement) CASE: ENEMY,
-					then cout << "ENEMY COLLISION" 
-Author: Sojung (Serena) Lee
-Date: Jan/31/2020
-Description:
-	- Added squareRadiansCheckObjects (for minerals or other game items only) --> has different (Smaller) radius than enemies
-Author: Sojung (Serena) Lee
-Date: Feb/11/2020
-Description:
-	- Added ENEMY GameObjectType to squareRadiansCheckObjects (when enemy hits player through smaller radius)
-		- smaller radius = enemy decreases player's health
-		- larger radius = enemy seeks player
-**/
-
 #include "CollisionManager.h"
 #include "Game.h"
 
@@ -77,6 +54,9 @@ bool CollisionManager::squaredRadiusCheckObjects(GameObject* object1, GameObject
 
 			switch (object2->getType()) {
 
+			case BULLET:
+				std::cout << "Bullets" << std::endl;
+				TheGame::Instance()->playerAttack();
 			case MINERALS:
 				std::cout << "Minerals gone" << std::endl;
 				TheGame::Instance()->objectPickUp();

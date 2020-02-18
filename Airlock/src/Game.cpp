@@ -83,6 +83,8 @@ void Game::createGameObjects()
 
 	//Creates player
 	m_pTarget = new Target();
+
+	new Bullet(Game::Instance()->getTargetPosition().x, Game::Instance()->getTargetPosition().y);
 }
 
 //Game Initialization
@@ -190,6 +192,12 @@ void Game::update()
 			//m_pMinerals[count]->update();
 		}
 	}
+
+	//Check for bullet/enemy collision
+	for (int count = 0; count < numofEnemies; count++)
+	{
+		//Collision::squaredRadiusCheckObjects(m_pBullet, m_pEnemy[count]);
+	}
 	
 	m_pTarget->update();
 
@@ -273,6 +281,23 @@ void Game::objectPickUp()
 			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() + 50);
 			cout << "GAINED: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
 
+		}
+	}
+}
+
+//Enemy attack function -> Reduces player health
+void Game::playerAttack()
+{
+	for (int count = 0; count < numofEnemies; count++)
+	{
+		if (m_pEnemy[count]->getIsHit() == true && m_pBullet->getIsHit() == true)
+		{
+			// if player collides with enemies, player's health depletes a certain amount (enemy's attack damage)
+			m_pEnemy[count]->setEnemyHealth(m_pEnemy[count]->getEnemyHealth() - m_pBullet->getBulletDmg());
+			cout << "LOST: " << m_pEnemy[count]->getEnemyName() << " = Health: " <<m_pEnemy[count]->getEnemyHealth() << endl;
+			cout << "\nEnemy " << count << " = getIsHit()->" << m_pEnemy[count]->getIsHit() << endl;
+			cout << "\nBullet " << count << " = getIsHit()->" << m_pBullet->getIsHit() << endl;
+			//m_pTarget->m_playerKilled();
 		}
 	}
 }

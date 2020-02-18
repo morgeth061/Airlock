@@ -22,7 +22,6 @@ private:
 	void m_checkState();
 	void m_checkBounds();
 
-	
 	void m_checkArrival();
 
 	// steering behaviours
