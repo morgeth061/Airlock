@@ -5,10 +5,11 @@
 #include <iostream>
 #include "GameObject.h"
 #include "Engine.h"
+#include "GameObject.h"
 
 using namespace std;
 
-class Bullet
+class Bullet : public GameObject
 {
 public:
 	bool active = true;
@@ -22,6 +23,11 @@ public:
 	void update();
 	void render();
 	void clean();
+	int bulletDamage;
+	int getBulletDamage();
+	void setBulletDamage(int);
+private:
+	
 };
 
 

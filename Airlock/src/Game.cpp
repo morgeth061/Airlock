@@ -176,6 +176,12 @@ void Game::update()
 		}
 	}
 	m_pTarget->update();
+	
+	for (int count = 0; count < numofEnemies; count++)
+	{
+		Collision::squaredRadiusCheckObjects(m_pBullet, m_pEnemy[count]);
+	}
+	
 	for (int i = 0; i < BullVec.size(); i++)
 	{
 		BullVec[i]->update();
@@ -207,6 +213,49 @@ void Game::clean()
 	SDL_Quit();
 }
 
+<<<<<<< Updated upstream
+=======
+void Game::enemyAttack()
+{
+	for (int count = 0; count < numofEnemies; count++)
+	{
+		if (m_pEnemy[count]->getIsHit() == true)
+		{
+			// if player collides with enemies, player's health depletes a certain amount (enemy's attack damage)
+			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() - m_pEnemy[count]->getEnemyAtkDmg());
+			cout << "LOST: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
+			//cout << "\nEnemy " << count << " = getIsHit()->" << m_pEnemy[count]->getIsHit() << endl;
+			m_pTarget->m_playerKilled();
+		}
+	}
+}
+
+void Game::playerAttack()
+{
+	for (int count = 0; count < numofEnemies; count++)
+	{
+		if (m_pEnemy[count]->getIsHit() == true)
+		{
+			
+		}
+	}
+}
+
+void Game::objectPickUp()
+{
+	for (int count = 0; count < numofMinerals; count++)
+	{
+		if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
+		{
+			//testing player's health functions (will remove in future updates)
+			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() + 50);
+			cout << "GAINED: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
+
+		}
+	}
+}
+
+>>>>>>> Stashed changes
 bool Game::KeyDown(SDL_Scancode c)
 {
 	if (m_iKeystates != nullptr)

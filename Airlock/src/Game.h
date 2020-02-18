@@ -46,6 +46,13 @@ public:
 	void handleEvents();
 	void clean();
 
+<<<<<<< Updated upstream
+=======
+	void enemyAttack();
+	void playerAttack();
+	void objectPickUp();
+
+>>>>>>> Stashed changes
 	// a function to access the private running variable
 	bool running() { return m_bRunning; }
 
