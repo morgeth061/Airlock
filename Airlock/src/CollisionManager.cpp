@@ -13,67 +13,67 @@ int CollisionManager::squaredDistance(glm::vec2 P1, glm::vec2 P2)
 	return result;
 }
 
-bool CollisionManager::squaredRadiusCheck(GameObject * object1, GameObject * object2)
+bool CollisionManager::squaredRadiusCheck(GameObject * object1, GameObject * object2, float distance)
 {
 	glm::vec2 P1 = object1->getPosition();
 	glm::vec2 P2 = object2->getPosition();
-	int halfHeights = (object1->getHeight() + object2->getHeight()) * 1;
+	int halfHeights = (object1->getHeight() + object2->getHeight()) * distance;
 
 	//if (glm::distance(P1, P2) < halfHeights) {
+	if (distance > 0.25)
+	{
+		if (CollisionManager::squaredDistance(P1, P2) < (halfHeights * halfHeights)) {
+			if (!object2->getIsColliding()) {
 
-	if (CollisionManager::squaredDistance(P1, P2) < (halfHeights * halfHeights)) {
-		if (!object2->getIsColliding()) {
+				object2->setIsColliding(true);
 
-			object2->setIsColliding(true);
+				switch (object2->getType()) {
+				case BULLET:
+					break;
+				case ENEMY:
+					//std::cout << "ENEMY COLLISION" << std::endl;
+					break;
+				default:
+					std::cout << "Collision with unknown type!" << std::endl;
+					break;
+				}
 
-			switch (object2->getType()) {
-			case BULLET:
-				break;
-			case ENEMY:
-				//std::cout << "ENEMY COLLISION" << std::endl;
-				break;
-			default:
-				std::cout << "Collision with unknown type!" << std::endl;
-				break;
+				return true;
 			}
-
-			return true;
+			return false;
 		}
-		return false;
 	}
-}
-bool CollisionManager::squaredRadiusCheckObjects(GameObject* object1, GameObject* object2)
-{
-	glm::vec2 P1 = object1->getPosition();
-	glm::vec2 P2 = object2->getPosition();
-	float halfHeights = (object1->getHeight() + object2->getHeight()) * 0.25;
-	if (CollisionManager::squaredDistance(P1, P2) < (halfHeights * halfHeights)) {
-		if (!object2->getIsHit()) {
+	else if (distance <= 0.25)
+	{
+		if (CollisionManager::squaredDistance(P1, P2) < (halfHeights * halfHeights)) {
+			if (!object2->getIsHit()) {
 
-			object2->setIsHit(true);
+				object2->setIsHit(true);
 
-			switch (object2->getType()) {
+				switch (object2->getType()) {
 
-			case BULLET:
-				std::cout << "Bullets" << std::endl;
-				TheGame::Instance()->playerAttack();
-			case MINERALS:
-				std::cout << "Minerals gone" << std::endl;
-				TheGame::Instance()->objectPickUp();
-				break;
-			case ENEMY:
-				std::cout << "ENEMY gone" << std::endl;
-				TheGame::Instance()->enemyAttack();
-				break;
-			default:
-				std::cout << "Collision with unknown type!" << std::endl;
-				break;
+				case BULLET:
+					std::cout << "Bullets" << std::endl;
+					TheGame::Instance()->playerAttack();
+				case MINERALS:
+					std::cout << "Minerals gone" << std::endl;
+					TheGame::Instance()->objectPickUp();
+					break;
+				case ENEMY:
+					std::cout << "ENEMY gone" << std::endl;
+					TheGame::Instance()->enemyAttack();
+					break;
+				default:
+					std::cout << "Collision with unknown type!" << std::endl;
+					break;
+				}
+
+				return true;
 			}
-
-			return true;
+			return false;
 		}
-		return false;
 	}
+	
 }
 
 CollisionManager::CollisionManager()

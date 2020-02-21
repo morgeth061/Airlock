@@ -84,7 +84,7 @@ void Game::createGameObjects()
 	//Creates player
 	m_pTarget = new Target();
 
-	new Bullet(Game::Instance()->getTargetPosition().x, Game::Instance()->getTargetPosition().y);
+	m_pBullet = new Bullet(Game::Instance()->getTargetPosition().x, Game::Instance()->getTargetPosition().y);
 }
 
 //Game Initialization
@@ -179,15 +179,15 @@ void Game::update()
 	//Check for enemy/player collision
 	for (int count = 0; count < numofEnemies; count++)
 	{
-		Collision::squaredRadiusCheckObjects(m_pTarget, m_pEnemy[count]);
-		Collision::squaredRadiusCheck(m_pTarget, m_pEnemy[count]);
+		Collision::squaredRadiusCheck(m_pTarget, m_pEnemy[count], 0.25f);
+		Collision::squaredRadiusCheck(m_pTarget, m_pEnemy[count], 1.0f);
 		m_pEnemy[count]->update();
 	}
 
 	//Check for mineral/player collision
 	for (int count = 0; count < numofMinerals; count++)
 	{
-		if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
+		if (Collision::squaredRadiusCheck(m_pTarget, m_pMinerals[count], 0.25f))
 		{
 			//m_pMinerals[count]->update();
 		}
@@ -275,7 +275,7 @@ void Game::objectPickUp()
 {
 	for (int count = 0; count < numofMinerals; count++)
 	{
-		if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
+		if (Collision::squaredRadiusCheck(m_pTarget, m_pMinerals[count], 0.25f))
 		{
 			//testing player's health functions (will remove in future updates)
 			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() + 50);
@@ -428,7 +428,7 @@ void Game::handleEvents()
 					m_pEnemy[count]->setSteeringState(SteeringState::SEEK);
 					m_pEnemy[count]->setTarget(m_pTarget->getPosition());
 				}
-				if (m_pEnemy[count]->getIsHit() == true && CollisionManager::squaredRadiusCheckObjects(m_pTarget, m_pEnemy[count]))
+				if (m_pEnemy[count]->getIsHit() == true && CollisionManager::squaredRadiusCheck(m_pTarget, m_pEnemy[count],0.25f))
 				{
 					m_pEnemy[count]->setIsHit(false);
 				}
