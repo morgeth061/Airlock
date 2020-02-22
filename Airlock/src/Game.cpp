@@ -50,30 +50,30 @@ void Game::createGameObjects()
 	//Creates enemies for Level 1
 	for (int count = 0; count < numofEnemies; count++)
 	{
-		m_pEnemy[count] = new Enemy();
+		m_pEnemy.push_back(new Enemy());
 	}
 
 	m_pEnemy[0]->setEnemySpawn(glm::vec2(384.0f, 320.0f));
 	m_pEnemy[1]->setEnemySpawn(glm::vec2(960.0f, 480.0f));
 	m_pEnemy[2]->setEnemySpawn(glm::vec2(1472.0f, 640.0f));
 
-	for (int i = 0; i < numofEnemies; i++)
+	for (auto enemies : m_pEnemy)
 	{
-		m_pEnemy[i]->setPosition(m_pEnemy[i]->getEnemySpawn());
+		enemies->setPosition(enemies->getEnemySpawn());
 	}
 
 	//Creates minerals for Level 1
 	for (int count = 0; count < numofMinerals; count++)
 	{
-		m_pMinerals[count] = new Minerals();
+		m_pMinerals.push_back(new Minerals);
 	}
 
 	m_pMinerals[0]->setSpawnPoint(glm::vec2(384.0f, 192.0f));
 	m_pMinerals[1]->setSpawnPoint(glm::vec2(1472.0f, 832.0f));
 
-	for (int i = 0; i < numofMinerals; i++)
+	for (auto minerals : m_pMinerals)
 	{
-		m_pMinerals[i]->setPosition(m_pMinerals[i]->getSpawnPoint());
+		minerals->setPosition(minerals->getSpawnPoint());
 	}
 
 	//Set Speed for Enemies
@@ -84,7 +84,7 @@ void Game::createGameObjects()
 	//Creates player
 	m_pTarget = new Target();
 
-	m_pBullet = new Bullet(Game::Instance()->getTargetPosition().x, Game::Instance()->getTargetPosition().y);
+	m_pBullet.push_back(new Bullet(Game::Instance()->getTargetPosition().x, Game::Instance()->getTargetPosition().y));
 }
 
 //Game Initialization
@@ -288,18 +288,18 @@ void Game::objectPickUp()
 //Enemy attack function -> Reduces player health
 void Game::playerAttack()
 {
-	for (int count = 0; count < numofEnemies; count++)
-	{
-		if (m_pEnemy[count]->getIsHit() == true && m_pBullet->getIsHit() == true)
-		{
-			// if player collides with enemies, player's health depletes a certain amount (enemy's attack damage)
-			m_pEnemy[count]->setEnemyHealth(m_pEnemy[count]->getEnemyHealth() - m_pBullet->getBulletDmg());
-			cout << "LOST: " << m_pEnemy[count]->getEnemyName() << " = Health: " <<m_pEnemy[count]->getEnemyHealth() << endl;
-			cout << "\nEnemy " << count << " = getIsHit()->" << m_pEnemy[count]->getIsHit() << endl;
-			cout << "\nBullet " << count << " = getIsHit()->" << m_pBullet->getIsHit() << endl;
-			//m_pTarget->m_playerKilled();
-		}
-	}
+	//for (int count = 0; count < numofEnemies; count++)
+	//{
+	//	if (m_pEnemy[count]->getIsHit() == true && m_pBullet->getIsHit() == true)
+	//	{
+	//		// if player collides with enemies, player's health depletes a certain amount (enemy's attack damage)
+	//		m_pEnemy[count]->setEnemyHealth(m_pEnemy[count]->getEnemyHealth() - m_pBullet->getBulletDmg());
+	//		cout << "LOST: " << m_pEnemy[count]->getEnemyName() << " = Health: " <<m_pEnemy[count]->getEnemyHealth() << endl;
+	//		cout << "\nEnemy " << count << " = getIsHit()->" << m_pEnemy[count]->getIsHit() << endl;
+	//		cout << "\nBullet " << count << " = getIsHit()->" << m_pBullet->getIsHit() << endl;
+	//		//m_pTarget->m_playerKilled();
+	//	}
+	//}
 }
 
 //Checks for keyboard/mouse input

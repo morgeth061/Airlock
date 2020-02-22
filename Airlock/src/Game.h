@@ -64,10 +64,10 @@ public:
 	glm::vec2 getTargetPosition();
 
 	//Game Objects
-	Enemy* m_pEnemy[3];
 	Target* m_pTarget;
-	Minerals* m_pMinerals[2];
-	Bullet* m_pBullet;
+	vector <Enemy*> m_pEnemy;
+	vector <Minerals*> m_pMinerals;
+	vector <Bullet*> m_pBullet;
 
 	//Keystate Method
 	bool KeyDown(SDL_Scancode c);
