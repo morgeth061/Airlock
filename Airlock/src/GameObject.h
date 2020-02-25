@@ -12,6 +12,10 @@
 class GameObject {
 public:
 	GameObject();
+	GameObject(SDL_Rect s, SDL_Rect d);
+	SDL_Rect* GetSrcP();
+	SDL_Rect* GetDstP();
+	double GetAngle();
 	~GameObject();
 
 	// Draw the object
@@ -49,7 +53,12 @@ public:
 	void setAcceleration(glm::vec2 newAcceleration);
 	void setFlip(SDL_RendererFlip flipType);
 
-
+protected:
+	SDL_Rect m_rSrc; // Rectangle for source pixels.
+	SDL_Rect m_rDst; // Rectangle for destination window.
+	int m_x,			// X coordinate. 
+		m_y,			// Y coordinate.
+		m_angle;		// Angle of sprite.
 private:
 	// transform variables
 	glm::vec2 m_position;

@@ -53,6 +53,7 @@ public:
 	void enemyAttack();
 	void objectPickUp();
 	void playerAttack();
+	void collide();
 
 	bool running()
 	{
@@ -67,7 +68,6 @@ public:
 	Target* m_pTarget;
 	vector <Enemy*> m_pEnemy;
 	vector <Minerals*> m_pMinerals;
-	vector <Bullet*> m_pBullet;
 
 	//Keystate Method
 	bool KeyDown(SDL_Scancode c);

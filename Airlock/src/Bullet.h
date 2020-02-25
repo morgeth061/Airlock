@@ -20,6 +20,7 @@ public:
 
 public:
 	Bullet(int x, int y);
+	Bullet(SDL_Rect s, SDL_Rect d, int spd);
 	~Bullet();
 	void update();
 	void render();

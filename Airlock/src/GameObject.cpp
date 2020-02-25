@@ -25,6 +25,18 @@ GameObject::GameObject()
 	m_acceleration = glm::vec2(0, 0);
 }
 
+GameObject::GameObject(SDL_Rect s, SDL_Rect d) :m_rSrc(s), m_rDst(d) 
+{
+	m_position = glm::vec2(0, 0);
+	m_rotation = glm::vec2(0, 0);
+	m_scale = glm::vec2(1.0f, 1.0f);
+	m_velocity = glm::vec2(0, 0);
+	m_acceleration = glm::vec2(0, 0);
+}
+SDL_Rect* GameObject::GetSrcP() { return &m_rSrc; }
+SDL_Rect* GameObject::GetDstP() { return &m_rDst; }
+double GameObject::GetAngle() { return m_angle; }
+
 GameObject::~GameObject()
 {
 }
