@@ -56,57 +56,7 @@ Target::Target()
 	setPlayerHealth(250);
 	setPlayerAtkDmg(50);
 	setPlayerDeath(false);
-
 }
-
-Target::Target(SDL_Rect s, SDL_Rect d)
-{
-	//Animation init
-	Texture::Instance()->load("../Assets/textures/Player_SMG_Walking_Sheet.png", "player", TheGame::Instance()->getRenderer());
-	m_iSprite = 0;
-	m_iSpriteMax = 0;
-	m_iFrame = 0;
-	m_iFrameMax = 4;
-
-	//Set Player Spawn
-	//DEFAULT
-	m_playerSpawn = glm::vec2(384.0f, 768.0f);
-
-
-	//generates level & collision
-	m_levelSelect = Level();
-	m_levelPtr = m_levelSelect.getLevel();
-	m_levelArray = *m_levelPtr;
-
-	for (int i = 0; i < 15; i++)
-	{
-		for (int j = 0; j < 29; j++)
-		{
-			cout << &m_levelArray[i][j];
-		}
-		cout << endl;
-	}
-
-	//Player Init
-	glm::vec2 size = Texture::Instance()->getTextureSize("player");
-	setWidth(size.x);
-	setHeight(size.y);
-	setPosition(m_playerSpawn); //changes original position
-	setVelocity(glm::vec2(0, 0));
-	setIsColliding(false);
-	setType(GameObjectType::TARGET);
-	setFlip(SDL_FLIP_HORIZONTAL);
-	SetIdle();
-	int inventory[Size];
-
-	//Set up health, name, and attack damage
-	setPlayerName("Astro");
-	setPlayerHealth(250);
-	setPlayerAtkDmg(50);
-	setPlayerDeath(false);
-
-}
-
 
 //Target De-Ctor.
 Target::~Target()

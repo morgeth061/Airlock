@@ -10,7 +10,6 @@ class Target : public GameObject {
 public:
 	//Ctor.
 	Target();
-	Target(SDL_Rect s, SDL_Rect d);
 	//De-Ctor.
 	~Target();
 

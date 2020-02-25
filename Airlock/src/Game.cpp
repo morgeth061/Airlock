@@ -83,12 +83,6 @@ void Game::createGameObjects()
 
 	//Creates player
 	m_pTarget = new Target();
-
-	for (auto bullets : BullVec)
-	{
-		bullets->setBulletDmg(25);
-	}
-	//BullVec.push_back(new Bullet(Game::Instance()->getTargetPosition().x, Game::Instance()->getTargetPosition().y));
 }
 
 //Game Initialization
@@ -125,8 +119,6 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, bo
 				std::cout << "renderer init failure" << std::endl;
 				return false; // render int fail
 			}
-
-			//TheTextureManager::Instance()->load("../../Assets/textures/animate-alpha.png", "animate", m_pRenderer);
 			createGameObjects();
 		}
 		else
@@ -196,37 +188,33 @@ void Game::update()
 			//m_pMinerals[count]->update();
 		}
 	}
-
-	//Check for bullet/enemy collision
-	for (int count = 0; count < numofEnemies; count++)
-	{
-		//Collision::squaredRadiusCheckObjects(BullVec, m_pEnemy[count]);
-	}
 	
 	m_pTarget->update();
 
-	//Check if bullet needs to be de-spawned
+	//updates bullet objects
 	for (int i = 0; i < BullVec.size(); i++)
 	{
 		BullVec[i]->update();
-		//if (BullVec[i]->active == false)
-		//{
-		//	delete BullVec[i];
-		//	BullVec[i] = nullptr;
-		//}
-
 	}
-	collide();
+
+	//check for player bullet/enemy collision
+	playerAttack();
+
+	//Check if bullet needs to be de-spawned
 	if (!BullVec.empty())
 	{
 		BullVec.erase(remove(BullVec.begin(), BullVec.end(), nullptr), BullVec.end());
 		BullVec.shrink_to_fit();
 	}
+	
+	//increases bullet frames	
 	bulletFrame++;
 	if (bulletFrame >= bulletFrameMax)
 	{
 		bulletFrame = bulletFrameMax;
 	}
+
+	//check if enemy needs to be de-spawned
 	if (!m_pEnemy.empty() && m_bENull == true)
 	{
 		m_pEnemy.erase(remove(m_pEnemy.begin(), m_pEnemy.end(), nullptr), m_pEnemy.end());
@@ -276,7 +264,6 @@ void Game::enemyAttack()
 			// if player collides with enemies, player's health depletes a certain amount (enemy's attack damage)
 			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() - enemies->getEnemyAtkDmg());
 			cout << "LOST: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
-			//cout << "\nEnemy " << count << " = getIsHit()->" << m_pEnemy[count]->getIsHit() << endl;
 			m_pTarget->m_playerKilled();
 		}
 	}
@@ -297,24 +284,8 @@ void Game::objectPickUp()
 	}
 }
 
-//Enemy attack function -> Reduces player health
+//player bullet collision with enemy object
 void Game::playerAttack()
-{
-	//for (int count = 0; count < numofEnemies; count++)
-	//{
-	//	if (m_pEnemy[count]->getIsHit() == true && BullVec->getIsHit() == true)
-	//	{
-	//		// if player collides with enemies, player's health depletes a certain amount (enemy's attack damage)
-	//		m_pEnemy[count]->setEnemyHealth(m_pEnemy[count]->getEnemyHealth() - BullVec->getBulletDmg());
-	//		cout << "LOST: " << m_pEnemy[count]->getEnemyName() << " = Health: " <<m_pEnemy[count]->getEnemyHealth() << endl;
-	//		cout << "\nEnemy " << count << " = getIsHit()->" << m_pEnemy[count]->getIsHit() << endl;
-	//		cout << "\nBullet " << count << " = getIsHit()->" << BullVec->getIsHit() << endl;
-	//		//m_pTarget->m_playerKilled();
-	//	}
-	//}
-}
-
-void Game::collide()
 {
 	for (int i = 0; i < (int)BullVec.size(); i++)
 	{
@@ -322,16 +293,17 @@ void Game::collide()
 		for (int j = 0; j < (int)m_pEnemy.size(); j++)
 		{
 			if (m_pEnemy[j] == nullptr) continue;
-			SDL_Rect e = { m_pEnemy[j]->getPosition().x, m_pEnemy[j]->getPosition().y, 64, 64 };
-			if (SDL_HasIntersection(&b, &e))
+			SDL_Rect e = { m_pEnemy[j]->getPosition().x, m_pEnemy[j]->getPosition().y-32, 64, 64 };
+			if (SDL_HasIntersection(&b, &e))// if enemy & bullet intersect...
 			{
-
+				//bullet object deleted
 				m_pEnemy[j]->setEnemyHealth(m_pEnemy[j]->getEnemyHealth() - BullVec[i]->getBulletDmg());
-				cout << "Enemy HP = " << m_pEnemy[j]->getEnemyHealth() << endl;
+				//cout << "Enemy HP = " << m_pEnemy[j]->getEnemyHealth() << endl;
 				delete BullVec[i];
 				BullVec[i] = nullptr;
 				if (m_pEnemy[j]->getEnemyHealth() <= 0)
 				{
+					//if enemy health <= 0, enemy objects deleted
 					m_bENull = true;
 					delete m_pEnemy[j];
 					m_pEnemy[j] = nullptr;
@@ -420,7 +392,6 @@ void Game::handleEvents()
 				}
 				break;
 			case SDLK_SPACE:
-
 				if (bulletFrame == bulletFrameMax)
 				{
 					BullVec.push_back(new Bullet({0,0,10,10}, {(int)m_pTarget->getPosition().x,(int)m_pTarget->getPosition().y,10,10 }, 30));

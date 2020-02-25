@@ -1,9 +1,6 @@
 #include "CollisionManager.h"
 #include "Game.h"
 
-#include "GameObject.h"
-
-
 int CollisionManager::squaredDistance(glm::vec2 P1, glm::vec2 P2)
 {
 	int diffOfXs = P2.x - P1.x;
@@ -19,7 +16,6 @@ bool CollisionManager::squaredRadiusCheck(GameObject * object1, GameObject * obj
 	glm::vec2 P2 = object2->getPosition();
 	int halfHeights = (object1->getHeight() + object2->getHeight()) * distance;
 
-	//if (glm::distance(P1, P2) < halfHeights) {
 	if (distance > 0.25)
 	{
 		if (CollisionManager::squaredDistance(P1, P2) < (halfHeights * halfHeights)) {
@@ -31,7 +27,6 @@ bool CollisionManager::squaredRadiusCheck(GameObject * object1, GameObject * obj
 				case BULLET:
 					break;
 				case ENEMY:
-					//std::cout << "ENEMY COLLISION" << std::endl;
 					break;
 				default:
 					std::cout << "Collision with unknown type!" << std::endl;
@@ -54,7 +49,6 @@ bool CollisionManager::squaredRadiusCheck(GameObject * object1, GameObject * obj
 
 				case BULLET:
 					std::cout << "Bullets" << std::endl;
-					TheGame::Instance()->playerAttack();
 				case MINERALS:
 					std::cout << "Minerals gone" << std::endl;
 					TheGame::Instance()->objectPickUp();

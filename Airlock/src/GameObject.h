@@ -12,10 +12,6 @@
 class GameObject {
 public:
 	GameObject();
-	GameObject(SDL_Rect s, SDL_Rect d);
-	SDL_Rect* GetSrcP();
-	SDL_Rect* GetDstP();
-	double GetAngle();
 	~GameObject();
 
 	// Draw the object

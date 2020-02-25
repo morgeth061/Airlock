@@ -6,27 +6,13 @@
 #include "Game.h"
 #define WIDTH 1024
 
-Bullet::Bullet(int x, int y)
+Bullet::Bullet(SDL_Rect s, SDL_Rect d, int spd)
 {
 	setType(GameObjectType::BULLET);
 	setIsColliding(false);
 	setIsHit(false);
 	setBulletDmg(25);
-	m_dst = { x - 2, y - 2 , 10,10};
-	if (Game::Instance()->m_pTarget->getFlip() == SDL_FLIP_HORIZONTAL)
-		headRight = true;
-	else
-		headRight = false;
-}
-
-Bullet::Bullet(SDL_Rect s, SDL_Rect d, int spd) :
-	GameObject(s, d)
-{
-	setType(GameObjectType::BULLET);
-	setIsColliding(false);
-	setIsHit(false);
-	setBulletDmg(25);
-	m_dst = { d.x - 2, d.y - 2 , 10,10 };
+	m_dst = { d.x , d.y , 4,4 };
 	if (Game::Instance()->m_pTarget->getFlip() == SDL_FLIP_HORIZONTAL)
 		headRight = true;
 	else
@@ -40,15 +26,9 @@ Bullet::~Bullet()
 void Bullet::update()
 {
 	if (headRight)
-	{
 		m_dst.x += speed;
-	}
-
 	else
-	{
 		m_dst.x -= speed;
-
-	}
 	if (m_dst.x > TheGame::Instance()->getTargetPosition().x+150 || m_dst.x < TheGame::Instance()->getTargetPosition().x - 150)
 		active = false;
 }
