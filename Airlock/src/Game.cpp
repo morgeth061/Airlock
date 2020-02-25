@@ -50,30 +50,30 @@ void Game::createGameObjects()
 	//Creates enemies for Level 1
 	for (int count = 0; count < numofEnemies; count++)
 	{
-		m_pEnemy[count] = new Enemy();
+		m_pEnemy.push_back(new Enemy());
 	}
 
 	m_pEnemy[0]->setEnemySpawn(glm::vec2(384.0f, 320.0f));
 	m_pEnemy[1]->setEnemySpawn(glm::vec2(960.0f, 480.0f));
 	m_pEnemy[2]->setEnemySpawn(glm::vec2(1472.0f, 640.0f));
 
-	for (int i = 0; i < numofEnemies; i++)
+	for (auto enemies : m_pEnemy)
 	{
-		m_pEnemy[i]->setPosition(m_pEnemy[i]->getEnemySpawn());
+		enemies->setPosition(enemies->getEnemySpawn());
 	}
 
 	//Creates minerals for Level 1
 	for (int count = 0; count < numofMinerals; count++)
 	{
-		m_pMinerals[count] = new Minerals();
+		m_pMinerals.push_back(new Minerals);
 	}
 
 	m_pMinerals[0]->setSpawnPoint(glm::vec2(384.0f, 192.0f));
 	m_pMinerals[1]->setSpawnPoint(glm::vec2(1472.0f, 832.0f));
 
-	for (int i = 0; i < numofMinerals; i++)
+	for (auto minerals : m_pMinerals)
 	{
-		m_pMinerals[i]->setPosition(m_pMinerals[i]->getSpawnPoint());
+		minerals->setPosition(minerals->getSpawnPoint());
 	}
 
 	//Set Speed for Enemies
@@ -119,8 +119,6 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, bo
 				std::cout << "renderer init failure" << std::endl;
 				return false; // render int fail
 			}
-
-			//TheTextureManager::Instance()->load("../../Assets/textures/animate-alpha.png", "animate", m_pRenderer);
 			createGameObjects();
 		}
 		else
@@ -160,12 +158,12 @@ void Game::render()
 		BullVec[i]->render();
 
 	//Draw Enemies
-	for (int count = 0; count < numofEnemies; count++)
-		m_pEnemy[count]->draw();
+	for (auto enemies : m_pEnemy)
+		enemies->draw();
 
 	//Draw Minerals
-	for (int count = 0; count < numofMinerals; count++)
-		m_pMinerals[count]->draw();
+	for (auto minerals : m_pMinerals)
+		minerals->draw();
 
 	//Draw to the screen
 	SDL_RenderPresent(m_pRenderer);
@@ -175,17 +173,17 @@ void Game::render()
 void Game::update()
 {
 	//Check for enemy/player collision
-	for (int count = 0; count < numofEnemies; count++)
+	for (auto enemies : m_pEnemy)
 	{
-		Collision::squaredRadiusCheckObjects(m_pTarget, m_pEnemy[count]);
-		Collision::squaredRadiusCheck(m_pTarget, m_pEnemy[count]);
-		m_pEnemy[count]->update();
+		Collision::squaredRadiusCheck(m_pTarget, enemies, 0.25f);
+		Collision::squaredRadiusCheck(m_pTarget, enemies, 1.0f);
+		enemies->update();
 	}
 
 	//Check for mineral/player collision
-	for (int count = 0; count < numofMinerals; count++)
+	for (auto minerals : m_pMinerals)
 	{
-		if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
+		if (Collision::squaredRadiusCheck(m_pTarget, minerals, 0.25f))
 		{
 			//m_pMinerals[count]->update();
 		}
@@ -193,25 +191,38 @@ void Game::update()
 	
 	m_pTarget->update();
 
-	//Check if bullet needs to be de-spawned
+	//updates bullet objects
 	for (int i = 0; i < BullVec.size(); i++)
 	{
-		BullVec[i]->update();
-		if (BullVec[i]->active == false)
+		if (!BullVec.empty())
+		{
+			BullVec[i]->update();
+			playerAttack(); //check if bullet is colliding with enemy
+		}
+\
+		//Check if bullet needs to be de-spawned
+		if (BullVec[i]->active == false && !BullVec.empty())
 		{
 			delete BullVec[i];
 			BullVec[i] = nullptr;
+			BullVec.erase(remove(BullVec.begin(), BullVec.end(), nullptr), BullVec.end());
+			BullVec.shrink_to_fit();
 		}
 	}
-	if (!BullVec.empty())
-	{
-		BullVec.erase(remove(BullVec.begin(), BullVec.end(), nullptr), BullVec.end());
-		BullVec.shrink_to_fit();
-	}
+
+	//increases bullet frames	
 	bulletFrame++;
 	if (bulletFrame >= bulletFrameMax)
 	{
 		bulletFrame = bulletFrameMax;
+	}
+
+	//check if enemy needs to be de-spawned
+	if (!m_pEnemy.empty() && m_bENull == true)
+	{
+		m_pEnemy.erase(remove(m_pEnemy.begin(), m_pEnemy.end(), nullptr), m_pEnemy.end());
+		m_pEnemy.shrink_to_fit();
+		m_bENull = false;
 	}
 
 	//player death/respawn
@@ -219,19 +230,19 @@ void Game::update()
 	{
 		m_pTarget->m_reset();
 
-		for (int count = 0; count < numofEnemies; count++)
+		for (auto enemies : m_pEnemy)
 		{
-			if (m_pEnemy[count]->getEnemyDeath() == true)
+			if (enemies->getEnemyDeath() == true)
 			{
-				m_pEnemy[count]->setEnemyDeath(false);
+				enemies->setEnemyDeath(false);
 			}
 			
-			m_pEnemy[count]->m_reset();
+			enemies->m_reset();
 		}
 
-		for (int count = 0; count < numofMinerals; count++)
+		for (auto minerals : m_pMinerals)
 		{
-			m_pMinerals[count]->m_reset();
+			minerals->m_reset();
 		}
 	}
 }
@@ -249,14 +260,13 @@ void Game::clean()
 //Enemy attack function -> Reduces player health
 void Game::enemyAttack()
 {
-	for (int count = 0; count < numofEnemies; count++)
+	for (auto enemies : m_pEnemy)
 	{
-		if (m_pEnemy[count]->getIsHit() == true)
+		if (enemies->getIsHit() == true)
 		{
 			// if player collides with enemies, player's health depletes a certain amount (enemy's attack damage)
-			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() - m_pEnemy[count]->getEnemyAtkDmg());
+			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() - enemies->getEnemyAtkDmg());
 			cout << "LOST: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
-			//cout << "\nEnemy " << count << " = getIsHit()->" << m_pEnemy[count]->getIsHit() << endl;
 			m_pTarget->m_playerKilled();
 		}
 	}
@@ -265,9 +275,9 @@ void Game::enemyAttack()
 //Player picks up object
 void Game::objectPickUp()
 {
-	for (int count = 0; count < numofMinerals; count++)
+	for (auto minerals : m_pMinerals)
 	{
-		if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count]))
+		if (Collision::squaredRadiusCheck(m_pTarget, minerals, 0.25f))
 		{
 			//testing player's health functions (will remove in future updates)
 			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() + 50);
@@ -275,6 +285,37 @@ void Game::objectPickUp()
 
 		}
 	}
+}
+
+//player bullet collision with enemy object
+void Game::playerAttack()
+{
+	for (int i = 0; i < (int)BullVec.size(); i++)
+	{
+		SDL_Rect b = { BullVec[i]->m_dst.x, BullVec[i]->m_dst.y,10,10 };
+		for (int j = 0; j < (int)m_pEnemy.size(); j++)
+		{
+			if (m_pEnemy[j] == nullptr) continue;
+			SDL_Rect e = { m_pEnemy[j]->getPosition().x, m_pEnemy[j]->getPosition().y - 32, 64, 64 };
+			if (SDL_HasIntersection(&b, &e))// if enemy & bullet intersect...
+			{
+				//bullet object deleted
+				m_pEnemy[j]->setEnemyHealth(m_pEnemy[j]->getEnemyHealth() - BullVec[i]->getBulletDmg());
+				//cout << "Enemy HP = " << m_pEnemy[j]->getEnemyHealth() << endl;
+				BullVec[i]->active = false;
+				if (m_pEnemy[j]->getEnemyHealth() <= 0)
+				{
+					//if enemy health <= 0, enemy objects deleted
+					m_bENull = true;
+					delete m_pEnemy[j];
+					m_pEnemy[j] = nullptr;
+				}
+				break;
+			}
+		}
+
+	}
+	
 }
 
 //Checks for keyboard/mouse input
@@ -333,31 +374,31 @@ void Game::handleEvents()
 				}
 				break;
 			case SDLK_1:
-				for (int count = 0; count < numofEnemies; count++)
+				for (auto enemies : m_pEnemy)
 				{
-					m_pEnemy[count]->setSteeringState(SteeringState::SEEK);
-					m_pEnemy[count]->setTarget(m_pTarget->getPosition());
+					enemies->setSteeringState(SteeringState::SEEK);
+					enemies->setTarget(m_pTarget->getPosition());
 				}
 				break;
 			case SDLK_2:
 				m_pTarget->setPlayerDeath(true);
 				break;
 			case SDLK_RIGHT:
-				for (int count = 0; count < numofEnemies; count++)
+				for (auto enemies : m_pEnemy)
 				{
-					m_pEnemy[count]->turnRight();
+					enemies->turnRight();
 				}
 				break;
 			case SDLK_LEFT:
-				for (int count = 0; count < numofEnemies; count++)
+				for (auto enemies : m_pEnemy)
 				{
-					m_pEnemy[count]->turnLeft();
+					enemies->turnLeft();
 				}
 				break;
 			case SDLK_SPACE:
 				if (bulletFrame == bulletFrameMax)
 				{
-					BullVec.push_back(new Bullet(Game::Instance()->getTargetPosition().x, Game::Instance()->getTargetPosition().y));
+					BullVec.push_back(new Bullet({0,0,10,10}, {(int)m_pTarget->getPosition().x,(int)m_pTarget->getPosition().y,10,10 }, 30));
 					bulletFrame = 0;
 				}
 			}
@@ -396,32 +437,25 @@ void Game::handleEvents()
 		default:
 			m_pTarget->animate();
 			//If enemy collide with player... what happens?			
-			for (int count = 0; count < numofEnemies; count++)
+			for (auto enemies : m_pEnemy)
 			{
-				if (m_pEnemy[count]->getIsColliding() == true)
+				if (enemies->getIsColliding() == true)
 				{
-					m_pEnemy[count]->setSteeringState(SteeringState::SEEK);
-					m_pEnemy[count]->setTarget(m_pTarget->getPosition());
+					enemies->setSteeringState(SteeringState::SEEK);
+					enemies->setTarget(m_pTarget->getPosition());
 				}
-				if (m_pEnemy[count]->getIsHit() == true && CollisionManager::squaredRadiusCheckObjects(m_pTarget, m_pEnemy[count]))
+				if (enemies->getIsHit() == true && CollisionManager::squaredRadiusCheck(m_pTarget, enemies,0.25f))
 				{
-					m_pEnemy[count]->setIsHit(false);
+					enemies->setIsHit(false);
 				}
 			}
 
 			//If minerals collide with player.... what happens (add inventory?)
-			for (int count = 0; count < numofMinerals; count++)
+			for (auto minerals : m_pMinerals)
 			{
-				//minerals disappear too slowly
-				//if (m_pMinerals[count]->getIsHit() == true && CollisionManager::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count])) 
-				//{
-				//	m_pMinerals[count]->setPosition(glm::vec2(2000.0f, 2000.0f));
-				//}
-				
-				//issue: enemies can 'steal' object (which shouldn't happen)
-				if (m_pMinerals[count]->getIsHit() == true)
+				if (minerals->getIsHit() == true)
 				{
-					m_pMinerals[count]->setPosition(glm::vec2(2000.0f, 2000.0f));
+					minerals->setPosition(glm::vec2(2000.0f, 2000.0f));
 				}
 			}
 

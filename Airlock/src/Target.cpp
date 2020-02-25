@@ -56,7 +56,6 @@ Target::Target()
 	setPlayerHealth(250);
 	setPlayerAtkDmg(50);
 	setPlayerDeath(false);
-
 }
 
 //Target De-Ctor.

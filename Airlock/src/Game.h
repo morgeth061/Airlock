@@ -49,9 +49,14 @@ public:
 	void handleEvents();
 	void clean();
 
+	// checks if enemy vector is null
+	bool m_bENull; 
+
+
 	//Public Game Methods
 	void enemyAttack();
 	void objectPickUp();
+	void playerAttack();
 
 	bool running()
 	{
@@ -63,10 +68,9 @@ public:
 	glm::vec2 getTargetPosition();
 
 	//Game Objects
-	Enemy* m_pEnemy[3];
 	Target* m_pTarget;
-	Minerals* m_pMinerals[2];
-	Bullet* m_pBullet;
+	vector <Enemy*> m_pEnemy;
+	vector <Minerals*> m_pMinerals;
 
 	//Keystate Method
 	bool KeyDown(SDL_Scancode c);

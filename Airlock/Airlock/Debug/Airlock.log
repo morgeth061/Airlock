@@ -1,24 +1,34 @@
 ﻿  Game.cpp
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(159,20): warning C4018:  '<': signed/unsigned mismatch
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(197,20): warning C4018:  '<': signed/unsigned mismatch
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(305,36): warning C4244:  '=': conversion from 'Sint32' to 'T', possible loss of data
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(305,36): warning C4244:         with
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(305,36): warning C4244:         [
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(305,36): warning C4244:             T=float
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(305,36): warning C4244:         ]
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(306,36): warning C4244:  '=': conversion from 'Sint32' to 'T', possible loss of data
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(306,36): warning C4244:         with
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(306,36): warning C4244:         [
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(306,36): warning C4244:             T=float
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(306,36): warning C4244:         ]
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(360,113): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(360,113): warning C4244:         with
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(360,113): warning C4244:         [
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(360,113): warning C4244:             T=float
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(360,113): warning C4244:         ]
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(360,72): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(360,72): warning C4244:         with
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(360,72): warning C4244:         [
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(360,72): warning C4244:             T=float
-D:\OneDrive\Documents\GitHub\Airlock\Airlock\src\Game.cpp(360,72): warning C4244:         ]
-  Airlock.vcxproj -> D:\OneDrive\Documents\GitHub\Airlock\Airlock\Debug\Airlock.exe
+D:\School\Github\Airlock\Airlock\src\Game.cpp(157,20): warning C4018: '<': signed/unsigned mismatch
+D:\School\Github\Airlock\Airlock\src\Game.cpp(195,20): warning C4018: '<': signed/unsigned mismatch
+D:\School\Github\Airlock\Airlock\src\Game.cpp(299,45): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Game.cpp(299,45): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Game.cpp(299,78): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Game.cpp(299,78): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Game.cpp(346,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Game.cpp(347,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Airlock.vcxproj -> D:\School\Github\Airlock\Airlock\Debug\Airlock.exe

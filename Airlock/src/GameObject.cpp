@@ -1,19 +1,3 @@
-/**
-GameObject class
-Author: Sojung (Serena) Lee
-Date: Jan/23/2020
-Description:
-	- Definitions for Game Object methods
-	- Defining GameObject constructor
-	- Adapted by GBC GAME3001 Template v4
-	- Helped create methods for objects (e.g. Enemy, Target)
-		- e.g.) setPosition, getIsColliding, setSteeringState
-Author: Sojung (Serena) Lee
-Date: Feb/11/2020
-Description:
-	- Added hit functions (get & set)
-**/
-
 #include "GameObject.h"
 
 GameObject::GameObject()
