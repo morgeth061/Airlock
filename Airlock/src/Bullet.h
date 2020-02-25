@@ -16,6 +16,7 @@ public:
 	static const int speed = 1;
 	bool headRight;
 
+
 	int m_bulletDmg;
 
 public:

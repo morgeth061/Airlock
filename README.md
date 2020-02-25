@@ -44,11 +44,63 @@ Description:
 Author:Sojung (Serena) Lee
 Date: Feb/16/2020
 Description:
-	 - slowed enemy speed for easier ranged combat
+	- slowed enemy speed for easier ranged combat
 Author:Ryan Ethier
 Date: Feb/16/2020
 Description:
-	 - Allowed for level reset and respawn
+	- Allowed for level reset and respawn
+Author:Sojung (Serena) Lee
+Date: Feb/25/2020
+Description:
+	- Changed enemy and mineral objects to vectors (uses vector functions --> e.g. auto, pop_back, push_back, empty)
+	- added playerAttack function
+		- if player bullets hit enemies, enemies take damange and bullets disappear
+		- enemy must be hit 4 times to disappear (Enemy health = 100, Bullet Damage = 25)
+
+
+----------
+GAME OBJECT CLASS
+----------
+
+GameObject class
+Author: Sojung (Serena) Lee
+Date: Jan/23/2020
+Description:
+	- Definitions for Game Object methods
+	- Defining GameObject constructor
+	- Adapted by GBC GAME3001 Template v4
+	- Helped create methods for objects (e.g. Enemy, Target)
+		- e.g.) setPosition, getIsColliding, setSteeringState
+Author: Sojung (Serena) Lee
+Date: Feb/11/2020
+Description:
+	- Added hit functions (get & set)
+	
+
+----------
+COLLISION MANAGER CLASS
+----------
+
+Collision Manager class
+Author: Sojung (Serena) Lee
+Date: Jan/23/2020
+Description:
+	- Definitions for Collision Manager
+	- Adapted from GBC GAME3001 Template v3
+	- Checks collision box around game object --> using squaredRadiusCheck
+		- if object is colliding with .... (switch statement) CASE: ______
+		- e.g.) if target/player (object) is colliding with.... (switch statement) CASE: ENEMY,
+					then cout << "ENEMY COLLISION" 
+Author: Sojung (Serena) Lee
+Date: Jan/31/2020
+Description:
+	- Added squareRadiansCheckObjects (for minerals or other game items only) --> has different (Smaller) radius than enemies
+Author: Sojung (Serena) Lee
+Date: Feb/11/2020
+Description:
+	- Added ENEMY GameObjectType to squareRadiansCheckObjects (when enemy hits player through smaller radius)
+		- smaller radius = enemy decreases player's health
+		- larger radius = enemy seeks player
 
 
 ----------
@@ -164,8 +216,8 @@ Description:
 Author:Sojung (Serena) Lee
 Date: Feb/11/2020
 Description:
-	 - added Hit get & set functions (bool)
-	 - added get & set functions for name, damage, and health
+	- added Hit get & set functions (bool)
+	- added get & set functions for name, damage, and health
 
 
 ----------
@@ -173,7 +225,24 @@ BULLET CLASS
 ----------
 
 Bullet Class
-Fisayo Akinsulire
+Author: Fisayo Akinsulire
 Date: Feb/10/2020
 Descripton:
-		-Added Bullet functionality
+	- Added Bullet functionality
+Author: Sojung (Serena) Lee
+Date: Feb/25/2020
+Descripton:
+	- Changed bullet constructor (parameters uses SDL_Rect x & y instead of integers)
+		
+----------
+UTIL CLASS
+----------
+
+GameObject class
+Author: Sojung (Serena) Lee
+Date: Jan/23/2020
+Description:
+	- Definitions for Util methods
+	- Adapted from GBC GAME3001 Template v4
+	- Defines mathematical functions needed for movement of game objects (e.g. enemies, player/target)
+

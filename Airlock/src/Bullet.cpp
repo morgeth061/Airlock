@@ -29,8 +29,10 @@ void Bullet::update()
 		m_dst.x += speed;
 	else
 		m_dst.x -= speed;
-	if (m_dst.x > TheGame::Instance()->getTargetPosition().x+150 || m_dst.x < TheGame::Instance()->getTargetPosition().x - 150)
+	if (m_dst.x > TheGame::Instance()->getTargetPosition().x + 150 || m_dst.x < TheGame::Instance()->getTargetPosition().x - 150)
+	{
 		active = false;
+	}
 }
 
 void Bullet::render()

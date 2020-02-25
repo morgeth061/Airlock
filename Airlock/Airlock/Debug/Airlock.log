@@ -1,66 +1,6 @@
-﻿  Bullet.cpp
-  CollisionManager.cpp
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(9,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(10,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(20,18): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  Enemy.cpp
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(18,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(19,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(47,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(48,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(89,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(90,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(93,38): warning C4244: 'argument': conversion from 'T' to 'std::array<row_type,15>::size_type', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(93,95): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Enemy.cpp(93,146): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
-          with
-          [
-              T=float
-          ]
-  FSM.cpp
-  Game.cpp
-D:\School\Github\Airlock\Airlock\src\Game.cpp(159,20): warning C4018: '<': signed/unsigned mismatch
-D:\School\Github\Airlock\Airlock\src\Game.cpp(197,20): warning C4018: '<': signed/unsigned mismatch
+﻿  Game.cpp
+D:\School\Github\Airlock\Airlock\src\Game.cpp(157,20): warning C4018: '<': signed/unsigned mismatch
+D:\School\Github\Airlock\Airlock\src\Game.cpp(195,20): warning C4018: '<': signed/unsigned mismatch
 D:\School\Github\Airlock\Airlock\src\Game.cpp(299,45): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
           with
           [
@@ -71,17 +11,12 @@ D:\School\Github\Airlock\Airlock\src\Game.cpp(299,45): warning C4244: 'initializ
           [
               T=float
           ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(299,77): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+D:\School\Github\Airlock\Airlock\src\Game.cpp(299,78): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
           with
           [
               T=float
           ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(299,77): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(345,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+D:\School\Github\Airlock\Airlock\src\Game.cpp(299,78): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
@@ -91,75 +26,9 @@ D:\School\Github\Airlock\Airlock\src\Game.cpp(346,36): warning C4244: '=': conve
           [
               T=float
           ]
-  GameObject.cpp
-  Minerals.cpp
-D:\School\Github\Airlock\Airlock\src\Minerals.cpp(11,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+D:\School\Github\Airlock\Airlock\src\Game.cpp(347,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\School\Github\Airlock\Airlock\src\Minerals.cpp(12,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Minerals.cpp(26,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Minerals.cpp(27,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-  Target.cpp
-D:\School\Github\Airlock\Airlock\src\Target.cpp(44,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(45,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(52,6): warning C4101: 'inventory': unreferenced local variable
-D:\School\Github\Airlock\Airlock\src\Target.cpp(69,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(70,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(121,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(122,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(131,62): warning C4244: 'argument': conversion from 'T' to 'std::array<row_type,15>::size_type', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(131,143): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\School\Github\Airlock\Airlock\src\Target.cpp(131,218): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
-          with
-          [
-              T=float
-          ]
-  Generating Code...
-D:\School\Github\Airlock\Airlock\src\CollisionManager.cpp(76): warning C4715: 'CollisionManager::squaredRadiusCheck': not all control paths return a value
   Airlock.vcxproj -> D:\School\Github\Airlock\Airlock\Debug\Airlock.exe

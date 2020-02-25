@@ -1,13 +1,3 @@
-/**
-GameObject class
-Author: Sojung (Serena) Lee
-Date: Jan/23/2020
-Description:
-	- Definitions for Util methods
-	- Adapted from GBC GAME3001 Template v4
-	- Defines mathematical functions needed for movement of game objects (e.g. enemies, player/target)
-**/
-
 #include "Util.h"
 #include "GLM/gtc/constants.hpp"
 #include "GLM/gtx/norm.hpp"

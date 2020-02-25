@@ -194,19 +194,22 @@ void Game::update()
 	//updates bullet objects
 	for (int i = 0; i < BullVec.size(); i++)
 	{
-		BullVec[i]->update();
+		if (!BullVec.empty())
+		{
+			BullVec[i]->update();
+			playerAttack(); //check if bullet is colliding with enemy
+		}
+\
+		//Check if bullet needs to be de-spawned
+		if (BullVec[i]->active == false && !BullVec.empty())
+		{
+			delete BullVec[i];
+			BullVec[i] = nullptr;
+			BullVec.erase(remove(BullVec.begin(), BullVec.end(), nullptr), BullVec.end());
+			BullVec.shrink_to_fit();
+		}
 	}
 
-	//check for player bullet/enemy collision
-	playerAttack();
-
-	//Check if bullet needs to be de-spawned
-	if (!BullVec.empty())
-	{
-		BullVec.erase(remove(BullVec.begin(), BullVec.end(), nullptr), BullVec.end());
-		BullVec.shrink_to_fit();
-	}
-	
 	//increases bullet frames	
 	bulletFrame++;
 	if (bulletFrame >= bulletFrameMax)
@@ -293,14 +296,13 @@ void Game::playerAttack()
 		for (int j = 0; j < (int)m_pEnemy.size(); j++)
 		{
 			if (m_pEnemy[j] == nullptr) continue;
-			SDL_Rect e = { m_pEnemy[j]->getPosition().x, m_pEnemy[j]->getPosition().y-32, 64, 64 };
+			SDL_Rect e = { m_pEnemy[j]->getPosition().x, m_pEnemy[j]->getPosition().y - 32, 64, 64 };
 			if (SDL_HasIntersection(&b, &e))// if enemy & bullet intersect...
 			{
 				//bullet object deleted
 				m_pEnemy[j]->setEnemyHealth(m_pEnemy[j]->getEnemyHealth() - BullVec[i]->getBulletDmg());
 				//cout << "Enemy HP = " << m_pEnemy[j]->getEnemyHealth() << endl;
-				delete BullVec[i];
-				BullVec[i] = nullptr;
+				BullVec[i]->active = false;
 				if (m_pEnemy[j]->getEnemyHealth() <= 0)
 				{
 					//if enemy health <= 0, enemy objects deleted
@@ -311,7 +313,9 @@ void Game::playerAttack()
 				break;
 			}
 		}
+
 	}
+	
 }
 
 //Checks for keyboard/mouse input
@@ -449,13 +453,6 @@ void Game::handleEvents()
 			//If minerals collide with player.... what happens (add inventory?)
 			for (auto minerals : m_pMinerals)
 			{
-				//minerals disappear too slowly
-				//if (m_pMinerals[count]->getIsHit() == true && CollisionManager::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count])) 
-				//{
-				//	m_pMinerals[count]->setPosition(glm::vec2(2000.0f, 2000.0f));
-				//}
-				
-				//issue: enemies can 'steal' object (which shouldn't happen)
 				if (minerals->getIsHit() == true)
 				{
 					minerals->setPosition(glm::vec2(2000.0f, 2000.0f));
