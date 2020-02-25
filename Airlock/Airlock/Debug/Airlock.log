@@ -1,32 +1,32 @@
 ﻿  Game.cpp
-D:\School\Github\Airlock\Airlock\src\Game.cpp(161,20): warning C4018: '<': signed/unsigned mismatch
-D:\School\Github\Airlock\Airlock\src\Game.cpp(205,20): warning C4018: '<': signed/unsigned mismatch
-D:\School\Github\Airlock\Airlock\src\Game.cpp(317,45): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+D:\School\Github\Airlock\Airlock\src\Game.cpp(165,20): warning C4018: '<': signed/unsigned mismatch
+D:\School\Github\Airlock\Airlock\src\Game.cpp(209,20): warning C4018: '<': signed/unsigned mismatch
+D:\School\Github\Airlock\Airlock\src\Game.cpp(325,45): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
           with
           [
               T=float
           ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(317,45): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+D:\School\Github\Airlock\Airlock\src\Game.cpp(325,45): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(317,75): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+D:\School\Github\Airlock\Airlock\src\Game.cpp(325,75): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
           with
           [
               T=float
           ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(317,75): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+D:\School\Github\Airlock\Airlock\src\Game.cpp(325,75): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(356,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+D:\School\Github\Airlock\Airlock\src\Game.cpp(371,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\School\Github\Airlock\Airlock\src\Game.cpp(357,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+D:\School\Github\Airlock\Airlock\src\Game.cpp(372,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
           with
           [
               T=float

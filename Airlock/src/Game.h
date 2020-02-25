@@ -49,6 +49,9 @@ public:
 	void handleEvents();
 	void clean();
 
+	bool m_bENull = false; // These three flags check if we need to clear the respective vectors of nullptrs.
+
+
 	//Public Game Methods
 	void enemyAttack();
 	void objectPickUp();

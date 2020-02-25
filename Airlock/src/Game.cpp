@@ -84,6 +84,10 @@ void Game::createGameObjects()
 	//Creates player
 	m_pTarget = new Target();
 
+	for (auto bullets : BullVec)
+	{
+		bullets->setBulletDmg(25);
+	}
 	//BullVec.push_back(new Bullet(Game::Instance()->getTargetPosition().x, Game::Instance()->getTargetPosition().y));
 }
 
@@ -223,6 +227,12 @@ void Game::update()
 	{
 		bulletFrame = bulletFrameMax;
 	}
+	if (!m_pEnemy.empty() && m_bENull == true)
+	{
+		m_pEnemy.erase(remove(m_pEnemy.begin(), m_pEnemy.end(), nullptr), m_pEnemy.end());
+		m_pEnemy.shrink_to_fit();
+		m_bENull = false;
+	}
 
 	//player death/respawn
 	if(m_pTarget->getPlayerStatus() == true)
@@ -308,19 +318,24 @@ void Game::collide()
 {
 	for (int i = 0; i < (int)BullVec.size(); i++)
 	{
-		SDL_Rect b = { BullVec[i]->m_dst.x, BullVec[i]->m_dst.y,5,5 };
-		//cout << "bullet x " << BullVec[i]->m_dst.x << endl;
-		//cout << "bullet y " << BullVec[i]->m_dst.y << endl;
+		SDL_Rect b = { BullVec[i]->m_dst.x, BullVec[i]->m_dst.y,10,10 };
 		for (int j = 0; j < (int)m_pEnemy.size(); j++)
 		{
 			if (m_pEnemy[j] == nullptr) continue;
-			SDL_Rect e = { m_pEnemy[j]->getPosition().x, m_pEnemy[j]->getPosition().y, 32, 64 };
+			SDL_Rect e = { m_pEnemy[j]->getPosition().x, m_pEnemy[j]->getPosition().y, 64, 64 };
 			if (SDL_HasIntersection(&b, &e))
 			{
-				//delete m_pEnemy[j];
-				//m_pEnemy[j] = nullptr;
+
+				m_pEnemy[j]->setEnemyHealth(m_pEnemy[j]->getEnemyHealth() - BullVec[i]->getBulletDmg());
+				cout << "Enemy HP = " << m_pEnemy[j]->getEnemyHealth() << endl;
 				delete BullVec[i];
 				BullVec[i] = nullptr;
+				if (m_pEnemy[j]->getEnemyHealth() <= 0)
+				{
+					m_bENull = true;
+					delete m_pEnemy[j];
+					m_pEnemy[j] = nullptr;
+				}
 				break;
 			}
 		}
@@ -408,8 +423,7 @@ void Game::handleEvents()
 
 				if (bulletFrame == bulletFrameMax)
 				{
-
-					BullVec.push_back(new Bullet({0,0,5,5 }, {(int)m_pTarget->getPosition().x,(int)m_pTarget->getPosition().y,4,4 }, 30));
+					BullVec.push_back(new Bullet({0,0,10,10}, {(int)m_pTarget->getPosition().x,(int)m_pTarget->getPosition().y,10,10 }, 30));
 					bulletFrame = 0;
 				}
 			}

@@ -12,7 +12,7 @@ Bullet::Bullet(int x, int y)
 	setIsColliding(false);
 	setIsHit(false);
 	setBulletDmg(25);
-	m_dst = { x - 2, y - 2 , 4,4 };
+	m_dst = { x - 2, y - 2 , 10,10};
 	if (Game::Instance()->m_pTarget->getFlip() == SDL_FLIP_HORIZONTAL)
 		headRight = true;
 	else
@@ -26,7 +26,7 @@ Bullet::Bullet(SDL_Rect s, SDL_Rect d, int spd) :
 	setIsColliding(false);
 	setIsHit(false);
 	setBulletDmg(25);
-	m_dst = { d.x - 2, d.y - 2 , 4,4 };
+	m_dst = { d.x - 2, d.y - 2 , 10,10 };
 	if (Game::Instance()->m_pTarget->getFlip() == SDL_FLIP_HORIZONTAL)
 		headRight = true;
 	else
