@@ -13,7 +13,8 @@ typedef array<row_type, 15> array_type;
 class Level
 {
 private:
-	array_type level1Array;	
+	array_type m_pLevel1Array;
+	array_type m_pLevelPtr;
 
 public:
 	//ctor.
@@ -24,7 +25,7 @@ public:
 	//setters
 
 	//getters
-	array_type& getLevel();
+	array_type* getLevel();
 	
 };
 

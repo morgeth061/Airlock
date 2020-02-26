@@ -9,13 +9,16 @@ Description:
 		- if object is colliding with .... (switch statement) CASE: ______
 		- e.g.) if target/player (object) is colliding with.... (switch statement) CASE: ENEMY,
 					then cout << "ENEMY COLLISION" 
-**/
-
-/**
 Author: Sojung (Serena) Lee
 Date: Jan/31/2020
 Description:
 	- Added squareRadiansCheckObjects (for minerals or other game items only) --> has different (Smaller) radius than enemies
+Author: Sojung (Serena) Lee
+Date: Feb/11/2020
+Description:
+	- Added ENEMY GameObjectType to squareRadiansCheckObjects (when enemy hits player through smaller radius)
+		- smaller radius = enemy decreases player's health
+		- larger radius = enemy seeks player
 **/
 
 #include "CollisionManager.h"
@@ -37,7 +40,7 @@ bool CollisionManager::squaredRadiusCheck(GameObject * object1, GameObject * obj
 {
 	glm::vec2 P1 = object1->getPosition();
 	glm::vec2 P2 = object2->getPosition();
-	int halfHeights = (object1->getHeight() + object2->getHeight()) * 2;
+	int halfHeights = (object1->getHeight() + object2->getHeight()) * 1;
 
 	//if (glm::distance(P1, P2) < halfHeights) {
 
@@ -50,7 +53,7 @@ bool CollisionManager::squaredRadiusCheck(GameObject * object1, GameObject * obj
 			case BULLET:
 				break;
 			case ENEMY:
-				std::cout << "ENEMY COLLISION" << std::endl;
+				//std::cout << "ENEMY COLLISION" << std::endl;
 				break;
 			default:
 				std::cout << "Collision with unknown type!" << std::endl;
@@ -66,15 +69,21 @@ bool CollisionManager::squaredRadiusCheckObjects(GameObject* object1, GameObject
 {
 	glm::vec2 P1 = object1->getPosition();
 	glm::vec2 P2 = object2->getPosition();
-	float halfHeights = (object1->getHeight() + object2->getHeight()) * 0.3;
+	float halfHeights = (object1->getHeight() + object2->getHeight()) * 0.25;
 	if (CollisionManager::squaredDistance(P1, P2) < (halfHeights * halfHeights)) {
-		if (!object2->getIsColliding()) {
+		if (!object2->getIsHit()) {
 
-			object2->setIsColliding(true);
+			object2->setIsHit(true);
 
 			switch (object2->getType()) {
+
 			case MINERALS:
 				std::cout << "Minerals gone" << std::endl;
+				TheGame::Instance()->objectPickUp();
+				break;
+			case ENEMY:
+				std::cout << "ENEMY gone" << std::endl;
+				TheGame::Instance()->enemyAttack();
 				break;
 			default:
 				std::cout << "Collision with unknown type!" << std::endl;

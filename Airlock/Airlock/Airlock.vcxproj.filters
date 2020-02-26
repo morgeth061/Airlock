@@ -63,6 +63,9 @@
     <ClCompile Include="..\src\Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Bullet.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Engine.h">
@@ -86,9 +89,6 @@
     <ClInclude Include="..\src\CollisionManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Enemy.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Target.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -106,6 +106,12 @@
     </ClInclude>
     <ClInclude Include="..\src\GameObject.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Enemy.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Bullet.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

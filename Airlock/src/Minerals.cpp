@@ -1,15 +1,3 @@
-/**
-Minerals class
-Author: Sojung (Serena) Lee
-Date: Jan/31/2020
-Description:
-	- Added minerals class
-	- created mineral object
-	- placed mineral (Quartz1.png) into game state (screen)
-	- Based on Enemy class
-	- changed minerals icon (quartz) to larger resolution
-**/
-
 #include "Minerals.h"
 #include "Game.h"
 #include "Engine.h"
@@ -22,9 +10,10 @@ Minerals::Minerals()
 	glm::vec2 size = Texture::Instance()->getTextureSize("minerals");
 	setWidth(size.x);
 	setHeight(size.y);
-	setPosition(glm::vec2(192.0f, 96.0f)); //changes original position
+	//setPosition(glm::vec2(192.0f, 96.0f)); //changes original position
 	setVelocity(glm::vec2(0, 0));
 	setIsColliding(false);
+	setIsHit(false);
 	setType(GameObjectType::MINERALS);
 }
 
@@ -42,17 +31,28 @@ void Minerals::draw()
 
 void Minerals::update()
 {
-	//m_move();
-	//m_checkBounds();
-	//clean();
+	
 }
 
 void Minerals::clean()
 {
 }
 
+void Minerals::setSpawnPoint(glm::vec2 spawn)
+{
+	m_mineralSpawnPoint = spawn;
+}
+
+glm::vec2 Minerals::getSpawnPoint()
+{
+	return m_mineralSpawnPoint;
+}
+
 
 void Minerals::m_reset()
 {
 	setIsColliding(false);
+	setIsHit(false);
+	setPosition(m_mineralSpawnPoint);
+	cout << getIsColliding() << " " << getIsHit() << endl;
 }

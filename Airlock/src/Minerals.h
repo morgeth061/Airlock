@@ -14,10 +14,19 @@ public:
 	virtual void draw() override;
 	virtual void update() override;
 	virtual void clean() override;
+
+	void setSpawnPoint(glm::vec2);
+
+	glm::vec2 getSpawnPoint();
+
+	void m_reset();
+	
 private:
 	//void m_checkBounds();
 
-	void m_reset();
+	glm::vec2 m_mineralSpawnPoint;
+
+	
 };
 
 #endif /* defined (__MINERALS__) */

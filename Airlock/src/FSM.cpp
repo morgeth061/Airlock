@@ -1,12 +1,3 @@
-/*
- * FSM class
- * Adapted from GBC GAME1017 SDL Template
- * Editors:
- * - Ryan Ethier
- * - Sojung (Serena) Lee - Jan/23/2020
-		- Updated background image with Robert's updated asset (larger resolution)
- */
-
 //includes
 #include "FSM.h"
 #include "Engine.h"
@@ -17,6 +8,7 @@
 using namespace std;
 
 //GENERAL
+int playerHealth;
 
 //begin current state
 void State::Render()
@@ -73,13 +65,17 @@ void PauseState::Exit() //"on exit" for pause state
 GameState::GameState() //ctor. of game state
 {
 	//Game::Instance()->init("Airlock", 0, 0, 1856, 960, false);
-	Game::Instance()->init("Airlock", 0, 0, 1856, 960, true);
+	Game::Instance()->init("Airlock", 0, 0, 1856, 960, false);
 }
 
 void GameState::Enter() //"on enter" of game state
 {
 	cout << "Entering Game..." << endl;
 	Texture::Instance()->load("../Assets/textures/FP_Level1.png", "Level1", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/playerHealthBack.png", "playerHealthBack", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/playerHealth.png", "playerHealthBar", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/playerInventory.png", "playerInv", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/playerInventorySelected.png", "playerInvSelected", TheGame::Instance()->getRenderer());
 }
 
 void GameState::Update() //update for game state

@@ -6,22 +6,23 @@
 #include <iostream>
 #include <vector>
 
+//SDL Libraries
 #include <SDL.h>
-#include <SDL_image.h>
 
 // Game Managers
-#include "TextureManager.h"
 #include "CollisionManager.h"
 
 // Game Objects
 #include "Enemy.h"
 #include "Target.h"
 #include "Minerals.h"
+#include "Bullet.h"
 
 class Game
 {
 public:
 
+	//Singleton
 	static Game* Instance()
 	{
 		if (s_pInstance == 0)
@@ -33,47 +34,72 @@ public:
 		return s_pInstance;
 	}
 
-	// simply set the running variable to true
-	void init() { m_bRunning = true; }
-
+	//Init method
+	void init()
+	{
+		//Simply set the running variable to true
+		m_bRunning = true;
+	}
+	
 	bool init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 
-	// public functions
+	//Public Methods
 	void render();
 	void update();
 	void handleEvents();
 	void clean();
 
-	// a function to access the private running variable
-	bool running() { return m_bRunning; }
+	//Public Game Methods
+	void enemyAttack();
+	void objectPickUp();
 
-	glm::vec2 getTargetPosition();
+	bool running()
+	{
+		return m_bRunning;
+	}
 
-	// getters
+	//Getters
 	SDL_Renderer* getRenderer();
+	glm::vec2 getTargetPosition();
+	int getTargetHealth();
+
+	//Game Objects
 	Enemy* m_pEnemy[3];
 	Target* m_pTarget;
 	Minerals* m_pMinerals[2];
+	Bullet* m_pBullet;
 
+	//Keystate Method
 	bool KeyDown(SDL_Scancode c);
+	
 private:
+	//Ctor.
 	Game();
+	//De-Ctor.
 	~Game();
 
+	//SDL Objects
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
 
+	//Bullet Vector
+	vector<Bullet*> BullVec;
+	int bulletFrame;
+	int bulletFrameMax;
 	int m_currentFrame;
 
+	//Engine
 	bool m_bRunning;
 
+	//Singleton
 	static Game* s_pInstance;
 
-	void createGameObjects();
-
+	//Mouse/Keyboard States
 	glm::vec2 m_mousePosition;
+	const Uint8* m_iKeystates;
 
-	const Uint8* m_iKeystates; // Keyboard state container.
+	//Private Methods
+	void createGameObjects();
 };
 
 typedef Game TheGame;

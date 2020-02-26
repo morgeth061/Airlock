@@ -8,6 +8,10 @@ Description:
 	- Adapted by GBC GAME3001 Template v4
 	- Helped create methods for objects (e.g. Enemy, Target)
 		- e.g.) setPosition, getIsColliding, setSteeringState
+Author: Sojung (Serena) Lee
+Date: Feb/11/2020
+Description:
+	- Added hit functions (get & set)
 **/
 
 #include "GameObject.h"
@@ -65,6 +69,11 @@ bool GameObject::getIsColliding()
 	return m_isColliding;
 }
 
+bool GameObject::getIsHit()
+{
+	return m_isHit;
+}
+
 GameObjectType GameObject::getType()
 {
 	return m_type;
@@ -104,6 +113,11 @@ void GameObject::setVelocity(glm::vec2 newVelocity)
 void GameObject::setIsColliding(bool collision)
 {
 	m_isColliding = collision;
+}
+
+void GameObject::setIsHit(bool hit)
+{
+	m_isHit = hit;
 }
 
 void GameObject::setType(GameObjectType newType)
