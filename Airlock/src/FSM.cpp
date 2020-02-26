@@ -8,6 +8,7 @@
 using namespace std;
 
 //GENERAL
+int playerHealth;
 
 //begin current state
 void State::Render()
@@ -71,6 +72,10 @@ void GameState::Enter() //"on enter" of game state
 {
 	cout << "Entering Game..." << endl;
 	Texture::Instance()->load("../Assets/textures/FP_Level1.png", "Level1", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/playerHealthBack.png", "playerHealthBack", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/playerHealth.png", "playerHealthBar", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/playerInventory.png", "playerInv", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/playerInventorySelected.png", "playerInvSelected", TheGame::Instance()->getRenderer());
 }
 
 void GameState::Update() //update for game state
