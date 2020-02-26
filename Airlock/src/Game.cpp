@@ -5,6 +5,7 @@
 
 //Includes
 #include "Game.h"
+#include "Util.h"
 
 //Defines
 #define FPS 60
@@ -149,6 +150,14 @@ void Game::render()
 	//**********
 	
 	Texture::Instance()->draw("Level1", 0, 0, TheGame::Instance()->getRenderer(), false);
+
+	//Draw Health Bar
+	Texture::Instance()->draw("playerHealthBack", 0, 0, TheGame::Instance()->getRenderer(), false);
+	Texture::Instance()->draw("playerHealthBar", 100, 12, m_pTarget->getPlayerHealth() * 4, 40, TheGame::Instance()->getRenderer());
+
+	//Draw Inventory
+	Texture::Instance()->draw("playerInv", 715, 875, TheGame::Instance()->getRenderer(), false);
+	Texture::Instance()->draw("playerInvSelected", 715 + (64 * (m_pTarget->getInvIndex())), 875, TheGame::Instance()->getRenderer(), false);
 
 	//Draw player
 	m_pTarget->draw();
@@ -367,6 +376,39 @@ void Game::handleEvents()
 				m_pTarget->setVelocity(glm::vec2(1.0f, m_pTarget->getVelocity().y));
 				m_pTarget->setFlip(SDL_FLIP_HORIZONTAL);
 				break;
+			case SDLK_f:
+				for (int i = 0; i < numofEnemies; i++)
+				{
+					//if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pEnemy[i]) && Collision::squaredRadiusCheck(m_pTarget, m_pEnemy[i]))
+					if(Collision::squaredRadiusCheck(m_pTarget, m_pEnemy[i], (Util::distance(m_pTarget->getPosition(), m_pEnemy[i]->getPosition()))))
+					{
+						m_pEnemy[i]->setEnemyHealth((m_pEnemy[i]->getEnemyHealth())-25);
+						cout << "ENEMY HIT" << " " << m_pEnemy[i]->getEnemyHealth() << endl;
+					}
+				}
+				break;
+			case SDLK_UP:
+				if (m_pTarget->getInvIndex() == 6) 
+				{
+					m_pTarget->setInvIndex(0);
+				}
+				else 
+				{
+					short ind = m_pTarget->getInvIndex();
+					m_pTarget->setInvIndex(ind+1);
+				}
+				break;
+			case SDLK_DOWN:
+				if ((m_pTarget->getInvIndex() == 0))
+				{
+					m_pTarget->setInvIndex(6);
+				}
+				else
+				{
+					short ind = m_pTarget->getInvIndex();
+					m_pTarget->setInvIndex(ind-1);
+				}
+				break;
 			case SDLK_0:
 				for (int count = 0; count < numofEnemies; count++)
 				{
@@ -451,11 +493,18 @@ void Game::handleEvents()
 			}
 
 			//If minerals collide with player.... what happens (add inventory?)
-			for (auto minerals : m_pMinerals)
+			for (int count = 0; count < numofMinerals; count++)
 			{
-				if (minerals->getIsHit() == true)
+				//minerals disappear too slowly
+				//if (m_pMinerals[count]->getIsHit() == true && CollisionManager::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count])) 
+				//{
+				//	m_pMinerals[count]->setPosition(glm::vec2(2000.0f, 2000.0f));
+				//}
+				
+				//issue: enemies can 'steal' object (which shouldn't happen)
+				if (m_pMinerals[count]->getIsHit() == true)
 				{
-					minerals->setPosition(glm::vec2(2000.0f, 2000.0f));
+					m_pMinerals[count]->setPosition(glm::vec2(2000.0f, 2000.0f));
 				}
 			}
 

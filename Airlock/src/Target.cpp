@@ -56,6 +56,8 @@ Target::Target()
 	setPlayerHealth(250);
 	setPlayerAtkDmg(50);
 	setPlayerDeath(false);
+	setInvIndex(0);
+	
 }
 
 //Target De-Ctor.
@@ -188,6 +190,12 @@ void Target::setPlayerHealth(int health)
 	m_playerHealth = health;
 }
 
+//Setter for player's inventory index
+void Target::setInvIndex(short index)
+{
+	m_invIndex = index;
+}
+
 //Setter for player name
 void Target::setPlayerName(string name)
 {
@@ -227,6 +235,12 @@ void Target::m_playerKilled()
 int Target::getPlayerHealth()
 {
 	return m_playerHealth;
+}
+
+//Getter for player's inventory index
+short Target::getInvIndex()
+{
+	return m_invIndex;
 }
 
 //Getter for player name
