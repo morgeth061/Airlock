@@ -70,37 +70,6 @@ bool CollisionManager::squaredRadiusCheck(GameObject * object1, GameObject * obj
 	
 }
 
-/*bool CollisionManager::squaredRadiusCheckObjects(GameObject* object1, GameObject* object2)
-{
-	glm::vec2 P1 = object1->getPosition();
-	glm::vec2 P2 = object2->getPosition();
-	float halfHeights = (object1->getHeight() + object2->getHeight()) * 0.25;
-	if (CollisionManager::squaredDistance(P1, P2) < (halfHeights * halfHeights)) {
-		if (!object2->getIsHit()) {
-
-			object2->setIsHit(true);
-
-			switch (object2->getType()) {
-
-			case MINERALS:
-				std::cout << "Minerals gone" << std::endl;
-				TheGame::Instance()->objectPickUp();
-				break;
-			case ENEMY:
-				std::cout << "ENEMY gone" << std::endl;
-				TheGame::Instance()->enemyAttack();
-				break;
-			default:
-				std::cout << "Collision with unknown type!" << std::endl;
-				break;
-			}
-
-			return true;
-		}
-		return false;
-	}
-}*/
-
 CollisionManager::CollisionManager()
 {
 }

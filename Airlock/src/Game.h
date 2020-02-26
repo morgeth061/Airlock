@@ -66,7 +66,6 @@ public:
 	//Getters
 	SDL_Renderer* getRenderer();
 	glm::vec2 getTargetPosition();
-	int getTargetHealth();
 
 	//Game Objects
 	Target* m_pTarget;

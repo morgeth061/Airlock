@@ -29,7 +29,6 @@ public:
 
 	//Setters
 	void setPlayerHealth(int);
-	void setInvIndex(short);
 	void setPlayerName(string);
 	void setPlayerAtkDmg(int);
 	void setPlayerDeath(bool);
@@ -40,7 +39,6 @@ public:
 
 	//Getters
 	int getPlayerHealth();
-	short getInvIndex();
 	string getPlayerName();
 	int getPlayerAtkDmg();
 	bool getPlayerStatus();
@@ -67,7 +65,6 @@ private:
 
 	//Private Attributes
 	int m_playerHealth;
-	short m_invIndex;
 	string m_playerName;
 	int m_playerAtkDmg;
 	glm::vec2 m_playerSpawn;
