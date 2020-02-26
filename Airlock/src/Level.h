@@ -14,6 +14,7 @@ class Level
 {
 private:
 	array_type m_pLevel1Array;
+	array_type m_pLevel2Array;
 	array_type m_pLevelPtr;
 
 public:
@@ -23,7 +24,7 @@ public:
 	~Level();
 
 	//setters
-
+	void setLevel(int);
 	//getters
 	array_type* getLevel();
 	
