@@ -166,6 +166,14 @@ void Game::deleteGameObjects()
 
 }
 
+bool Game::init()
+{
+	m_pRenderer = Engine::Instance().GetRenderer();
+	createGameObjects();
+	m_bRunning = true;
+	return true;
+}
+
 //Game Initialization
 bool Game::init(const char* title, int xpos, int ypos, int height, int width, bool fullscreen)
 {
