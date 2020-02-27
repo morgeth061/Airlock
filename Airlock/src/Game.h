@@ -5,6 +5,8 @@
 // Core Libraries
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include <thread>
 
 //SDL Libraries
 #include <SDL.h>
@@ -12,7 +14,11 @@
 // Game Managers
 #include "CollisionManager.h"
 
+//Enums
+#include "LevelNumber.h"
+
 // Game Objects
+#include "Level.h"
 #include "Enemy.h"
 #include "Target.h"
 #include "Minerals.h"
@@ -57,21 +63,28 @@ public:
 	void enemyAttack();
 	void objectPickUp();
 	void playerAttack();
+	void levelChange(int);
 
 	bool running()
 	{
 		return m_bRunning;
 	}
 
+	//Setters
+	void setCurrentLevel(int);
+	
 	//Getters
 	SDL_Renderer* getRenderer();
 	glm::vec2 getTargetPosition();
 	int getTargetHealth();
+	int getCurrentLevel();
 
 	//Game Objects
 	Target* m_pTarget;
 	vector <Enemy*> m_pEnemy;
 	vector <Minerals*> m_pMinerals;
+	
+	Level* levelPtr;
 
 	//Keystate Method
 	bool KeyDown(SDL_Scancode c);
@@ -102,8 +115,13 @@ private:
 	glm::vec2 m_mousePosition;
 	const Uint8* m_iKeystates;
 
+	//Private variables
+	int m_currentLevel;
+	bool isLoading;
+
 	//Private Methods
 	void createGameObjects();
+	void deleteGameObjects();
 };
 
 typedef Game TheGame;
