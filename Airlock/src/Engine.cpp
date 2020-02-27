@@ -1,8 +1,9 @@
 //includes
 #include "Engine.h"
 #include <iostream>
-#define WIDTH 1024
-#define HEIGHT 768
+#include "Game.h"
+#define WIDTH 1856
+#define HEIGHT 960
 #define FPS 60
 
 using namespace std;
@@ -153,6 +154,7 @@ FSM& Engine::GetFSM()
 {
 	return *m_pFSM;
 }
+
 
 
 void Engine::SetGameWon()

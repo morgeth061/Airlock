@@ -10,8 +10,7 @@ Enemy::Enemy()
 	Texture::Instance()->load("../Assets/textures/enemy1.png",
 		"Enemy", TheGame::Instance()->getRenderer());
 
-	levelSelect = Level();
-	levelPtr = levelSelect.getLevel();
+	levelPtr = Level::Instance()->getLevel();
 	levelArray = *levelPtr;
 
 	glm::vec2 size = Texture::Instance()->getTextureSize("Enemy");

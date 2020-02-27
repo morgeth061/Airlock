@@ -24,20 +24,9 @@ Target::Target()
 	//DEFAULT
 	m_playerSpawn = glm::vec2(384.0f, 768.0f);
 
-
 	//generates level & collision
-	m_levelSelect = Level();
-	m_levelPtr = m_levelSelect.getLevel();
+	m_levelPtr = Level::Instance()->getLevel();
 	m_levelArray = *m_levelPtr;
-
-	for (int i = 0; i < 15; i++)
-	{
-		for (int j = 0; j < 29; j++)
-		{
-			cout << &m_levelArray[i][j];
-		}
-		cout << endl;
-	}
 
 	//Player Init
 	glm::vec2 size = Texture::Instance()->getTextureSize("player");
@@ -105,9 +94,11 @@ void Target::update()
 	//m_rSrc.x = m_rSrc.w * static_cast<int>((SDL_GetTicks() / 500) % m_iFrameMax);
 
 	//cout << m_playerHealth << endl;
-	
+
+	//m_levelSelect.setLevel(Game::s_pInstance->getCurrentLevel());
 	m_move();
 	m_checkBounds();
+	
 
 }
 
@@ -145,7 +136,15 @@ void Target::m_move()
 	{
 		newPosition = getPosition() + getVelocity() * 0.9f;
 		setPosition(newPosition);
-		Engine::Instance().SetGameWon();
+
+		if(Game::Instance()->getCurrentLevel() == LEVEL1)
+		{
+			Game::Instance()->levelChange(LEVEL2);
+		}
+		else if(Game::Instance()->getCurrentLevel() == LEVEL2)
+		{
+			Engine::Instance().SetGameWon();
+		}
 	}
 }
 
