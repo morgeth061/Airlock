@@ -34,12 +34,19 @@ PauseState::PauseState() //ctor. of pause state
 void PauseState::Enter() //"on enter" for pause state
 {
 	cout << "Entering Pause State" << endl;
+	m_vButtons.push_back(new ResumeButton("../Assets/textures/resume.png", { 0,0,200,80 }, { 412,200,200,80 }));
+	// This exit button has a different size but SAME function as the one in title.
+	m_vButtons.push_back(new ExitButton("../Assets/textures/exit.png", { 0,0,400,100 }, { 412,400,200,80 }));
+
 }
 
 void PauseState::Update() //update for pause state
 {
 	if (Engine::Instance().KeyDown(SDL_SCANCODE_RETURN))
 		Engine::Instance().GetFSM().PopState();
+	for (int i = 0; i < (int)m_vButtons.size(); i++)
+		m_vButtons[i]->Update();
+
 }
 
 void PauseState::Render() //render for pause state
@@ -49,12 +56,23 @@ void PauseState::Render() //render for pause state
 	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), 0, 0, 255, 128);
 	SDL_Rect rect = { 256, 128, 512, 512 };
 	SDL_RenderFillRect(Engine::Instance().GetRenderer(), &rect);
+	for (int i = 0; i < (int)m_vButtons.size(); i++)
+		m_vButtons[i]->Render();
+
 	State::Render();
 }
 
 void PauseState::Exit() //"on exit" for pause state
 {
 	cout << "Exiting Pause..." << endl;
+	for (int i = 0; i < (int)m_vButtons.size(); i++)
+	{
+		delete m_vButtons[i];
+		m_vButtons[i] = nullptr;
+	}
+	m_vButtons.clear();
+	m_vButtons.shrink_to_fit();
+
 }
 //end of pause state
 
@@ -108,6 +126,7 @@ void GameState::Exit() //"on exit" for game state
 {
 	TheGame::Instance()->clean();
 	cout << "Exiting Game..." << endl;
+
 }
 
 void GameState::Resume() //on resume from pause
@@ -132,12 +151,17 @@ void TitleState::Enter() //"on enter" for title state
 	Texture::Instance()->load("../Assets/textures/Airlock_Logo.png", "title", Engine::Instance().GetRenderer());
 	Texture::Instance()->load("../Assets/textures/Background.png", "background", Engine::Instance().GetRenderer());
 	Texture::Instance()->load("../Assets/textures/Begin_Game.png", "begin", Engine::Instance().GetRenderer());
+	m_vButtons.push_back(new PlayButton("../Assets/textures/titlebutton.png", { 0,0,400,100 }, { 312,525,400,100 }));
+
 }
 
 void TitleState::Update() //update for title state
 {
 	if (Engine::Instance().KeyDown(SDL_SCANCODE_RETURN))
 		Engine::Instance().GetFSM().ChangeState(new GameState());
+	for (int i = 0; i < (int)m_vButtons.size(); i++)
+		m_vButtons[i]->Update();
+
 }
 
 void TitleState::Render() //render for title state
@@ -147,12 +171,22 @@ void TitleState::Render() //render for title state
 	Texture::Instance()->draw("background", 0, 0, Engine::Instance().GetRenderer(), false);
 	Texture::Instance()->draw("title", (1028/2)-7, 768/3, Engine::Instance().GetRenderer(), true);
 	Texture::Instance()->draw("begin", 1028 / 2, 768 / 2, Engine::Instance().GetRenderer(), true);
+	for (int i = 0; i < (int)m_vButtons.size(); i++)
+		m_vButtons[i]->Render();
 	State::Render();
 }
 
 void TitleState::Exit() //"on exit" for title state
 {
 	cout << "Exiting Title..." << endl;
+	for (int i = 0; i < (int)m_vButtons.size(); i++)
+	{
+		delete m_vButtons[i];
+		m_vButtons[i] = nullptr;
+	}
+	m_vButtons.clear();
+	m_vButtons.shrink_to_fit();
+
 }
 // End TitleState.
 

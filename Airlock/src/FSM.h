@@ -6,6 +6,7 @@
  */
 #pragma once
 #include <vector>
+#include "Button.h"
 using namespace std;
 
 class State // Abstract base class.
@@ -22,6 +23,8 @@ public:
 
 class PauseState : public State
 {
+private:
+	vector<Button*> m_vButtons;
 public:
 	PauseState();
 	void Enter();
@@ -32,6 +35,8 @@ public:
 
 class GameState : public State
 {
+private:
+	vector<Button*> m_vButtons;
 public:
 	GameState();
 	void Enter();
@@ -43,6 +48,8 @@ public:
 
 class TitleState : public State
 {
+private:
+	vector<Button*> m_vButtons;
 public:
 	TitleState();
 	void Enter();
