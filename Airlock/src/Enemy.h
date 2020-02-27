@@ -35,7 +35,6 @@ public:
 	Enemy();
 	~Enemy();
 
-	Level levelSelect;
 	array_type* levelPtr;
 	array_type levelArray;
 

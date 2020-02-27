@@ -10,8 +10,8 @@
 //Defines
 #define FPS 60
 
-const int numofEnemies = 3;
-const int numofMinerals = 2;
+int numofEnemies = 3;
+int numofMinerals = 2;
 
 //Singleton
 Game* Game::s_pInstance = 0;
@@ -20,6 +20,19 @@ Game* Game::s_pInstance = 0;
 glm::vec2 Game::getTargetPosition()
 {
 	return m_pTarget->getPosition();
+}
+
+int Game::getCurrentLevel()
+{
+	return m_currentLevel;
+}
+
+void Game::setCurrentLevel(int level)
+{
+	m_currentLevel = level;
+	Level::Instance()->setLevel(level);
+
+	cout << "SET LEVEL TO " << level << endl;
 }
 
 //Returns renderer
@@ -33,6 +46,10 @@ Game::Game()
 {
 	bulletFrame = 0;
 	bulletFrameMax = 120;
+	isLoading = false;
+
+	setCurrentLevel(LEVEL1);
+	cout << "CTOR" << endl;
 }
 
 //de-ctor.
@@ -44,46 +61,109 @@ Game::~Game()
 void Game::createGameObjects()
 {
 
-	//**********
-	//LEVEL 1
-	//**********
-	
-	//Creates enemies for Level 1
-	for (int count = 0; count < numofEnemies; count++)
-	{
-		m_pEnemy.push_back(new Enemy());
-	}
+	cout << "CREATING GAME OBJECTS" << endl;
 
-	m_pEnemy[0]->setEnemySpawn(glm::vec2(384.0f, 320.0f));
-	m_pEnemy[1]->setEnemySpawn(glm::vec2(960.0f, 480.0f));
-	m_pEnemy[2]->setEnemySpawn(glm::vec2(1472.0f, 640.0f));
+	if(getCurrentLevel() == LEVEL1)
+	{
+		numofEnemies = 3;
+		
+		//Creates enemies for Level 1
+		for (int count = 0; count < numofEnemies; count++)
+		{
+			m_pEnemy.push_back(new Enemy());
+			cout << "LEVEL 1 NEW ENEMY" << endl;
+		}
+
+		m_pEnemy[0]->setEnemySpawn(glm::vec2(384.0f, 320.0f));
+		m_pEnemy[1]->setEnemySpawn(glm::vec2(960.0f, 480.0f));
+		m_pEnemy[2]->setEnemySpawn(glm::vec2(1472.0f, 640.0f));
+
+		numofMinerals = 2;
+		//Creates minerals for Level 1
+		for (int count = 0; count < numofMinerals; count++)
+		{
+			m_pMinerals.push_back(new Minerals);
+		}
+
+		m_pMinerals[0]->setSpawnPoint(glm::vec2(384.0f, 192.0f));
+		m_pMinerals[1]->setSpawnPoint(glm::vec2(1472.0f, 832.0f));
+
+		//Set Speed for Enemies
+		m_pEnemy[0]->setMaxSpeed(0.40f);
+		m_pEnemy[1]->setMaxSpeed(0.50f);
+		m_pEnemy[2]->setMaxSpeed(0.60f);
+	}
+	else if (getCurrentLevel() == LEVEL2)
+	{
+		numofEnemies = 4;
+		
+		//Creates enemies for Level 2
+		for (int count = 0; count < numofEnemies; count++)
+		{
+			m_pEnemy.push_back(new Enemy());
+			cout << "LEVEL 2 NEW ENEMY" << endl;
+		}
+
+		m_pEnemy[0]->setEnemySpawn(glm::vec2(544.0f, 800.0f));
+		m_pEnemy[1]->setEnemySpawn(glm::vec2(874.0f, 544.0f));
+		m_pEnemy[2]->setEnemySpawn(glm::vec2(1312.0f, 544.0f));
+		m_pEnemy[3]->setEnemySpawn(glm::vec2(1760.0f, 544.0f));
+
+		numofMinerals = 2;
+		//Creates minerals for Level 2
+		for (int count = 0; count < numofMinerals; count++)
+		{
+			m_pMinerals.push_back(new Minerals);
+		}
+
+		m_pMinerals[0]->setSpawnPoint(glm::vec2(384.0f, 192.0f));
+		m_pMinerals[1]->setSpawnPoint(glm::vec2(1472.0f, 832.0f));
+
+		//Set Speed for Enemies
+		m_pEnemy[0]->setMaxSpeed(0.40f);
+		m_pEnemy[1]->setMaxSpeed(0.50f);
+		m_pEnemy[2]->setMaxSpeed(0.60f);
+	}
+	
+	
 
 	for (auto enemies : m_pEnemy)
 	{
 		enemies->setPosition(enemies->getEnemySpawn());
 	}
 
-	//Creates minerals for Level 1
-	for (int count = 0; count < numofMinerals; count++)
-	{
-		m_pMinerals.push_back(new Minerals);
-	}
-
-	m_pMinerals[0]->setSpawnPoint(glm::vec2(384.0f, 192.0f));
-	m_pMinerals[1]->setSpawnPoint(glm::vec2(1472.0f, 832.0f));
-
 	for (auto minerals : m_pMinerals)
 	{
 		minerals->setPosition(minerals->getSpawnPoint());
 	}
 
-	//Set Speed for Enemies
-	m_pEnemy[0]->setMaxSpeed(0.40f);
-	m_pEnemy[1]->setMaxSpeed(0.50f);
-	m_pEnemy[2]->setMaxSpeed(0.60f);
-
 	//Creates player
 	m_pTarget = new Target();
+}
+
+void Game::deleteGameObjects()
+{
+	m_pTarget = nullptr;
+
+	for (int count = 0; count < numofEnemies; count++)
+	{
+		delete Instance()->m_pEnemy[count];
+		Instance()->m_pEnemy[count] = nullptr;
+	}
+	m_pEnemy.erase(remove(m_pEnemy.begin(), m_pEnemy.end(), nullptr), m_pEnemy.end());
+	m_pEnemy.shrink_to_fit();
+	numofEnemies = 0;
+
+	for (int count = 0; count < numofMinerals; count++)
+	{
+		delete Instance()->m_pMinerals[count];
+		Instance()->m_pMinerals[count] = nullptr;
+	}
+	m_pMinerals.erase(remove(m_pMinerals.begin(), m_pMinerals.end(), nullptr), m_pMinerals.end());
+	m_pMinerals.shrink_to_fit();
+	Instance()->m_pMinerals.shrink_to_fit();
+	numofMinerals = 0;
+
 }
 
 //Game Initialization
@@ -145,34 +225,48 @@ void Game::render()
 {
 	SDL_RenderClear(m_pRenderer);
 
-	//**********
-	//LEVEL 1
-	//**********
+	if(isLoading == true)
+	{
+		Texture::Instance()->draw("loadingScreen", 0, 0, TheGame::Instance()->getRenderer(), false);
+	}
+	else if(isLoading == false)
+	{
+		if (getCurrentLevel() == LEVEL1)
+		{
+			Texture::Instance()->draw("Level1", 0, 0, TheGame::Instance()->getRenderer(), false);
+		}
+		else if (getCurrentLevel() == LEVEL2)
+		{
+			Texture::Instance()->draw("Level2", 0, 0, TheGame::Instance()->getRenderer(), false);
+		}
+
+		//Draw Health Bar
+		Texture::Instance()->draw("playerHealthBack", 0, 0, TheGame::Instance()->getRenderer(), false);
+		Texture::Instance()->draw("playerHealthBar", 100, 12, m_pTarget->getPlayerHealth() * 4, 40, TheGame::Instance()->getRenderer());
+
+		//Draw Inventory
+		Texture::Instance()->draw("playerInv", 715, 875, TheGame::Instance()->getRenderer(), false);
+		Texture::Instance()->draw("playerInvSelected", 715 + (64 * (m_pTarget->getInvIndex())), 875, TheGame::Instance()->getRenderer(), false);
+
+		//Draw player
+		m_pTarget->draw();
+
+		//Draw Bullets
+		for (int i = 0; i < BullVec.size(); i++)
+			BullVec[i]->render();
+
+		//Draw Enemies
+		for (auto enemies : m_pEnemy)
+			enemies->draw();
+
+		//Draw Minerals
+		for (auto minerals : m_pMinerals)
+			minerals->draw();
+	}
+
 	
-	Texture::Instance()->draw("Level1", 0, 0, TheGame::Instance()->getRenderer(), false);
+	
 
-	//Draw Health Bar
-	Texture::Instance()->draw("playerHealthBack", 0, 0, TheGame::Instance()->getRenderer(), false);
-	Texture::Instance()->draw("playerHealthBar", 100, 12, m_pTarget->getPlayerHealth() * 4, 40, TheGame::Instance()->getRenderer());
-
-	//Draw Inventory
-	Texture::Instance()->draw("playerInv", 715, 875, TheGame::Instance()->getRenderer(), false);
-	Texture::Instance()->draw("playerInvSelected", 715 + (64 * (m_pTarget->getInvIndex())), 875, TheGame::Instance()->getRenderer(), false);
-
-	//Draw player
-	m_pTarget->draw();
-
-	//Draw Bullets
-	for (int i = 0; i < BullVec.size(); i++)
-		BullVec[i]->render();
-
-	//Draw Enemies
-	for (auto enemies : m_pEnemy)
-		enemies->draw();
-
-	//Draw Minerals
-	for (auto minerals : m_pMinerals)
-		minerals->draw();
 
 	//Draw to the screen
 	SDL_RenderPresent(m_pRenderer);
@@ -325,6 +419,17 @@ void Game::playerAttack()
 
 	}
 	
+}
+
+void Game::levelChange(int newLevel)
+{
+	deleteGameObjects();
+	setCurrentLevel(newLevel);
+	isLoading = true;
+	render();
+	this_thread::sleep_for(chrono::milliseconds(1500));
+	isLoading = false;
+	createGameObjects();
 }
 
 //Checks for keyboard/mouse input

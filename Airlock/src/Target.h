@@ -14,7 +14,6 @@ public:
 	~Target();
 
 	//Level Attributes
-	Level m_levelSelect;
 	array_type* m_levelPtr;
 	array_type m_levelArray;
 
@@ -64,6 +63,8 @@ private:
 	//Private Methods
 	void m_move();
 	void m_checkBounds();
+
+	//Game Instance
 
 	//Private Attributes
 	int m_playerHealth;
