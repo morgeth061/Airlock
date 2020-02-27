@@ -63,6 +63,9 @@ void Game::createGameObjects()
 
 	cout << "CREATING GAME OBJECTS" << endl;
 
+	//Creates player
+	m_pTarget = new Target();
+
 	if(getCurrentLevel() == LEVEL1)
 	{
 		numofEnemies = 3;
@@ -92,6 +95,8 @@ void Game::createGameObjects()
 		m_pEnemy[0]->setMaxSpeed(0.40f);
 		m_pEnemy[1]->setMaxSpeed(0.50f);
 		m_pEnemy[2]->setMaxSpeed(0.60f);
+
+		m_pTarget->setPlayerSpawn(glm::vec2(384.0f, 768.0f));
 	}
 	else if (getCurrentLevel() == LEVEL2)
 	{
@@ -104,25 +109,29 @@ void Game::createGameObjects()
 			cout << "LEVEL 2 NEW ENEMY" << endl;
 		}
 
-		m_pEnemy[0]->setEnemySpawn(glm::vec2(544.0f, 800.0f));
-		m_pEnemy[1]->setEnemySpawn(glm::vec2(874.0f, 544.0f));
-		m_pEnemy[2]->setEnemySpawn(glm::vec2(1312.0f, 544.0f));
-		m_pEnemy[3]->setEnemySpawn(glm::vec2(1760.0f, 544.0f));
+		m_pEnemy[0]->setEnemySpawn(glm::vec2(512.0f, 768.0f));
+		m_pEnemy[1]->setEnemySpawn(glm::vec2(842.0f, 512.0f));
+		m_pEnemy[2]->setEnemySpawn(glm::vec2(1280.0f, 512.0f));
+		m_pEnemy[3]->setEnemySpawn(glm::vec2(1728.0f, 512.0f));
 
-		numofMinerals = 2;
+		numofMinerals = 3;
 		//Creates minerals for Level 2
 		for (int count = 0; count < numofMinerals; count++)
 		{
 			m_pMinerals.push_back(new Minerals);
 		}
 
-		m_pMinerals[0]->setSpawnPoint(glm::vec2(384.0f, 192.0f));
-		m_pMinerals[1]->setSpawnPoint(glm::vec2(1472.0f, 832.0f));
+		m_pMinerals[0]->setSpawnPoint(glm::vec2(512.0f, 256.0f));
+		m_pMinerals[1]->setSpawnPoint(glm::vec2(970.0f, 768.0f));
+		m_pMinerals[2]->setSpawnPoint(glm::vec2(1728.0f, 256.0f));
 
 		//Set Speed for Enemies
 		m_pEnemy[0]->setMaxSpeed(0.40f);
 		m_pEnemy[1]->setMaxSpeed(0.50f);
 		m_pEnemy[2]->setMaxSpeed(0.60f);
+		m_pEnemy[3]->setMaxSpeed(0.60f);
+
+		m_pTarget->setPlayerSpawn(glm::vec2(64.0f, 512.0f));
 	}
 	
 	
@@ -137,33 +146,37 @@ void Game::createGameObjects()
 		minerals->setPosition(minerals->getSpawnPoint());
 	}
 
-	//Creates player
-	m_pTarget = new Target();
+	m_pTarget->setPosition(m_pTarget->getPlayerSpawn());
 }
 
 void Game::deleteGameObjects()
 {
 	m_pTarget = nullptr;
 
-	for (int count = 0; count < numofEnemies; count++)
+	if(m_pEnemy.empty() == false)
 	{
-		delete Instance()->m_pEnemy[count];
-		Instance()->m_pEnemy[count] = nullptr;
+		for (int count = 0; count < numofEnemies; count++)
+		{
+			delete Instance()->m_pEnemy[count];
+			Instance()->m_pEnemy[count] = nullptr;
+		}
+		m_pEnemy.erase(remove(m_pEnemy.begin(), m_pEnemy.end(), nullptr), m_pEnemy.end());
+		m_pEnemy.shrink_to_fit();
+		numofEnemies = 0;
 	}
-	m_pEnemy.erase(remove(m_pEnemy.begin(), m_pEnemy.end(), nullptr), m_pEnemy.end());
-	m_pEnemy.shrink_to_fit();
-	numofEnemies = 0;
-
-	for (int count = 0; count < numofMinerals; count++)
+	
+	if(m_pMinerals.empty() == false)
 	{
-		delete Instance()->m_pMinerals[count];
-		Instance()->m_pMinerals[count] = nullptr;
+		for (int count = 0; count < numofMinerals; count++)
+		{
+			delete Instance()->m_pMinerals[count];
+			Instance()->m_pMinerals[count] = nullptr;
+		}
+		m_pMinerals.erase(remove(m_pMinerals.begin(), m_pMinerals.end(), nullptr), m_pMinerals.end());
+		m_pMinerals.shrink_to_fit();
+		Instance()->m_pMinerals.shrink_to_fit();
+		numofMinerals = 0;
 	}
-	m_pMinerals.erase(remove(m_pMinerals.begin(), m_pMinerals.end(), nullptr), m_pMinerals.end());
-	m_pMinerals.shrink_to_fit();
-	Instance()->m_pMinerals.shrink_to_fit();
-	numofMinerals = 0;
-
 }
 
 bool Game::init()
@@ -171,60 +184,6 @@ bool Game::init()
 	m_pRenderer = Engine::Instance().GetRenderer();
 	createGameObjects();
 	m_bRunning = true;
-	return true;
-}
-
-//Game Initialization
-bool Game::init(const char* title, int xpos, int ypos, int height, int width, bool fullscreen)
-{
-	int flags = 0;
-
-	if (fullscreen)
-	{
-		flags = SDL_WINDOW_FULLSCREEN;
-	}
-
-	// initialize SDL
-	if (SDL_Init(SDL_INIT_EVERYTHING) >= 0)
-	{
-		std::cout << "SDL Init success" << std::endl;
-
-		// if succeeded create our window
-		m_pWindow = SDL_CreateWindow(title, xpos, ypos, height, width, flags);
-
-		// if window creation successful create our renderer
-		if (m_pWindow != 0)
-		{
-			std::cout << "window creation success" << std::endl;
-			m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
-
-			if (m_pRenderer != 0) // render init success
-			{
-				std::cout << "renderer creation success" << std::endl;
-				SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
-			}
-			else
-			{
-				std::cout << "renderer init failure" << std::endl;
-				return false; // render int fail
-			}
-			createGameObjects();
-		}
-		else
-		{
-			std::cout << "window init failure" << std::endl;
-			return false; // window init fail
-		}
-	}
-	else
-	{
-		std::cout << "SDL init failure" << std::endl;
-		return false; //SDL could not intialize
-	}
-
-	std::cout << "init success" << std::endl;
-	m_bRunning = true; // everything initialized successfully - start the main loop
-
 	return true;
 }
 
@@ -248,17 +207,6 @@ void Game::render()
 			Texture::Instance()->draw("Level2", 0, 0, TheGame::Instance()->getRenderer(), false);
 		}
 
-		//Draw Health Bar
-		Texture::Instance()->draw("playerHealthBack", 0, 0, TheGame::Instance()->getRenderer(), false);
-		Texture::Instance()->draw("playerHealthBar", 100, 12, m_pTarget->getPlayerHealth() * 4, 40, TheGame::Instance()->getRenderer());
-
-		//Draw Inventory
-		Texture::Instance()->draw("playerInv", 715, 875, TheGame::Instance()->getRenderer(), false);
-		Texture::Instance()->draw("playerInvSelected", 715 + (64 * (m_pTarget->getInvIndex())), 875, TheGame::Instance()->getRenderer(), false);
-
-		//Draw player
-		m_pTarget->draw();
-
 		//Draw Bullets
 		for (int i = 0; i < BullVec.size(); i++)
 			BullVec[i]->render();
@@ -270,6 +218,17 @@ void Game::render()
 		//Draw Minerals
 		for (auto minerals : m_pMinerals)
 			minerals->draw();
+
+		//Draw player
+		m_pTarget->draw();
+		
+		//Draw Health Bar
+		Texture::Instance()->draw("playerHealthBack", 0, 0, TheGame::Instance()->getRenderer(), false);
+		Texture::Instance()->draw("playerHealthBar", 100, 12, m_pTarget->getPlayerHealth() * 4, 40, TheGame::Instance()->getRenderer());
+
+		//Draw Inventory
+		Texture::Instance()->draw("playerInv", 715, 875, TheGame::Instance()->getRenderer(), false);
+		Texture::Instance()->draw("playerInvSelected", 715 + (64 * (m_pTarget->getInvIndex())), 875, TheGame::Instance()->getRenderer(), false);
 	}
 
 	
@@ -463,6 +422,8 @@ void Game::handleEvents()
 		{
 		case SDL_QUIT:
 			m_bRunning = false;
+			clean();
+			exit(EXIT_SUCCESS);
 			break;
 		case SDL_MOUSEMOTION:
 			m_mousePosition.x = event.motion.x;

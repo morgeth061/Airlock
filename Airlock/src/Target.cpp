@@ -22,7 +22,6 @@ Target::Target()
 
 	//Set Player Spawn
 	//DEFAULT
-	m_playerSpawn = glm::vec2(384.0f, 768.0f);
 
 	//generates level & collision
 	m_levelPtr = Level::Instance()->getLevel();
@@ -59,6 +58,7 @@ void Target::draw()
 {
 	int xComponent = getPosition().x;
 	int yComponent = getPosition().y;
+	Texture::Instance()->draw("playerCircle", xComponent, yComponent, Engine::Instance().GetRenderer(), true);
 	Texture::Instance()->drawFrame("player", xComponent - 64, yComponent - 64, 128, 128, 1, m_iFrame, TheGame::Instance()->getRenderer(), getFlip());
 }
 
