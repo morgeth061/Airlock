@@ -41,11 +41,7 @@ public:
 	}
 
 	//Init method
-	void init()
-	{
-		//Simply set the running variable to true
-		m_bRunning = true;
-	}
+	bool init();
 	
 	bool init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 
