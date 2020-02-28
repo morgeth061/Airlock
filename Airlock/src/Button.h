@@ -34,6 +34,38 @@ public:
 	MenuButton(const char* s, SDL_Rect src, SDL_Rect dst);
 };
 
+class LevelSelectButton : public Button
+{
+private:
+	void Execute();
+public:
+	LevelSelectButton(const char* s, SDL_Rect src, SDL_Rect dst);
+};
+
+class Level1Button : public Button
+{
+private:
+	void Execute();
+public:
+	Level1Button(const char* s, SDL_Rect src, SDL_Rect dst);
+};
+
+class Level2Button : public Button
+{
+private:
+	void Execute();
+public:
+	Level2Button(const char* s, SDL_Rect src, SDL_Rect dst);
+};
+
+class Level3Button : public Button
+{
+private:
+	void Execute();
+public:
+	Level3Button(const char* s, SDL_Rect src, SDL_Rect dst);
+};
+
 
 class ExitButton : public Button
 {

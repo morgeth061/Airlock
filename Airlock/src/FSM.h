@@ -58,6 +58,18 @@ public:
 	void Exit();
 };
 
+class LevelSelectState : public State
+{
+private:
+	vector<Button*> m_vButtons;
+public:
+	LevelSelectState();
+	void Enter();
+	void Update();
+	void Render();
+	void Exit();
+};
+
 class FSM
 {
 private:

@@ -78,6 +78,30 @@ void MenuButton::Execute()
 	Engine::Instance().GetFSM().ChangeState(new TitleState());
 }
 
+LevelSelectButton::LevelSelectButton(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
+void LevelSelectButton::Execute()
+{
+	Engine::Instance().GetFSM().ChangeState(new LevelSelectState());
+}
+
+Level1Button::Level1Button(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
+void Level1Button::Execute()
+{
+	Engine::Instance().GetFSM().ChangeState(new GameState());
+}
+
+Level2Button::Level2Button(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
+void Level2Button::Execute()
+{
+	Engine::Instance().GetFSM().ChangeState(new GameState());
+}
+
+Level3Button::Level3Button(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
+void Level3Button::Execute()
+{
+	Engine::Instance().GetFSM().ChangeState(new GameState());
+}
+
 ExitButton::ExitButton(const char * s, SDL_Rect src, SDL_Rect dst):Button(s, src, dst){}
 void ExitButton::Execute()
 {
