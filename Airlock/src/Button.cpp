@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Button.h"
 #include "Engine.h"
+#include "Game.h"
 #include "SDL.h"
 #include "SDL_image.h"
 
@@ -93,12 +94,14 @@ void Level1Button::Execute()
 Level2Button::Level2Button(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
 void Level2Button::Execute()
 {
+	Game::Instance()->setCurrentLevel(LEVEL2);
 	Engine::Instance().GetFSM().ChangeState(new GameState());
 }
 
 Level3Button::Level3Button(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
 void Level3Button::Execute()
 {
+	Game::Instance()->setCurrentLevel(LEVEL3);
 	Engine::Instance().GetFSM().ChangeState(new GameState());
 }
 
