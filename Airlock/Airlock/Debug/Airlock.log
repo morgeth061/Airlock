@@ -1,0 +1,47 @@
+﻿  Enemy.cpp
+D:\School\Github\Airlock\Airlock\src\Enemy.cpp(25,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Enemy.cpp(26,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Enemy.cpp(55,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Enemy.cpp(56,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Enemy.cpp(101,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Enemy.cpp(102,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Enemy.cpp(107,38): warning C4244: 'argument': conversion from 'T' to 'std::array<row_type,15>::size_type', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Enemy.cpp(108,40): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\School\Github\Airlock\Airlock\src\Enemy.cpp(109,40): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Airlock.vcxproj -> D:\School\Github\Airlock\Airlock\Debug\Airlock.exe
