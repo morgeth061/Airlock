@@ -1,18 +1,26 @@
+/*
+Enemy Class
+- deals with all enemy functionality
+*/
+
+
 #include "Enemy.h"
 #include "Game.h"
 #include "Util.h"
 #include "GLM/gtx/rotate_vector.hpp"
 #include "Engine.h"
 
-
+//Enemy Ctor
 Enemy::Enemy()
 {
 	Texture::Instance()->load("../Assets/textures/enemy1.png",
 		"Enemy", TheGame::Instance()->getRenderer());
 
+//Generates level and level collision
 	levelPtr = Level::Instance()->getLevel();
 	levelArray = *levelPtr;
 
+// Enemy Init
 	glm::vec2 size = Texture::Instance()->getTextureSize("Enemy");
 	setWidth(size.x);
 	setHeight(size.y);
@@ -36,11 +44,12 @@ Enemy::Enemy()
 	setEnemyDeath(false);
 }
 
-
+//Enemy De-Ctor
 Enemy::~Enemy()
 {
 }
 
+// Enemy draw to buffer
 void Enemy::draw()
 {
 	int xComponent = getPosition().x;
@@ -49,6 +58,7 @@ void Enemy::draw()
 	Texture::Instance()->draw("Enemy", xComponent, yComponent, TheGame::Instance()->getRenderer(), m_currentDirection, 255, true);
 }
 
+//Checks steering state of the enemy(Either seek or idle)
 void Enemy::m_checkState()
 {
 	switch (getSteeringState())
@@ -64,24 +74,27 @@ void Enemy::m_checkState()
 	}
 }
 
+// Enemy Update
 void Enemy::update()
 {
 	m_checkState();
 }
 
+//Clean on Exit
 void Enemy::clean()
 {
 }
 
+//Enemy Right-Turn
 void Enemy::turnRight()
 {
 
 }
-
+// Enemy Left-Turn
 void Enemy::turnLeft()
 {
 }
-
+// Enemy Movement
 void Enemy::m_move()
 {
 	glm::vec2 newPosition = getPosition() + getVelocity() * m_maxSpeed;
@@ -96,29 +109,27 @@ void Enemy::m_move()
 	}
 	setPosition(newPosition);
 }
-
+// Enemy Target Getter
 glm::vec2 Enemy::getTarget()
 {
 	return m_target;
 }
-
+//Enemy Max Speed Getter
 float Enemy::getMaxSpeed()
 {
 	return m_maxSpeed;
 }
-
-
-
+// Enemy Max Speed Setter
 void Enemy::setMaxSpeed(float newMaxSpeed)
 {
 	m_maxSpeed = newMaxSpeed;
 }
-
+// Enemy Target Setter
 void Enemy::setTarget(glm::vec2 newTarget)
 {
 	m_target = newTarget;
 }
-
+// Checks if Enemy is out of the window boarders
 void Enemy::m_checkBounds()
 {
 
@@ -143,6 +154,7 @@ void Enemy::m_checkBounds()
 	}
 }
 
+// Enemy Reset
 void Enemy::m_reset()
 {
 	setEnemyHealth(100);
@@ -151,7 +163,7 @@ void Enemy::m_reset()
 	setIsColliding(false);
 }
 
-
+// Seek State for enemy
 void Enemy::m_seek()
 {
 
@@ -161,7 +173,7 @@ void Enemy::m_seek()
 	setVelocity(steeringVelocity);
 }
 
-
+// Checking if the Enemy is at the enemy
 void Enemy::m_checkArrival()
 {
 	if (getSteeringState() != IDLE)
@@ -172,48 +184,53 @@ void Enemy::m_checkArrival()
 		}
 	}
 }
+// Enemy Health Getter
 int Enemy::getEnemyHealth()
 {
 	return m_enemyHealth;
 }
-
+// Enemy Name Getter
 string Enemy::getEnemyName()
 {
 	return m_enemyName;
 }
 
+// Enemy Attack Damage Getter
 int Enemy::getEnemyAtkDmg()
 {
 	return m_enemyAtkDmg;
 }
+// Enemy Death Getter
 bool Enemy::getEnemyDeath()
 {
 	return m_enemyDeath;
 }
-
+// Enemy Spawnpoint Getter
 glm::vec2 Enemy::getEnemySpawn()
 {
 	return m_enemySpawnPoint;
 }
-
+// Enemy Health Setter
 void Enemy::setEnemyHealth(int health)
 {
 	m_enemyHealth = health;
 }
+// Enemy Name Setter
 void Enemy::setEnemyName(string name)
 {
 	m_enemyName = name;
 }
+// Enemy Attack Damage Setter
 void Enemy::setEnemyAtkDmg(int damage)
 {
 	m_enemyAtkDmg = damage;
 }
-
+// Enemy Death Setter
 void Enemy::setEnemyDeath(bool death)
 {
 	m_enemyDeath = death;
 }
-
+// Enemy Spawnpoint Setter
 void Enemy::setEnemySpawn(glm::vec2 spawn)
 {
 	m_enemySpawnPoint = spawn;
