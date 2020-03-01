@@ -41,7 +41,7 @@ Target::Target()
 
 	//Set up health, name, and attack damage
 	setPlayerName("Astro");
-	setPlayerHealth(250);
+	setPlayerHealth(100);
 	setPlayerAtkDmg(50);
 	setPlayerDeath(false);
 	setInvIndex(0);
@@ -189,7 +189,7 @@ void Target::m_checkBounds()
 void Target::m_reset()
 {
 	setPlayerDeath(false);
-	setPlayerHealth(250);
+	setPlayerHealth(100);
 	setPosition(getPlayerSpawn());
 	setIsColliding(false);
 }
@@ -198,6 +198,12 @@ void Target::m_reset()
 void Target::setPlayerHealth(int health)
 {
 	m_playerHealth = health;
+}
+
+//Setter for player score
+void Target::setPlayerScore(int score)
+{
+	playerScore = score;
 }
 
 //Setter for player's inventory index
@@ -245,6 +251,12 @@ void Target::m_playerKilled()
 int Target::getPlayerHealth()
 {
 	return m_playerHealth;
+}
+
+//Getter for player score
+int Target::getPlayerScore()
+{
+	return playerScore;
 }
 
 //Getter for player's inventory index

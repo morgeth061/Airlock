@@ -114,6 +114,7 @@ private:
 	//Private variables
 	int m_currentLevel;
 	bool isLoading;
+	bool canShoot;
 
 	//Private Methods
 	void createGameObjects();
