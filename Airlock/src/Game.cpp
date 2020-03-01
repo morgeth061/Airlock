@@ -47,6 +47,7 @@ Game::Game()
 	bulletFrame = 0;
 	bulletFrameMax = 120;
 	isLoading = false;
+	canShoot = true;
 
 	setCurrentLevel(LEVEL1);
 	cout << "CTOR" << endl;
@@ -315,6 +316,7 @@ void Game::update()
 			minerals->m_reset();
 		}
 	}
+	cout << "Player Score: " << m_pTarget->getPlayerScore() << endl;
 }
 
 //Clean game on exit
@@ -350,7 +352,8 @@ void Game::objectPickUp()
 		if (Collision::squaredRadiusCheck(m_pTarget, minerals, 0.25f))
 		{
 			//testing player's health functions (will remove in future updates)
-			m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth() + 50);
+			m_pTarget->setPlayerHealth(100);
+			m_pTarget->setPlayerScore(m_pTarget->getPlayerScore() + 500);
 			cout << "GAINED: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
 
 		}
@@ -379,6 +382,8 @@ void Game::playerAttack()
 					m_bENull = true;
 					delete m_pEnemy[j];
 					m_pEnemy[j] = nullptr;
+
+					m_pTarget->setPlayerScore(m_pTarget->getPlayerScore() + 100);
 				}
 				break;
 			}
@@ -390,6 +395,8 @@ void Game::playerAttack()
 
 void Game::levelChange(int newLevel)
 {
+	m_pTarget->setPlayerScore((m_pTarget->getPlayerScore()) + (m_pTarget->getPlayerHealth()));
+
 	deleteGameObjects();
 	setCurrentLevel(newLevel);
 	isLoading = true;
@@ -514,8 +521,12 @@ void Game::handleEvents()
 			case SDLK_SPACE:
 				if (bulletFrame == bulletFrameMax)
 				{
-					BullVec.push_back(new Bullet({0,0,10,10}, {(int)m_pTarget->getPosition().x,(int)m_pTarget->getPosition().y,10,10 }, 30));
-					bulletFrame = 0;
+					if (canShoot)
+					{
+						BullVec.push_back(new Bullet({ 0,0,10,10 }, { (int)m_pTarget->getPosition().x,(int)m_pTarget->getPosition().y,10,10 }, 30));
+						bulletFrame = 0;
+						canShoot = false;
+					}
 				}
 			}
 			break;
@@ -549,6 +560,8 @@ void Game::handleEvents()
 					m_pTarget->SetIdle();
 				}
 				break;
+			case SDLK_SPACE:
+				canShoot = true;
 			}
 		default:
 			m_pTarget->animate();
