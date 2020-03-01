@@ -14,16 +14,35 @@ class Level
 {
 private:
 	array_type m_pLevel1Array;
+	array_type m_pLevel2Array;
 	array_type m_pLevelPtr;
 
-public:
+	//Singleton
+	static Level* s_pInstance;
+
 	//ctor.
 	Level();
 	//de-ctor.
 	~Level();
 
-	//setters
+public:
 
+	//Singleton
+	static Level* Instance()
+	{
+		if (s_pInstance == 0)
+		{
+			s_pInstance = new Level();
+			return s_pInstance;
+		}
+
+		return s_pInstance;
+	}
+	
+	
+
+	//setters
+	void setLevel(int);
 	//getters
 	array_type* getLevel();
 	

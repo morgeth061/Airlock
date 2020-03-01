@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class Bullet
+class Bullet : public GameObject
 {
 public:
 	bool active = true;
@@ -16,15 +16,20 @@ public:
 	static const int speed = 1;
 	bool headRight;
 
+
+	int m_bulletDmg;
+
 public:
-	Bullet(int x, int y);
+	Bullet(SDL_Rect s, SDL_Rect d, int spd);
 	~Bullet();
 	void update();
 	void render();
 	void clean();
+	void draw() override;
+
+	void setBulletDmg(int);
+	int getBulletDmg();
+
 };
-
-
-
 
 #endif

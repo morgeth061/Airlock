@@ -14,7 +14,6 @@ public:
 	~Target();
 
 	//Level Attributes
-	Level m_levelSelect;
 	array_type* m_levelPtr;
 	array_type m_levelArray;
 
@@ -29,6 +28,7 @@ public:
 
 	//Setters
 	void setPlayerHealth(int);
+	void setPlayerScore(int);
 	void setInvIndex(short);
 	void setPlayerName(string);
 	void setPlayerAtkDmg(int);
@@ -40,6 +40,7 @@ public:
 
 	//Getters
 	int getPlayerHealth();
+	int getPlayerScore();
 	short getInvIndex();
 	string getPlayerName();
 	int getPlayerAtkDmg();
@@ -65,8 +66,11 @@ private:
 	void m_move();
 	void m_checkBounds();
 
+	//Game Instance
+
 	//Private Attributes
 	int m_playerHealth;
+	int playerScore;
 	short m_invIndex;
 	string m_playerName;
 	int m_playerAtkDmg;

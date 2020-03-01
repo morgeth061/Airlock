@@ -22,7 +22,6 @@ private:
 	void m_checkState();
 	void m_checkBounds();
 
-	
 	void m_checkArrival();
 
 	// steering behaviours
@@ -36,7 +35,6 @@ public:
 	Enemy();
 	~Enemy();
 
-	Level levelSelect;
 	array_type* levelPtr;
 	array_type levelArray;
 

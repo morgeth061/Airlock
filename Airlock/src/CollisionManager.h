@@ -13,8 +13,8 @@ class CollisionManager
 {
 public:
 	static int squaredDistance(glm::vec2 P1, glm::vec2 P2);
-	static bool squaredRadiusCheck(GameObject* object1, GameObject* object2);
-	static bool squaredRadiusCheckObjects(GameObject* object1, GameObject* object2);
+	static bool squaredRadiusCheck(GameObject* object1, GameObject* object2, float distance);
+	//bool CollisionManager::squaredRadiusCheckObjects(GameObject* object1, GameObject* object2);
 private:
 	CollisionManager();
 	~CollisionManager();

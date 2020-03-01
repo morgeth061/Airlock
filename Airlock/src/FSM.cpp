@@ -65,17 +65,23 @@ void PauseState::Exit() //"on exit" for pause state
 GameState::GameState() //ctor. of game state
 {
 	//Game::Instance()->init("Airlock", 0, 0, 1856, 960, false);
-	Game::Instance()->init("Airlock", 0, 0, 1856, 960, false);
+	Game::Instance()->init();
 }
 
 void GameState::Enter() //"on enter" of game state
 {
 	cout << "Entering Game..." << endl;
 	Texture::Instance()->load("../Assets/textures/FP_Level1.png", "Level1", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/FP_Level1_Walls.png", "Level1Walls", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/FP_Level2.png", "Level2", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/FP_Level2_Walls.png", "Level2Walls", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/Player_Circle.png", "playerCircle", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/Player_Circle_Transparent.png", "playerCircleTransparent", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/playerHealthBack.png", "playerHealthBack", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/playerHealth.png", "playerHealthBar", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/playerInventory.png", "playerInv", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/playerInventorySelected.png", "playerInvSelected", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/Loading_Screen.png", "loadingScreen", TheGame::Instance()->getRenderer());
 }
 
 void GameState::Update() //update for game state

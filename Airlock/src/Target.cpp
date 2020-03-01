@@ -22,22 +22,10 @@ Target::Target()
 
 	//Set Player Spawn
 	//DEFAULT
-	m_playerSpawn = glm::vec2(384.0f, 768.0f);
-
 
 	//generates level & collision
-	m_levelSelect = Level();
-	m_levelPtr = m_levelSelect.getLevel();
+	m_levelPtr = Level::Instance()->getLevel();
 	m_levelArray = *m_levelPtr;
-
-	for (int i = 0; i < 15; i++)
-	{
-		for (int j = 0; j < 29; j++)
-		{
-			cout << &m_levelArray[i][j];
-		}
-		cout << endl;
-	}
 
 	//Player Init
 	glm::vec2 size = Texture::Instance()->getTextureSize("player");
@@ -53,11 +41,11 @@ Target::Target()
 
 	//Set up health, name, and attack damage
 	setPlayerName("Astro");
-	setPlayerHealth(100);
+	setPlayerHealth(250);
 	setPlayerAtkDmg(50);
 	setPlayerDeath(false);
 	setInvIndex(0);
-
+	
 }
 
 //Target De-Ctor.
@@ -70,6 +58,18 @@ void Target::draw()
 {
 	int xComponent = getPosition().x;
 	int yComponent = getPosition().y;
+	Texture::Instance()->draw("playerCircle", xComponent, yComponent, Engine::Instance().GetRenderer(), true);
+
+	if(Game::Instance()->getCurrentLevel() == LEVEL1)
+	{
+		Texture::Instance()->draw("Level1Walls", 0, 0, Engine::Instance().GetRenderer(), false);
+	}
+	else if(Game::Instance()->getCurrentLevel() == LEVEL2)
+	{
+		Texture::Instance()->draw("Level2Walls", 0, 0, Engine::Instance().GetRenderer(), false);
+	}
+	
+	Texture::Instance()->draw("playerCircleTransparent", xComponent, yComponent, Engine::Instance().GetRenderer(), true);
 	Texture::Instance()->drawFrame("player", xComponent - 64, yComponent - 64, 128, 128, 1, m_iFrame, TheGame::Instance()->getRenderer(), getFlip());
 }
 
@@ -105,9 +105,11 @@ void Target::update()
 	//m_rSrc.x = m_rSrc.w * static_cast<int>((SDL_GetTicks() / 500) % m_iFrameMax);
 
 	//cout << m_playerHealth << endl;
-	
+
+	//m_levelSelect.setLevel(Game::s_pInstance->getCurrentLevel());
 	m_move();
 	m_checkBounds();
+	
 
 }
 
@@ -145,7 +147,15 @@ void Target::m_move()
 	{
 		newPosition = getPosition() + getVelocity() * 0.9f;
 		setPosition(newPosition);
-		Engine::Instance().SetGameWon();
+
+		if(Game::Instance()->getCurrentLevel() == LEVEL1)
+		{
+			Game::Instance()->levelChange(LEVEL2);
+		}
+		else if(Game::Instance()->getCurrentLevel() == LEVEL2)
+		{
+			Engine::Instance().SetGameWon();
+		}
 	}
 }
 
@@ -179,7 +189,7 @@ void Target::m_checkBounds()
 void Target::m_reset()
 {
 	setPlayerDeath(false);
-	setPlayerHealth(100);
+	setPlayerHealth(250);
 	setPosition(getPlayerSpawn());
 	setIsColliding(false);
 }
@@ -188,6 +198,11 @@ void Target::m_reset()
 void Target::setPlayerHealth(int health)
 {
 	m_playerHealth = health;
+}
+
+void Target::setPlayerScore(int score)
+{
+	playerScore = score;
 }
 
 //Setter for player's inventory index
@@ -235,6 +250,11 @@ void Target::m_playerKilled()
 int Target::getPlayerHealth()
 {
 	return m_playerHealth;
+}
+
+int Target::getPlayerScore()
+{
+	return playerScore;
 }
 
 //Getter for player's inventory index
