@@ -192,10 +192,10 @@ bool Game::init()
 void Game::render()
 {
 	SDL_RenderClear(m_pRenderer);
-
 	if(isLoading == true)
 	{
 		Texture::Instance()->draw("loadingScreen", 0, 0, TheGame::Instance()->getRenderer(), false);
+
 	}
 	else if(isLoading == false)
 	{
@@ -231,10 +231,6 @@ void Game::render()
 		Texture::Instance()->draw("playerInv", 715, 875, TheGame::Instance()->getRenderer(), false);
 		Texture::Instance()->draw("playerInvSelected", 715 + (64 * (m_pTarget->getInvIndex())), 875, TheGame::Instance()->getRenderer(), false);
 	}
-
-	
-	
-
 
 	//Draw to the screen
 	SDL_RenderPresent(m_pRenderer);
@@ -388,15 +384,12 @@ void Game::playerAttack()
 				break;
 			}
 		}
-
 	}
-	
 }
 
 void Game::levelChange(int newLevel)
 {
 	m_pTarget->setPlayerScore((m_pTarget->getPlayerScore()) + (m_pTarget->getPlayerHealth()));
-
 	deleteGameObjects();
 	setCurrentLevel(newLevel);
 	isLoading = true;

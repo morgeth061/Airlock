@@ -8,6 +8,9 @@
 #include "Level.h"
 #include "GameObjectType.h"
 
+ //SDL Libraries
+#include <SDL.h>
+
 const int Target::Size = 7;
 
 //Target Ctor.
@@ -15,6 +18,7 @@ Target::Target()
 {
 	//Animation init
 	Texture::Instance()->load("../Assets/textures/Player_SMG_Walking_Sheet.png", "player", TheGame::Instance()->getRenderer());
+
 	m_iSprite = 0;
 	m_iSpriteMax = 0;
 	m_iFrame = 0;
@@ -145,15 +149,23 @@ void Target::m_move()
 	}
 	else if (currentArray[newY][newX] == 3) //Tile is an Exit Tile
 	{
+
+
 		newPosition = getPosition() + getVelocity() * 0.9f;
 		setPosition(newPosition);
 
 		if(Game::Instance()->getCurrentLevel() == LEVEL1)
 		{
+			Texture::Instance()->draw("WonScreen", 0, 0, TheGame::Instance()->getRenderer(), false);
+			SDL_RenderPresent(Game::Instance()->getRenderer());
+			this_thread::sleep_for(chrono::milliseconds(1500));
 			Game::Instance()->levelChange(LEVEL2);
 		}
 		else if(Game::Instance()->getCurrentLevel() == LEVEL2)
 		{
+			Texture::Instance()->draw("WonScreen", 0, 0, TheGame::Instance()->getRenderer(), false);
+			SDL_RenderPresent(Game::Instance()->getRenderer());
+			this_thread::sleep_for(chrono::milliseconds(1500));
 			Engine::Instance().SetGameWon();
 		}
 	}
