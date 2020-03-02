@@ -148,7 +148,10 @@ Author:Ryan Ethier
 Date: Feb/16/2020
 Description:
 	 - Added spawn point variable for enemy re-spawning
-
+Author:Sojung (Serena) Lee
+Date: Mar/01/2020
+Description:
+	 - Updated enemy obstacle avoidance (enemy now moves around the purple islands & walls to seek player)
 
 
 ----------
@@ -161,6 +164,11 @@ FSM class
  - Ryan Ethier
  - Sojung (Serena) Lee - Jan/23/2020
 	- Updated background image with Robert's updated asset (larger resolution)
+Author: Sojung (Serena) Lee
+Date: Mar/01/2020
+Description:
+	- Updated title state with play button & level select button
+	- Added select level state (player chooses which level to start with)
 
 
 ----------
@@ -173,7 +181,10 @@ Engine class
  - Ryan Ethier
   - Sojung (Serena) Lee - Feb/1/2020
 	- updated setGameWon (added exit code)
-
+Author: Sojung (Serena) Lee
+Date: Mar/01/2020
+Description:
+	- Added Mouse position (Up, down, motion) for buttons
 
 ----------
 LEVEL CLASS
@@ -218,6 +229,10 @@ Date: Feb/11/2020
 Description:
 	- added Hit get & set functions (bool)
 	- added get & set functions for name, damage, and health
+Author:Sojung (Serena) Lee
+Date: Mar/01/2020
+Description:
+	- Added won screen after player reaches exit (if levelarray == 3)
 
 
 ----------
@@ -245,4 +260,15 @@ Description:
 	- Definitions for Util methods
 	- Adapted from GBC GAME3001 Template v4
 	- Defines mathematical functions needed for movement of game objects (e.g. enemies, player/target)
+		
+----------
+BUTTON CLASS
+----------
 
+Button class
+Author: Sojung (Serena) Lee
+Date: Mar/01/2020
+Description:
+	- Added bullet class
+	- Adapted from GAME1017 Assignment 1 (Starting Project)
+	- Defined play button, exit button, select level button, level 1 2 3 buttons
