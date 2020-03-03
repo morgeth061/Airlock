@@ -15,6 +15,7 @@ class Level
 private:
 	array_type m_pLevel1Array;
 	array_type m_pLevel2Array;
+	array_type m_pLevel3Array;
 	array_type m_pLevelPtr;
 
 	//Singleton
