@@ -101,7 +101,7 @@ void Level2Button::Execute()
 Level3Button::Level3Button(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
 void Level3Button::Execute()
 {
-	Game::Instance()->setCurrentLevel(LEVEL2);
+	Game::Instance()->setCurrentLevel(LEVEL3);
 	Engine::Instance().GetFSM().ChangeState(new GameState());
 }
 

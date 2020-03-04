@@ -34,6 +34,7 @@ public:
 	void setPlayerAtkDmg(int);
 	void setPlayerDeath(bool);
 	void setPlayerSpawn(glm::vec2);
+	void setKeysHeld(int);
 
 	//Checker for Player Death
 	void m_playerKilled();
@@ -46,6 +47,11 @@ public:
 	int getPlayerAtkDmg();
 	bool getPlayerStatus();
 	glm::vec2 getPlayerSpawn();
+	int getKeysHeld();
+
+	//public methods
+	void updateLevel();
+	void addKey();
 
 	//Reset Method
 	void m_reset();
@@ -71,6 +77,7 @@ private:
 	//Private Attributes
 	int m_playerHealth;
 	int playerScore;
+	int m_pKeysHeld;
 	short m_invIndex;
 	string m_playerName;
 	int m_playerAtkDmg;
