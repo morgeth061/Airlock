@@ -5,7 +5,6 @@ Minerals Class
 
 #include "Minerals.h"
 #include "Game.h"
-#include "Engine.h"
 
 //Mineral Ctor
 Minerals::Minerals()

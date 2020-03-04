@@ -72,10 +72,13 @@ GameState::GameState() //ctor. of game state
 void GameState::Enter() //"on enter" of game state
 {
 	cout << "Entering Game..." << endl;
+	//Load Textures
 	Texture::Instance()->load("../Assets/textures/FP_Level1.png", "Level1", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/FP_Level1_Walls.png", "Level1Walls", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/FP_Level2.png", "Level2", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/FP_Level2_Walls.png", "Level2Walls", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/FP_Level3.png", "Level3", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/FP_Level3_Walls.png", "Level3Walls", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/Player_Circle.png", "playerCircle", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/Player_Circle_Transparent.png", "playerCircleTransparent", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/playerHealthBack.png", "playerHealthBack", TheGame::Instance()->getRenderer());
@@ -84,6 +87,9 @@ void GameState::Enter() //"on enter" of game state
 	Texture::Instance()->load("../Assets/textures/playerInventorySelected.png", "playerInvSelected", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/Loading_Screen.png", "loadingScreen", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/Won_Screen.png", "WonScreen", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/BreakableRock.png", "breakableRock", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/Chest_Open.png", "chestOpen", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/Chest_Closed.png", "chestClosed", TheGame::Instance()->getRenderer());
 }
 
 void GameState::Update() //update for game state

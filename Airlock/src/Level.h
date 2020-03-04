@@ -16,7 +16,13 @@ private:
 	array_type m_pLevel1Array;
 	array_type m_pLevel2Array;
 	array_type m_pLevel3Array;
+
+	array_type m_pLevel1ObjectArray;
+	array_type m_pLevel2ObjectArray;
+	array_type m_pLevel3ObjectArray;
+	
 	array_type m_pLevelPtr;
+	array_type m_pObjectPtr;
 
 	//Singleton
 	static Level* s_pInstance;
@@ -39,13 +45,14 @@ public:
 
 		return s_pInstance;
 	}
-	
-	
 
 	//setters
 	void setLevel(int);
+	void setObjects(int);
+	
 	//getters
 	array_type* getLevel();
+	array_type* getObjects();
 	
 };
 
