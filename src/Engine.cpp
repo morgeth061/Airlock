@@ -81,6 +81,17 @@ void Engine::HandleEvents()
 			if (event.key.keysym.sym == SDLK_ESCAPE)
 				m_bRunning = false;
 			break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (event.button.button >= 1 && event.button.button <= 3)
+				m_MouseState[event.button.button - 1] = true;
+			break;
+		case SDL_MOUSEBUTTONUP:
+			if (event.button.button >= 1 && event.button.button <= 3)
+				m_MouseState[event.button.button - 1] = false;
+			break;
+		case SDL_MOUSEMOTION:
+			SDL_GetMouseState(&m_MousePos.x, &m_MousePos.y);
+			break;
 		}
 	}
 }
@@ -155,7 +166,9 @@ FSM& Engine::GetFSM()
 	return *m_pFSM;
 }
 
+SDL_Point& Engine::GetMousePos() { return m_MousePos; }
 
+bool Engine::GetMouseState(int idx) { return m_MouseState[idx]; }
 
 void Engine::SetGameWon()
 {

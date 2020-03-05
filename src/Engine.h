@@ -33,6 +33,10 @@ private:
 	void Update();
 	void Render();
 	void Clean();
+
+	SDL_Point m_MousePos;
+	bool m_MouseState[3] = { 0,0,0 }; // Button up/down. Left, Middle, Right.
+
 public:
 	Engine();
 	~Engine();
@@ -41,5 +45,7 @@ public:
 	bool KeyDown(SDL_Scancode c);
 	SDL_Renderer* GetRenderer();
 	FSM& GetFSM();
+	SDL_Point& GetMousePos();
+	bool GetMouseState(int idx);
 	void SetGameWon();
 };

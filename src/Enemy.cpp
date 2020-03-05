@@ -100,12 +100,34 @@ void Enemy::m_move()
 	glm::vec2 newPosition = getPosition() + getVelocity() * m_maxSpeed;
 	int newX = (getPosition().x + getVelocity().x) / 64;
 	int newY = (getPosition().y + getVelocity().y) / 64;
+	float y = getPosition().y;
+	float x = getPosition().x;
 
 	//cout << endl << "got here" << endl;
 	if (levelArray[(newPosition.y + 12) / 64][newX] == 1 || levelArray[newY][(newPosition.x + 4) / 64] == 1 || levelArray[newY][(newPosition.x - 4) / 64] == 1)
 	{
 		//cout << endl << "a" << endl;
-		newPosition = getPosition();
+
+		if (Game::Instance()->m_pTarget->getPosition().y < getPosition().y && Game::Instance()->m_pTarget->getPosition().y != getPosition().y)
+		{
+			y -= 0.5;
+			newPosition = glm::vec2(getPosition().x, y);
+		}
+		else if (Game::Instance()->m_pTarget->getPosition().y > getPosition().y&& Game::Instance()->m_pTarget->getPosition().y != getPosition().y)
+		{
+			y += 0.5;
+			newPosition = glm::vec2(getPosition().x, y);
+		}
+		if (Game::Instance()->m_pTarget->getPosition().x > getPosition().x&& Game::Instance()->m_pTarget->getPosition().x != getPosition().x)
+		{
+			x += 0.5;
+			newPosition = glm::vec2(x, getPosition().y);
+		}
+		else if (Game::Instance()->m_pTarget->getPosition().x < getPosition().x && Game::Instance()->m_pTarget->getPosition().x != getPosition().x)
+		{
+			x -= 0.5;
+			newPosition = glm::vec2(x, getPosition().y);
+		}
 	}
 	setPosition(newPosition);
 }
