@@ -23,8 +23,6 @@
 #include "Target.h"
 #include "Minerals.h"
 #include "Bullet.h"
-#include "Key.h"
-#include "Chest.h"
 
 class Game
 {
@@ -81,8 +79,6 @@ public:
 	Target* m_pTarget;
 	vector <Enemy*> m_pEnemy;
 	vector <Minerals*> m_pMinerals;
-	vector <Key*> m_pKeys;
-	vector <Chest*> m_pChests;
 	
 	Level* levelPtr;
 
@@ -98,10 +94,6 @@ private:
 	//SDL Objects
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
-
-	//Level Objects
-	array_type* m_objectPtr;
-	array_type m_objectArray;
 
 	//Bullet Vector
 	vector<Bullet*> BullVec;
@@ -123,9 +115,6 @@ private:
 	int m_currentLevel;
 	bool isLoading;
 	bool canShoot;
-	int numOfEnemies = 0;
-	int numOfMinerals = 0;
-	int numOfKeys = 0;
 
 	//Private Methods
 	void createGameObjects();

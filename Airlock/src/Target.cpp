@@ -28,7 +28,8 @@ Target::Target()
 	//DEFAULT
 
 	//generates level & collision
-	
+	m_levelPtr = Level::Instance()->getLevel();
+	m_levelArray = *m_levelPtr;
 
 	//Player Init
 	glm::vec2 size = Texture::Instance()->getTextureSize("player");
@@ -40,7 +41,6 @@ Target::Target()
 	setType(GameObjectType::TARGET);
 	setFlip(SDL_FLIP_HORIZONTAL);
 	SetIdle();
-	m_pKeysHeld = 0;
 	int inventory[Size];
 
 	//Set up health, name, and attack damage
@@ -71,10 +71,6 @@ void Target::draw()
 	else if(Game::Instance()->getCurrentLevel() == LEVEL2)
 	{
 		Texture::Instance()->draw("Level2Walls", 0, 0, Engine::Instance().GetRenderer(), false);
-	}
-	else if(Game::Instance()->getCurrentLevel() == LEVEL3)
-	{
-		Texture::Instance()->draw("Level3Walls", 0, 0, Engine::Instance().GetRenderer(), false);
 	}
 	
 	Texture::Instance()->draw("playerCircleTransparent", xComponent, yComponent, Engine::Instance().GetRenderer(), true);
@@ -138,8 +134,6 @@ void Target::m_move()
 	//Checks if new coordinates are ground the player can walk on
 	glm::vec2 newPosition = getPosition() + getVelocity() * 0.9f;
 
-	//cout << currentArray[newY][newX] << endl;
-	
 	if (currentArray[newY][newX] == 0) //Tile is traversable
 	{
 		if ((currentArray[(getPosition().y + getVelocity().y + 32) / 64][newX] == 1) || (currentArray[newY][(getPosition().x + getVelocity().x + 8) / 64] == 1) || (currentArray[newY][(getPosition().x + getVelocity().x - 8) / 64] == 1))
@@ -155,6 +149,8 @@ void Target::m_move()
 	}
 	else if (currentArray[newY][newX] == 3) //Tile is an Exit Tile
 	{
+
+
 		newPosition = getPosition() + getVelocity() * 0.9f;
 		setPosition(newPosition);
 
@@ -170,18 +166,6 @@ void Target::m_move()
 			Texture::Instance()->draw("WonScreen", 0, 0, TheGame::Instance()->getRenderer(), false);
 			SDL_RenderPresent(Game::Instance()->getRenderer());
 			this_thread::sleep_for(chrono::milliseconds(1500));
-			Game::Instance()->levelChange(LEVEL3);
-			//Engine::Instance().SetGameWon();
-		}
-		else if (Game::Instance()->getCurrentLevel() == LEVEL3)
-		{
-			Texture::Instance()->draw("WonScreen", 0, 0, TheGame::Instance()->getRenderer(), false);
-			SDL_RenderPresent(Game::Instance()->getRenderer());
-			this_thread::sleep_for(chrono::milliseconds(1500));
-			Engine::Instance().SetGameWon();
-		}
-		else
-		{
 			Engine::Instance().SetGameWon();
 		}
 	}
@@ -264,11 +248,6 @@ void Target::setPlayerSpawn(glm::vec2 spawn)
 	m_playerSpawn = spawn;
 }
 
-void Target::setKeysHeld(int totalKeys)
-{
-	m_pKeysHeld = totalKeys;
-}
-
 //Checker for player death
 void Target::m_playerKilled()
 {
@@ -278,11 +257,6 @@ void Target::m_playerKilled()
 		cout << "player died" << endl;
 		//exit(EXIT_SUCCESS);
 	}
-}
-
-void Target::addKey()
-{
-	m_pKeysHeld++;
 }
 
 //Getter for player health
@@ -325,17 +299,6 @@ bool Target::getPlayerStatus()
 glm::vec2 Target::getPlayerSpawn()
 {
 	return m_playerSpawn;
-}
-
-int Target::getKeysHeld()
-{
-	return m_pKeysHeld;
-}
-
-void Target::updateLevel()
-{
-	m_levelPtr = Level::Instance()->getLevel();
-	m_levelArray = *m_levelPtr;
 }
 
 

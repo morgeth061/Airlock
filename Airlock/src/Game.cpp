@@ -10,6 +10,9 @@
 //Defines
 #define FPS 60
 
+int numofEnemies = 3;
+int numofMinerals = 2;
+
 //Singleton
 Game* Game::s_pInstance = 0;
 
@@ -28,7 +31,6 @@ void Game::setCurrentLevel(int level)
 {
 	m_currentLevel = level;
 	Level::Instance()->setLevel(level);
-	Level::Instance()->setObjects(level);
 
 	cout << "SET LEVEL TO " << level << endl;
 }
@@ -46,6 +48,9 @@ Game::Game()
 	bulletFrameMax = 120;
 	isLoading = false;
 	canShoot = true;
+
+	setCurrentLevel(LEVEL1);
+	cout << "CTOR" << endl;
 }
 
 //de-ctor.
@@ -56,70 +61,82 @@ Game::~Game()
 //Creates Game Objects
 void Game::createGameObjects()
 {
+
 	cout << "CREATING GAME OBJECTS" << endl;
 
-	//Player Creation/Update
-	if (m_pTarget == nullptr)
-		m_pTarget = new Target();
-	
-	m_pTarget->updateLevel();
+	//Creates player
+	m_pTarget = new Target();
 
-	//Reset Counts
-	numOfEnemies = 0;
-	numOfMinerals = 0;
-	numOfKeys = 0;
-
-	//Update Level Objects
-	Level::Instance()->setObjects(getCurrentLevel());
-	m_objectPtr = Level::Instance()->getObjects();
-	m_objectArray = *m_objectPtr;
-	array_type currentArray = m_objectArray;
-
-	//Spawn Objects
-	for (int x = 0; x < 29; x++) //X Coordinate
+	if(getCurrentLevel() == LEVEL1)
 	{
-		for (int y = 0; y < 15; y++) //Y Coordinate
+		numofEnemies = 3;
+		
+		//Creates enemies for Level 1
+		for (int count = 0; count < numofEnemies; count++)
 		{
-			//cout << currentArray[y][x] << endl;
-			if(currentArray[y][x] == 1) //Enemies
-			{
-				m_pEnemy.push_back(new Enemy());
-				m_pEnemy[numOfEnemies]->setEnemySpawn(glm::vec2((x*64.0f)+32.0f, (y * 64.0f) + 32.0f));
-				m_pEnemy[numOfEnemies]->setMaxSpeed(0.6f);
-				numOfEnemies++;
-				cout << "NEW ENEMY #" << numOfEnemies + 1 << " at (" << (x * 64.0f) + 32.0f << " , " << (y * 64.0f) + 32.0f << ")" << endl;
-			}
-			else if (currentArray[y][x] == 2) //Minerals
-			{
-				m_pMinerals.push_back(new Minerals());
-				m_pMinerals[numOfMinerals]->setSpawnPoint(glm::vec2((x * 64.0f) + 32.0f, (y * 64.0f) + 32.0f));
-				numOfMinerals++;
-				cout << "NEW MINERAL #" << numOfMinerals << " at (" << (x * 64.0f) + 32.0f << " , " << (y * 64.0f) + 32.0f << ")" << endl;
-			}
-			else if (currentArray[y][x] == 3) //Breakable Rocks
-			{
-
-			}
-			else if (currentArray[y][x] == 4) //Chests
-			{
-
-			}
-			else if (currentArray[y][x] == 5) //Keys
-			{
-				m_pKeys.push_back(new Key());
-				m_pKeys[numOfKeys]->setSpawnPoint(glm::vec2((x * 64.0f) + 32.0f, (y * 64.0f) + 32.0f));
-				numOfKeys++;
-				cout << "NEW KEY #" << numOfKeys << " at (" << (x * 64.0f) + 32.0f << " , " << (y * 64.0f) + 32.0f << ")" << endl;
-				
-			}
-			else if (currentArray[y][x] == 9) //Player Spawn
-			{
-				m_pTarget->setPlayerSpawn(glm::vec2(x * 64.0f, y * 64.0f));
-			}
+			m_pEnemy.push_back(new Enemy());
+			cout << "LEVEL 1 NEW ENEMY" << endl;
 		}
-	}
 
-	//Set Position for each object
+		m_pEnemy[0]->setEnemySpawn(glm::vec2(384.0f, 320.0f));
+		m_pEnemy[1]->setEnemySpawn(glm::vec2(960.0f, 480.0f));
+		m_pEnemy[2]->setEnemySpawn(glm::vec2(1472.0f, 640.0f));
+
+		numofMinerals = 2;
+		//Creates minerals for Level 1
+		for (int count = 0; count < numofMinerals; count++)
+		{
+			m_pMinerals.push_back(new Minerals);
+		}
+
+		m_pMinerals[0]->setSpawnPoint(glm::vec2(384.0f, 192.0f));
+		m_pMinerals[1]->setSpawnPoint(glm::vec2(1472.0f, 832.0f));
+
+		//Set Speed for Enemies
+		m_pEnemy[0]->setMaxSpeed(0.40f);
+		m_pEnemy[1]->setMaxSpeed(0.50f);
+		m_pEnemy[2]->setMaxSpeed(0.60f);
+
+		m_pTarget->setPlayerSpawn(glm::vec2(384.0f, 768.0f));
+	}
+	else if (getCurrentLevel() == LEVEL2)
+	{
+		numofEnemies = 4;
+		
+		//Creates enemies for Level 2
+		for (int count = 0; count < numofEnemies; count++)
+		{
+			m_pEnemy.push_back(new Enemy());
+			cout << "LEVEL 2 NEW ENEMY" << endl;
+		}
+
+		m_pEnemy[0]->setEnemySpawn(glm::vec2(512.0f, 768.0f));
+		m_pEnemy[1]->setEnemySpawn(glm::vec2(842.0f, 512.0f));
+		m_pEnemy[2]->setEnemySpawn(glm::vec2(1280.0f, 512.0f));
+		m_pEnemy[3]->setEnemySpawn(glm::vec2(1728.0f, 512.0f));
+
+		numofMinerals = 3;
+		//Creates minerals for Level 2
+		for (int count = 0; count < numofMinerals; count++)
+		{
+			m_pMinerals.push_back(new Minerals);
+		}
+
+		m_pMinerals[0]->setSpawnPoint(glm::vec2(512.0f, 256.0f));
+		m_pMinerals[1]->setSpawnPoint(glm::vec2(970.0f, 768.0f));
+		m_pMinerals[2]->setSpawnPoint(glm::vec2(1728.0f, 256.0f));
+
+		//Set Speed for Enemies
+		m_pEnemy[0]->setMaxSpeed(0.40f);
+		m_pEnemy[1]->setMaxSpeed(0.50f);
+		m_pEnemy[2]->setMaxSpeed(0.60f);
+		m_pEnemy[3]->setMaxSpeed(0.60f);
+
+		m_pTarget->setPlayerSpawn(glm::vec2(64.0f, 512.0f));
+	}
+	
+	
+
 	for (auto enemies : m_pEnemy)
 	{
 		enemies->setPosition(enemies->getEnemySpawn());
@@ -130,33 +147,28 @@ void Game::createGameObjects()
 		minerals->setPosition(minerals->getSpawnPoint());
 	}
 
-	for (auto keys : m_pKeys)
-	{
-		keys->setPosition(keys->getSpawnPoint());
-	}
-
 	m_pTarget->setPosition(m_pTarget->getPlayerSpawn());
 }
 
 void Game::deleteGameObjects()
 {
-	//m_pTarget = nullptr;
+	m_pTarget = nullptr;
 
 	if(m_pEnemy.empty() == false)
 	{
-		for (int count = 0; count < numOfEnemies; count++)
+		for (int count = 0; count < numofEnemies; count++)
 		{
 			delete Instance()->m_pEnemy[count];
 			Instance()->m_pEnemy[count] = nullptr;
 		}
 		m_pEnemy.erase(remove(m_pEnemy.begin(), m_pEnemy.end(), nullptr), m_pEnemy.end());
 		m_pEnemy.shrink_to_fit();
-		numOfEnemies = 0;
+		numofEnemies = 0;
 	}
 	
 	if(m_pMinerals.empty() == false)
 	{
-		for (int count = 0; count < numOfMinerals; count++)
+		for (int count = 0; count < numofMinerals; count++)
 		{
 			delete Instance()->m_pMinerals[count];
 			Instance()->m_pMinerals[count] = nullptr;
@@ -164,20 +176,7 @@ void Game::deleteGameObjects()
 		m_pMinerals.erase(remove(m_pMinerals.begin(), m_pMinerals.end(), nullptr), m_pMinerals.end());
 		m_pMinerals.shrink_to_fit();
 		Instance()->m_pMinerals.shrink_to_fit();
-		numOfMinerals = 0;
-	}
-
-	if (m_pKeys.empty() == false)
-	{
-		for (int count = 0; count < numOfKeys; count++)
-		{
-			delete Instance()->m_pKeys[count];
-			Instance()->m_pKeys[count] = nullptr;
-		}
-		m_pKeys.erase(remove(m_pKeys.begin(), m_pKeys.end(), nullptr), m_pKeys.end());
-		m_pKeys.shrink_to_fit();
-		Instance()->m_pKeys.shrink_to_fit();
-		numOfKeys = 0;
+		numofMinerals = 0;
 	}
 }
 
@@ -208,11 +207,6 @@ void Game::render()
 		{
 			Texture::Instance()->draw("Level2", 0, 0, TheGame::Instance()->getRenderer(), false);
 		}
-		else if (getCurrentLevel() == LEVEL3)
-		{
-			Texture::Instance()->draw("Level3", 0, 0, TheGame::Instance()->getRenderer(), false);
-		}
-
 
 		//Draw Bullets
 		for (int i = 0; i < BullVec.size(); i++)
@@ -225,16 +219,6 @@ void Game::render()
 		//Draw Minerals
 		for (auto minerals : m_pMinerals)
 			minerals->draw();
-
-		//Draw Keys
-		for (auto keys : m_pKeys)
-		{
-			if(keys->getIsActive() == true)
-			{
-				keys->draw();
-			}
-		}
-			
 
 		//Draw player
 		m_pTarget->draw();
@@ -269,16 +253,6 @@ void Game::update()
 		if (Collision::squaredRadiusCheck(m_pTarget, minerals, 0.25f))
 		{
 			//m_pMinerals[count]->update();
-		}
-	}
-
-	//Check for key/player collision
-	for (auto keys : m_pKeys)
-	{
-		//cout << "KEY ";
-		if (Collision::squaredRadiusCheck(m_pTarget, keys, 0.25f) && keys->getIsActive() == true)
-		{
-			
 		}
 	}
 	
@@ -337,15 +311,8 @@ void Game::update()
 		{
 			minerals->m_reset();
 		}
-
-		for (auto keys : m_pKeys)
-		{
-			keys->m_reset();
-		}
 	}
-	//cout << m_pKeys[0]->getPosition().x / 64 << " " << m_pKeys[0]->getPosition().y /64 << endl;
-	//cout << m_pKeys[0]->getIsActive() << " ";
-	//cout << "Player Score: " << m_pTarget->getPlayerScore() << endl;
+	cout << "Player Score: " << m_pTarget->getPlayerScore() << endl;
 }
 
 //Clean game on exit
@@ -484,7 +451,7 @@ void Game::handleEvents()
 				m_pTarget->setFlip(SDL_FLIP_HORIZONTAL);
 				break;
 			case SDLK_f:
-				for (int i = 0; i < numOfEnemies; i++)
+				for (int i = 0; i < numofEnemies; i++)
 				{
 					//if (Collision::squaredRadiusCheckObjects(m_pTarget, m_pEnemy[i]) && Collision::squaredRadiusCheck(m_pTarget, m_pEnemy[i]))
 					if(Collision::squaredRadiusCheck(m_pTarget, m_pEnemy[i], (Util::distance(m_pTarget->getPosition(), m_pEnemy[i]->getPosition()))))
@@ -517,7 +484,7 @@ void Game::handleEvents()
 				}
 				break;
 			case SDLK_0:
-				for (int count = 0; count < numOfEnemies; count++)
+				for (int count = 0; count < numofEnemies; count++)
 				{
 					m_pEnemy[count]->setSteeringState(SteeringState::IDLE);
 				}
@@ -606,7 +573,7 @@ void Game::handleEvents()
 			}
 
 			//If minerals collide with player.... what happens (add inventory?)
-			for (int count = 0; count < numOfMinerals; count++)
+			for (int count = 0; count < numofMinerals; count++)
 			{
 				//minerals disappear too slowly
 				//if (m_pMinerals[count]->getIsHit() == true && CollisionManager::squaredRadiusCheckObjects(m_pTarget, m_pMinerals[count])) 
@@ -621,20 +588,8 @@ void Game::handleEvents()
 				}
 			}
 
-			for (int count = 0; count < numOfKeys; count++)
-			{
-				if (m_pKeys[count]->getIsHit() == true)
-				{
-					m_pKeys[count]->setIsActive(false);
-					cout << "KEY COLLISION" << endl;
-					m_pTarget->addKey();
-				}
-			}
-
 
 			break;
-
-			
 		}
 	}
 }
