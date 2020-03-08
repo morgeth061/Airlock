@@ -56,6 +56,13 @@ Description:
 	- added playerAttack function
 		- if player bullets hit enemies, enemies take damange and bullets disappear
 		- enemy must be hit 4 times to disappear (Enemy health = 100, Bullet Damage = 25)
+Author:Sojung (Serena) Lee
+Date: Mar/08/2020
+Description:
+	- Added Shooting Up & Shooting Down Toggles
+		- Press 'Q' to shoot upwards only
+		- Press 'E' to shoot downwards only
+		- To turn off shooting up, press 'Q' again & to turn off shooting down, press 'E' again
 
 
 ----------
@@ -149,7 +156,7 @@ Date: Feb/16/2020
 Description:
 	 - Added spawn point variable for enemy re-spawning
 Author:Sojung (Serena) Lee
-Date: Mar/01/2020
+Date: Mar/01/2020 & Mar/08/2020
 Description:
 	 - Updated enemy obstacle avoidance (enemy now moves around the purple islands & walls to seek player)
 
@@ -248,6 +255,10 @@ Author: Sojung (Serena) Lee
 Date: Feb/25/2020
 Descripton:
 	- Changed bullet constructor (parameters uses SDL_Rect x & y instead of integers)
+Author: Sojung (Serena) Lee
+Date: Mar/08/2020
+Descripton:
+	- Added vertical shooting
 		
 ----------
 UTIL CLASS

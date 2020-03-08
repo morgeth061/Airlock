@@ -56,6 +56,8 @@ public:
 	//Reset Method
 	void m_reset();
 
+	bool up = false, bottom = false, right, left;
+
 protected:
 	//Animation Methods
 	int m_iSprite = 0,	// Which sprite to display for animation.

@@ -15,7 +15,8 @@ public:
 	SDL_Rect m_dst;
 	static const int speed = 1;
 	bool headRight;
-
+	bool headLeft;
+	bool up;
 
 	int m_bulletDmg;
 

@@ -26,11 +26,16 @@ private:
 
 	// steering behaviours
 	void m_seek();
+	void m_flee();
 	float m_maxSpeed;
 	double m_currentDirection;
 	float m_turnSpeed;
 	float m_steerForce;
 	glm::vec2 m_target;
+
+
+
+
 public:
 	Enemy();
 	~Enemy();

@@ -235,10 +235,9 @@ void Game::render()
 			}
 		}
 			
-
 		//Draw player
 		m_pTarget->draw();
-		
+
 		//Draw Health Bar
 		Texture::Instance()->draw("playerHealthBack", 0, 0, TheGame::Instance()->getRenderer(), false);
 		Texture::Instance()->draw("playerHealthBar", 100, 12, m_pTarget->getPlayerHealth() * 4, 40, TheGame::Instance()->getRenderer());
@@ -471,9 +470,11 @@ void Game::handleEvents()
 				break;
 			case SDLK_w:
 				m_pTarget->setVelocity(glm::vec2(m_pTarget->getVelocity().x, -1.0f));
+	
 				break;
 			case SDLK_s:
 				m_pTarget->setVelocity(glm::vec2(m_pTarget->getVelocity().x, 1.0f));
+
 				break;
 			case SDLK_a:
 				m_pTarget->setVelocity(glm::vec2(-1.0f, m_pTarget->getVelocity().y));
@@ -493,6 +494,28 @@ void Game::handleEvents()
 						cout << "ENEMY HIT" << " " << m_pEnemy[i]->getEnemyHealth() << endl;
 					}
 				}
+				break;
+			case SDLK_q:
+				for (auto bullets : BullVec) bullets->active = false;
+				m_pTarget->bottom = false;
+				if (m_pTarget->up == false)
+				{
+					m_pTarget->up = true;
+				}
+				else if (m_pTarget->up == true)
+					m_pTarget->up = false;
+
+				break;
+			case SDLK_e:
+				for (auto bullets : BullVec) bullets->active = false;
+				m_pTarget->up = false;
+				if (m_pTarget->bottom == false)
+				{
+					m_pTarget->bottom = true;
+				}
+				else if (m_pTarget->bottom == true)
+					m_pTarget->bottom = false;
+
 				break;
 			case SDLK_UP:
 				if (m_pTarget->getInvIndex() == 6) 
