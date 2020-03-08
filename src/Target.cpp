@@ -136,7 +136,7 @@ void Target::m_move()
 	array_type currentArray = m_levelArray;
 
 	//Checks if new coordinates are ground the player can walk on
-	glm::vec2 newPosition = getPosition() + getVelocity() * 0.9f;
+	glm::vec2 newPosition = getPosition() + getVelocity() * 0.8f;
 
 	//cout << currentArray[newY][newX] << endl;
 	
@@ -155,7 +155,7 @@ void Target::m_move()
 	}
 	else if (currentArray[newY][newX] == 3) //Tile is an Exit Tile
 	{
-		newPosition = getPosition() + getVelocity() * 0.9f;
+		newPosition = getPosition() + getVelocity() * 0.5f;
 		setPosition(newPosition);
 
 		if(Game::Instance()->getCurrentLevel() == LEVEL1)

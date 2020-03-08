@@ -6,6 +6,7 @@
 enum SteeringState {
 	IDLE,
 	SEEK,
+	FLEE,
 	NUM_OF_STATES
 };
 

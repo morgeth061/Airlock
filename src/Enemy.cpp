@@ -35,7 +35,7 @@ Enemy::Enemy()
 	m_maxSpeed = 1.0f;
 	m_currentDirection = 0.0;
 	m_turnSpeed = 2.0f;
-	m_steerForce = 0.1f;
+	m_steerForce = 0.5f;
 
 	// set up health, name, and attack damage (PLEASE CHANGE ONCE DETAILS ARE FINALIZED)
 	setEnemyHealth(100);
@@ -71,6 +71,12 @@ void Enemy::m_checkState()
 		m_checkArrival();
 		m_move();
 		break;
+	case SteeringState::FLEE:
+		m_flee();
+		m_checkBounds();
+		m_checkArrival();
+		m_move();
+		break;
 	}
 }
 
@@ -94,43 +100,89 @@ void Enemy::turnRight()
 void Enemy::turnLeft()
 {
 }
+
 // Enemy Movement
 void Enemy::m_move()
 {
+	//up or down : levelArray[(newPosition.y + 12) / 64][newX] == 1
+	//side to side : levelArray[newY][(newPosition.x + 4) / 64] == 1 || levelArray[newY][(newPosition.x - 4) / 64] == 1
+
 	glm::vec2 newPosition = getPosition() + getVelocity() * m_maxSpeed;
 	int newX = (getPosition().x + getVelocity().x) / 64;
 	int newY = (getPosition().y + getVelocity().y) / 64;
 	float y = getPosition().y;
 	float x = getPosition().x;
 
-	//cout << endl << "got here" << endl;
-	if (levelArray[(newPosition.y + 12) / 64][newX] == 1 || levelArray[newY][(newPosition.x + 4) / 64] == 1 || levelArray[newY][(newPosition.x - 4) / 64] == 1)
+	if ((levelArray[(newPosition.y + 12) / 64][newX] == 0 || levelArray[newY][(newPosition.x + 4) / 64] == 0 || levelArray[newY][(newPosition.x - 4) / 64] == 0) &&
+		(levelArray[((newPosition.y + 12) / 64) + 0.5][newX] == 1 || levelArray[((newPosition.y + 12) / 64) - 0.5][newX] == 1 ||
+			levelArray[newY][((newPosition.x + 4) / 64) - 0.5] == 1 || levelArray[newY][((newPosition.x + 4) / 64) + 0.5] == 1 ||
+			levelArray[newY][((newPosition.x - 4) / 64) - 0.5] == 1 || levelArray[newY][((newPosition.x - 4) / 64) + 0.5] == 1))
 	{
-		//cout << endl << "a" << endl;
+		if ((levelArray[newY][(newPosition.x + 4) / 64] == 0 || levelArray[newY][(newPosition.x - 4) / 64] == 0) &&
+			(levelArray[newY][((newPosition.x + 4) / 64) + 1] == 1 || levelArray[newY][((newPosition.x - 4) / 64) + 1] == 1))
+		{
+			if (Game::Instance()->m_pTarget->getPosition().y < getPosition().y)
+			{
+				y -= 0.5;
+				newPosition = glm::vec2(getPosition().x, y);
+			}
+			else if (Game::Instance()->m_pTarget->getPosition().y > getPosition().y)
+			{
+				y += 0.5;
+				newPosition = glm::vec2(getPosition().x, y);
+			}
+		}
+		else if ((levelArray[newY][(newPosition.x + 4) / 64] == 0 || levelArray[newY][(newPosition.x - 4) / 64] == 0) &&
+			(levelArray[newY][((newPosition.x + 4) / 64) - 1] == 1 || levelArray[newY][((newPosition.x - 4) / 64) - 1] == 1))
+		{
+			if (Game::Instance()->m_pTarget->getPosition().y < getPosition().y)
+			{
+				y -= 0.5;
+				newPosition = glm::vec2(getPosition().x, y);
+			}
+			else if (Game::Instance()->m_pTarget->getPosition().y > getPosition().y)
+			{
+				y += 0.5;
+				newPosition = glm::vec2(getPosition().x, y);
+			}
+		}
 
-		if (Game::Instance()->m_pTarget->getPosition().y < getPosition().y && Game::Instance()->m_pTarget->getPosition().y != getPosition().y)
+		if ((levelArray[((newPosition.y - 12) / 64)][newX] == 0 || levelArray[((newPosition.y - 12) / 64)][newX] == 0) &&
+			(levelArray[((newPosition.y + 12) / 64) - 0.5][newX] == 1 || levelArray[((newPosition.y + 12) / 64) + 0.5][newX] == 1))
 		{
-			y -= 0.5;
-			newPosition = glm::vec2(getPosition().x, y);
+			if (Game::Instance()->m_pTarget->getPosition().x > getPosition().x)
+			{
+				x += 0.5;
+				newPosition = glm::vec2(x, getPosition().y);
+			}
+			else if (Game::Instance()->m_pTarget->getPosition().x < getPosition().x)
+			{
+				x -= 0.5;
+				newPosition = glm::vec2(x, getPosition().y);
+			}
 		}
-		else if (Game::Instance()->m_pTarget->getPosition().y > getPosition().y&& Game::Instance()->m_pTarget->getPosition().y != getPosition().y)
+		if ((levelArray[((newPosition.y - 12) / 64)][newX] == 0 || levelArray[((newPosition.y - 12) / 64)][newX] == 0) &&
+			(levelArray[((newPosition.y + 12) / 64) + 0.5][newX] == 1 || levelArray[((newPosition.y + 12) / 64) - 0.5][newX] == 1))
 		{
-			y += 0.5;
-			newPosition = glm::vec2(getPosition().x, y);
+			if (Game::Instance()->m_pTarget->getPosition().x > getPosition().x)
+			{
+				x += 0.5;
+				newPosition = glm::vec2(x, getPosition().y);
+			}
+			else if (Game::Instance()->m_pTarget->getPosition().x < getPosition().x)
+			{
+				x -= 0.5;
+				newPosition = glm::vec2(x, getPosition().y);
+			}
 		}
-		if (Game::Instance()->m_pTarget->getPosition().x > getPosition().x&& Game::Instance()->m_pTarget->getPosition().x != getPosition().x)
-		{
-			x += 0.5;
-			newPosition = glm::vec2(x, getPosition().y);
-		}
-		else if (Game::Instance()->m_pTarget->getPosition().x < getPosition().x && Game::Instance()->m_pTarget->getPosition().x != getPosition().x)
-		{
-			x -= 0.5;
-			newPosition = glm::vec2(x, getPosition().y);
-		}
+	}
+	else if ((levelArray[(newPosition.y + 12) / 64][newX] == 1 || levelArray[newY][(newPosition.x + 4) / 64] == 1 || levelArray[newY][(newPosition.x - 4) / 64] == 1))
+	{
+		setSteeringState(FLEE);
 	}
 	setPosition(newPosition);
 }
+
 // Enemy Target Getter
 glm::vec2 Enemy::getTarget()
 {
@@ -190,6 +242,16 @@ void Enemy::m_seek()
 {
 
 	glm::vec2 steeringVelocity = m_target - getPosition();
+	steeringVelocity = Util::normalize(steeringVelocity);
+
+	setVelocity(steeringVelocity);
+}
+
+// Seek State for enemy
+void Enemy::m_flee()
+{
+
+	glm::vec2 steeringVelocity = getPosition() - m_target;
 	steeringVelocity = Util::normalize(steeringVelocity);
 
 	setVelocity(steeringVelocity);

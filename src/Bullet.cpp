@@ -9,7 +9,9 @@ BULLET class
 #include "Bullet.h"
 #include "Engine.h"
 #include "Game.h"
+#include <Windows.h>
 #define WIDTH 1024
+
 
 // Bullet Ctor
 Bullet::Bullet(SDL_Rect s, SDL_Rect d, int spd)
@@ -22,8 +24,10 @@ Bullet::Bullet(SDL_Rect s, SDL_Rect d, int spd)
 	//Makes sure Bullets shoots the way the player is looking
 	if (Game::Instance()->m_pTarget->getFlip() == SDL_FLIP_HORIZONTAL)
 		headRight = true;
-	else
+	else if (Game::Instance()->m_pTarget->getFlip() == SDL_FLIP_NONE)
 		headRight = false;
+	else if (Game::Instance()->m_pTarget->up == true)
+		up = true;
 }
 
 // Bullet De-Ctor
@@ -33,11 +37,27 @@ Bullet::~Bullet()
 // Bullet Update
 void Bullet::update()
 {
-	if (headRight)
+	if (Game::Instance()->m_pTarget->up == true)
+	{ 
+		m_dst.y -= speed;
+		m_dst.x = Game::Instance()->m_pTarget->getPosition().x;
+	}
+	else if (Game::Instance()->m_pTarget->bottom == true)
+	{
+		m_dst.y += speed;
+		m_dst.x = Game::Instance()->m_pTarget->getPosition().x;
+	}
+	else if (headRight)
+	{
 		m_dst.x += speed;
+		m_dst.y = Game::Instance()->m_pTarget->getPosition().y;
+	}
 	else
+	{
 		m_dst.x -= speed;
-	if (m_dst.x > TheGame::Instance()->getTargetPosition().x + 150 || m_dst.x < TheGame::Instance()->getTargetPosition().x - 150)
+		m_dst.y = Game::Instance()->m_pTarget->getPosition().y;
+	}
+	if (m_dst.x > TheGame::Instance()->getTargetPosition().x + 150 || m_dst.x < TheGame::Instance()->getTargetPosition().x - 150 || m_dst.y < TheGame::Instance()->getTargetPosition().y - 150)
 	{
 		active = false;
 	}
@@ -66,4 +86,3 @@ int Bullet::getBulletDmg()
 {
 	return m_bulletDmg;
 }
-
