@@ -46,7 +46,7 @@ Target::Target()
 	//Set up health, name, and attack damage
 	setPlayerName("Astro");
 	setPlayerHealth(100);
-	setPlayerAtkDmg(50);
+	setPlayerAtkDmg(100);
 	setPlayerDeath(false);
 	setInvIndex(0);
 	

@@ -40,7 +40,7 @@ Enemy::Enemy()
 	// set up health, name, and attack damage (PLEASE CHANGE ONCE DETAILS ARE FINALIZED)
 	setEnemyHealth(100);
 	setEnemyName("Fairies");
-	setEnemyAtkDmg(20);
+	setEnemyAtkDmg(15);
 	setEnemyDeath(false);
 }
 

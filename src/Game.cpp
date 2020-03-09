@@ -380,7 +380,14 @@ void Game::objectPickUp()
 		if (Collision::squaredRadiusCheck(m_pTarget, minerals, 0.25f))
 		{
 			//testing player's health functions (will remove in future updates)
-			m_pTarget->setPlayerHealth(100);
+			if (m_pTarget->getPlayerHealth() < 81)
+			{
+				m_pTarget->setPlayerHealth(m_pTarget->getPlayerHealth()+20);
+			}
+			else
+			{
+				m_pTarget->setPlayerHealth(100);
+			}
 			m_pTarget->setPlayerScore(m_pTarget->getPlayerScore() + 500);
 			cout << "GAINED: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
 
