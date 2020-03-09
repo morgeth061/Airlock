@@ -19,7 +19,7 @@ Bullet::Bullet(SDL_Rect s, SDL_Rect d, int spd)
 	setType(GameObjectType::BULLET);
 	setIsColliding(false);
 	setIsHit(false);
-	setBulletDmg(25);
+	setBulletDmg(50);
 	m_dst = { d.x , d.y , 4,4 };
 	//Makes sure Bullets shoots the way the player is looking
 	if (Game::Instance()->m_pTarget->getFlip() == SDL_FLIP_HORIZONTAL)

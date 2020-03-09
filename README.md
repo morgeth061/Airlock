@@ -63,6 +63,12 @@ Description:
 		- Press 'Q' to shoot upwards only
 		- Press 'E' to shoot downwards only
 		- To turn off shooting up, press 'Q' again & to turn off shooting down, press 'E' again
+Author: Brandon Law
+Date: Mar/08/2020
+Description:
+	-Balanced regen values
+		-Player Health regen on mineral pickup set to 20
+			-Caps at max 100 health
 
 
 ----------
@@ -159,6 +165,11 @@ Author:Sojung (Serena) Lee
 Date: Mar/01/2020 & Mar/08/2020
 Description:
 	 - Updated enemy obstacle avoidance (enemy now moves around the purple islands & walls to seek player)
+Author: Brandon Law
+Date: Mar/08/2020
+Description:
+	-Balanced damage values
+		-Set enemy attack damage to 15
 
 
 ----------
@@ -240,6 +251,11 @@ Author:Sojung (Serena) Lee
 Date: Mar/01/2020
 Description:
 	- Added won screen after player reaches exit (if levelarray == 3)
+Author: Brandon Law
+Date: Mar/08/2020
+Description:
+	-Balanced damage values
+		-Set player attack damage to 75
 
 
 ----------
@@ -259,6 +275,11 @@ Author: Sojung (Serena) Lee
 Date: Mar/08/2020
 Descripton:
 	- Added vertical shooting
+Author: Brandon Law
+Date: Mar/08/2020
+Description:
+	-Balanced damage values
+		-Set bullet damage to 50
 		
 ----------
 UTIL CLASS
