@@ -28,7 +28,7 @@ bool Button::MouseCollision()
 		    my < (m_rDst.y + m_rDst.h) && my > m_rDst.y);
 }
 
-void Button::Update()
+bool Button::Update()
 {
 	bool col = MouseCollision();
 	switch (m_state)
@@ -51,12 +51,14 @@ void Button::Update()
 				m_state = STATE_OVER;
 				// Execute new "callback".
 				Execute();
+				return 1;
 			}
 			else 
 				m_state = STATE_UP;
 		}
 		break;
 	}
+	return 0;
 }
 
 void Button::Render()

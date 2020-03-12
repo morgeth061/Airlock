@@ -146,8 +146,8 @@ void Game::deleteGameObjects()
 	{
 		for (int count = 0; count < numOfEnemies; count++)
 		{
-			delete Instance()->m_pEnemy[count];
-			Instance()->m_pEnemy[count] = nullptr;
+			delete m_pEnemy[count];
+			m_pEnemy[count] = nullptr;
 		}
 		m_pEnemy.erase(remove(m_pEnemy.begin(), m_pEnemy.end(), nullptr), m_pEnemy.end());
 		m_pEnemy.shrink_to_fit();
@@ -408,9 +408,9 @@ void Game::playerAttack()
 				{
 					//if enemy health <= 0, enemy objects deleted
 					m_bENull = true;
+					numOfEnemies --;
 					delete m_pEnemy[j];
 					m_pEnemy[j] = nullptr;
-
 					m_pTarget->setPlayerScore(m_pTarget->getPlayerScore() + 100);
 				}
 				break;
@@ -640,7 +640,7 @@ void Game::handleEvents()
 				//issue: enemies can 'steal' object (which shouldn't happen)
 				if (m_pMinerals[count]->getIsHit() == true)
 				{
-					m_pMinerals[count]->setPosition(glm::vec2(2000.0f, 2000.0f));
+					m_pMinerals[count]->setPosition(glm::vec2(2000, 2000));
 				}
 			}
 
