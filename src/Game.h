@@ -13,6 +13,7 @@
 
 // Game Managers
 #include "CollisionManager.h"
+#include "SoundManager.h"
 
 //Enums
 #include "LevelNumber.h"

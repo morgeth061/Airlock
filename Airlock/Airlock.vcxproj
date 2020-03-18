@@ -32,6 +32,7 @@
     <ClCompile Include="..\src\Level.cpp" />
     <ClCompile Include="..\src\Main.cpp" />
     <ClCompile Include="..\src\Minerals.cpp" />
+    <ClCompile Include="..\src\SoundManager.cpp" />
     <ClCompile Include="..\src\Target.cpp" />
     <ClCompile Include="..\src\TextManager.cpp" />
     <ClCompile Include="..\src\TextureManager.cpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="..\src\Level.h" />
     <ClInclude Include="..\src\LevelNumber.h" />
     <ClInclude Include="..\src\Minerals.h" />
+    <ClInclude Include="..\src\SoundManager.h" />
     <ClInclude Include="..\src\SteeringState.h" />
     <ClInclude Include="..\src\Target.h" />
     <ClInclude Include="..\src\TextManager.h" />

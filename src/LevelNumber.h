@@ -7,6 +7,7 @@ enum LevelNumber {
 	LEVEL1,
 	LEVEL2,
 	LEVEL3,
+	DEBUG,
 	NUM_OF_LEVELS
 };
 #endif // defined __LEVEL_NUMBER__

@@ -146,8 +146,8 @@ void Game::deleteGameObjects()
 	{
 		for (int count = 0; count < numOfEnemies; count++)
 		{
-			delete m_pEnemy[count];
-			m_pEnemy[count] = nullptr;
+			delete Instance()->m_pEnemy[count];
+			Instance()->m_pEnemy[count] = nullptr;
 		}
 		m_pEnemy.erase(remove(m_pEnemy.begin(), m_pEnemy.end(), nullptr), m_pEnemy.end());
 		m_pEnemy.shrink_to_fit();
@@ -212,6 +212,10 @@ void Game::render()
 		{
 			Texture::Instance()->draw("Level3", 0, 0, TheGame::Instance()->getRenderer(), false);
 		}
+		else if (getCurrentLevel() == DEBUG)
+		{
+			Texture::Instance()->draw("Debug", 0, 0, TheGame::Instance()->getRenderer(), false);			
+		}
 
 
 		//Draw Bullets
@@ -257,6 +261,7 @@ void Game::update()
 	//Check for enemy/player collision
 	for (auto enemies : m_pEnemy)
 	{
+		//SoundManager::Instance()->playSound("playerHurt", 0);
 		Collision::squaredRadiusCheck(m_pTarget, enemies, 0.25f);
 		Collision::squaredRadiusCheck(m_pTarget, enemies, 1.0f);
 		enemies->update();
@@ -265,6 +270,8 @@ void Game::update()
 	//Check for mineral/player collision
 	for (auto minerals : m_pMinerals)
 	{
+
+		
 		if (Collision::squaredRadiusCheck(m_pTarget, minerals, 0.25f))
 		{
 			//m_pMinerals[count]->update();
@@ -274,6 +281,8 @@ void Game::update()
 	//Check for key/player collision
 	for (auto keys : m_pKeys)
 	{
+
+		
 		//cout << "KEY ";
 		if (Collision::squaredRadiusCheck(m_pTarget, keys, 0.25f) && keys->getIsActive() == true)
 		{
@@ -408,9 +417,9 @@ void Game::playerAttack()
 				{
 					//if enemy health <= 0, enemy objects deleted
 					m_bENull = true;
-					numOfEnemies --;
 					delete m_pEnemy[j];
 					m_pEnemy[j] = nullptr;
+
 					m_pTarget->setPlayerScore(m_pTarget->getPlayerScore() + 100);
 				}
 				break;
@@ -640,7 +649,9 @@ void Game::handleEvents()
 				//issue: enemies can 'steal' object (which shouldn't happen)
 				if (m_pMinerals[count]->getIsHit() == true)
 				{
-					m_pMinerals[count]->setPosition(glm::vec2(2000, 2000));
+					SoundManager::Instance()->playSound("playerPickup", 0);
+					m_pMinerals[count]->setPosition(glm::vec2(2000.0f, 2000.0f));
+					m_pMinerals[count]->setIsHit(false);
 				}
 			}
 
@@ -648,9 +659,11 @@ void Game::handleEvents()
 			{
 				if (m_pKeys[count]->getIsHit() == true)
 				{
-					m_pKeys[count]->setIsActive(false);
+					SoundManager::Instance()->playSound("playerPickup", 0);
 					cout << "KEY COLLISION" << endl;
 					m_pTarget->addKey();
+					m_pKeys[count]->setIsActive(false);
+					m_pKeys[count]->setIsHit(false);
 				}
 			}
 

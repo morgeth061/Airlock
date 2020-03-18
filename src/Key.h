@@ -3,6 +3,7 @@
 #define __KEY__
 #include "GameObject.h"
 #include "TextureManager.h"
+#include "SoundManager.h"
 
 class Key : public GameObject
 {

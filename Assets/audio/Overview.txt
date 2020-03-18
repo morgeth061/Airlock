@@ -1,0 +1,26 @@
+Author: Robert Palermo
+Date: 02 / 14 / 2020
+----------
+
+This archive contains Music and Sound effects for the Alpha release of Airlock.
+A list of contained assets and their use cases can be found below...
+
+----------
+
+SOUND EFECTS
+---
+Player_Slash.wav 	-> Sound of Player swinging  their sword
+Player_Shot1.wav	-> Variation of Player firing their gun
+Player_Shot2.wav	-> Variation of Player firing their gun
+Player_Walk.wav		-> Sound of Player walking
+Player_Hurt.wav		-> Sound of Player taking damage
+Player_Pickup.wav	-> Sound of Player picking up gem / item
+Player_Death.wav	-> Sound of Player dying
+Game_Start.wav		-> Sound of selecting to start the game
+Enemy_Hurt.wav		-> Sound of Enemy taking damage
+
+MUSIC
+---
+Music_World1.mp3	-> Music to play for the first world of the game
+
+----------

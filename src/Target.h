@@ -4,6 +4,7 @@
 
 #include "GameObject.h"
 #include "TextureManager.h"
+#include "SoundManager.h"
 #include "Level.h"
 
 class Target : public GameObject {

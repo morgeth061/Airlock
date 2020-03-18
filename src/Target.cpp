@@ -62,22 +62,27 @@ void Target::draw()
 {
 	int xComponent = getPosition().x;
 	int yComponent = getPosition().y;
-	Texture::Instance()->draw("playerCircle", xComponent, yComponent, Engine::Instance().GetRenderer(), true);
 
-	if(Game::Instance()->getCurrentLevel() == LEVEL1)
+	if (Game::Instance()->getCurrentLevel() != DEBUG)
 	{
-		Texture::Instance()->draw("Level1Walls", 0, 0, Engine::Instance().GetRenderer(), false);
-	}
-	else if(Game::Instance()->getCurrentLevel() == LEVEL2)
-	{
-		Texture::Instance()->draw("Level2Walls", 0, 0, Engine::Instance().GetRenderer(), false);
-	}
-	else if(Game::Instance()->getCurrentLevel() == LEVEL3)
-	{
-		Texture::Instance()->draw("Level3Walls", 0, 0, Engine::Instance().GetRenderer(), false);
+		Texture::Instance()->draw("playerCircle", xComponent, yComponent, Engine::Instance().GetRenderer(), true);
+
+		if (Game::Instance()->getCurrentLevel() == LEVEL1)
+		{
+			Texture::Instance()->draw("Level1Walls", 0, 0, Engine::Instance().GetRenderer(), false);
+		}
+		else if (Game::Instance()->getCurrentLevel() == LEVEL2)
+		{
+			Texture::Instance()->draw("Level2Walls", 0, 0, Engine::Instance().GetRenderer(), false);
+		}
+		else if (Game::Instance()->getCurrentLevel() == LEVEL3)
+		{
+			Texture::Instance()->draw("Level3Walls", 0, 0, Engine::Instance().GetRenderer(), false);
+		}
+
+		Texture::Instance()->draw("playerCircleTransparent", xComponent, yComponent, Engine::Instance().GetRenderer(), true);
 	}
 	
-	Texture::Instance()->draw("playerCircleTransparent", xComponent, yComponent, Engine::Instance().GetRenderer(), true);
 	Texture::Instance()->drawFrame("player", xComponent - 64, yComponent - 64, 128, 128, 1, m_iFrame, TheGame::Instance()->getRenderer(), getFlip());
 }
 
@@ -129,6 +134,8 @@ void Target::clean()
 //Move player
 void Target::m_move()
 {
+
+	SoundManager::Instance()->playSound("playerMove", 0);
 	//integers representing the new X and Y coordinates.
 	int newX = (getPosition().x + getVelocity().x) / 64;
 	int newY = (getPosition().y + getVelocity().y) / 64;

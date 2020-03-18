@@ -28,7 +28,7 @@ bool Button::MouseCollision()
 		    my < (m_rDst.y + m_rDst.h) && my > m_rDst.y);
 }
 
-bool Button::Update()
+void Button::Update()
 {
 	bool col = MouseCollision();
 	switch (m_state)
@@ -51,14 +51,12 @@ bool Button::Update()
 				m_state = STATE_OVER;
 				// Execute new "callback".
 				Execute();
-				return 1;
 			}
 			else 
 				m_state = STATE_UP;
 		}
 		break;
 	}
-	return 0;
 }
 
 void Button::Render()
@@ -72,6 +70,7 @@ void Button::Render()
 PlayButton::PlayButton(const char * s, SDL_Rect src, SDL_Rect dst):Button(s, src, dst){}
 void PlayButton::Execute()
 {
+	Game::Instance()->setCurrentLevel(DEBUG);
 	Engine::Instance().GetFSM().ChangeState(new GameState());
 }
 
@@ -90,6 +89,7 @@ void LevelSelectButton::Execute()
 Level1Button::Level1Button(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
 void Level1Button::Execute()
 {
+	Game::Instance()->setCurrentLevel(LEVEL1);
 	Engine::Instance().GetFSM().ChangeState(new GameState());
 }
 
