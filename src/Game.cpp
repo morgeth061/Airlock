@@ -419,7 +419,7 @@ void Game::playerAttack()
 					m_bENull = true;
 					delete m_pEnemy[j];
 					m_pEnemy[j] = nullptr;
-
+					numOfEnemies--;
 					m_pTarget->setPlayerScore(m_pTarget->getPlayerScore() + 100);
 				}
 				break;

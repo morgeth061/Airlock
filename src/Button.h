@@ -14,7 +14,7 @@ protected: // Private but inherited!
 public:
 	Button(const char* s, SDL_Rect src, SDL_Rect dst);
 	~Button();
-	void Update();
+	bool Update();
 	void Render();
 };
 
