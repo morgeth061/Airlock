@@ -102,7 +102,10 @@ void Game::createGameObjects()
 			}
 			else if (currentArray[y][x] == 4) //Chests
 			{
-
+				m_pChests.push_back(new Chest());
+				m_pChests[numOfChests]->setSpawnPoint(glm::vec2((x * 64.0f) + 32.0f, (y * 64.0f) + 32.0f));
+				numOfChests++;
+				cout << "NEW CHEST #" << numOfChests << " at (" << (x * 64.0f) + 32.0f << " , " << (y * 64.0f) + 32.0f << ")" << endl;
 			}
 			else if (currentArray[y][x] == 5) //Keys
 			{
@@ -133,6 +136,11 @@ void Game::createGameObjects()
 	for (auto keys : m_pKeys)
 	{
 		keys->setPosition(keys->getSpawnPoint());
+	}
+
+	for (auto chests : m_pChests)
+	{
+		chests->setPosition(chests->getSpawnPoint());
 	}
 
 	m_pTarget->setPosition(m_pTarget->getPlayerSpawn());
@@ -178,6 +186,19 @@ void Game::deleteGameObjects()
 		m_pKeys.shrink_to_fit();
 		Instance()->m_pKeys.shrink_to_fit();
 		numOfKeys = 0;
+	}
+
+	if (m_pChests.empty() == false)
+	{
+		for (int count = 0; count < numOfChests; count++)
+		{
+			delete Instance()->m_pChests[count];
+			Instance()->m_pChests[count] = nullptr;
+		}
+		m_pChests.erase(remove(m_pChests.begin(), m_pChests.end(), nullptr), m_pChests.end());
+		m_pChests.shrink_to_fit();
+		Instance()->m_pChests.shrink_to_fit();
+		numOfChests = 0;
 	}
 }
 
@@ -238,6 +259,12 @@ void Game::render()
 				keys->draw();
 			}
 		}
+
+		//Draw Chests
+		for (auto chests : m_pChests)
+		{
+			chests->draw();
+		}
 			
 		//Draw player
 		m_pTarget->draw();
@@ -281,12 +308,20 @@ void Game::update()
 	//Check for key/player collision
 	for (auto keys : m_pKeys)
 	{
-
-		
 		//cout << "KEY ";
 		if (Collision::squaredRadiusCheck(m_pTarget, keys, 0.25f) && keys->getIsActive() == true)
 		{
 			
+		}
+	}
+
+	//Check for key/player collision
+	for (auto chests : m_pChests)
+	{
+		//cout << "KEY ";
+		if (Collision::squaredRadiusCheck(m_pTarget, chests, 0.25f) && chests->getIsActive() == true)
+		{
+
 		}
 	}
 	
@@ -349,6 +384,11 @@ void Game::update()
 		for (auto keys : m_pKeys)
 		{
 			keys->m_reset();
+		}
+
+		for (auto chests : m_pChests)
+		{
+			chests->m_reset();
 		}
 	}
 	//cout << m_pKeys[0]->getPosition().x / 64 << " " << m_pKeys[0]->getPosition().y /64 << endl;
@@ -664,6 +704,22 @@ void Game::handleEvents()
 					m_pTarget->addKey();
 					m_pKeys[count]->setIsActive(false);
 					m_pKeys[count]->setIsHit(false);
+				}
+			}
+
+			for (int count = 0; count < numOfChests; count++)
+			{
+				if (m_pChests[count]->getIsHit() == true)
+				{
+					//SoundManager::Instance()->playSound("playerPickup", 0);
+					cout << "CHEST COLLISION" << endl;
+
+					if(m_pTarget->getKeysHeld() > 0)
+					{
+						m_pChests[count]->m_openChest();
+						m_pTarget->setKeysHeld(m_pTarget->getKeysHeld() - 1);
+					}
+					
 				}
 			}
 
