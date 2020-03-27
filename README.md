@@ -176,6 +176,12 @@ Date: Mar/01/2020
 Description:
 	- Updated title state with play button & level select button
 	- Added select level state (player chooses which level to start with)
+Author: Sojung (Serena) Lee
+Date: Mar/27/2020
+Description:
+	- Added handleEvents function to all states
+	- Erased while loop in GameState::Updated
+	- Organized game render, update, and handle events function in respective functions
 
 
 ----------
@@ -192,6 +198,10 @@ Author: Sojung (Serena) Lee
 Date: Mar/01/2020
 Description:
 	- Added Mouse position (Up, down, motion) for buttons
+Author: Sojung (Serena) Lee
+Date: Mar/27/2020
+Description:
+	- Added FSM handle events function
 
 ----------
 LEVEL CLASS

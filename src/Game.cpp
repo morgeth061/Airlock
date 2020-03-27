@@ -85,7 +85,7 @@ void Game::createGameObjects()
 			{
 				m_pEnemy.push_back(new Enemy());
 				m_pEnemy[numOfEnemies]->setEnemySpawn(glm::vec2((x*64.0f)+32.0f, (y * 64.0f) + 32.0f));
-				m_pEnemy[numOfEnemies]->setMaxSpeed(0.6f);
+				m_pEnemy[numOfEnemies]->setMaxSpeed(4.0f);
 				numOfEnemies++;
 				cout << "NEW ENEMY #" << numOfEnemies + 1 << " at (" << (x * 64.0f) + 32.0f << " , " << (y * 64.0f) + 32.0f << ")" << endl;
 			}
