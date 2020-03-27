@@ -68,8 +68,8 @@ void Engine::Sleep()
 
 void Engine::HandleEvents()
 {
+	m_pFSM->HandleEvents();
 	SDL_Event event;
-
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)

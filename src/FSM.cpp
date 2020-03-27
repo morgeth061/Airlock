@@ -54,6 +54,8 @@ void PauseState::Render() //render for pause state
 	State::Render();
 }
 
+void PauseState::HandleEvents() {} //handle events for pause state 
+
 void PauseState::Exit() //"on exit" for pause state
 {
 	cout << "Exiting Pause..." << endl;
@@ -108,26 +110,25 @@ void GameState::Enter() //"on enter" of game state
 
 void GameState::Update() //update for game state
 {
-	while (TheGame::Instance()->running())
-	{
-		TheGame::Instance()->handleEvents();
-		TheGame::Instance()->update();
-		TheGame::Instance()->render();
-
-	}
-	if (Engine::Instance().KeyDown(SDL_SCANCODE_P))
-		Engine::Instance().GetFSM().PushState(new PauseState());
-	else if (Engine::Instance().KeyDown(SDL_SCANCODE_X))
-		Engine::Instance().GetFSM().ChangeState(new TitleState());
+	TheGame::Instance()->update();
+	//if (Engine::Instance().KeyDown(SDL_SCANCODE_P))
+	//	Engine::Instance().GetFSM().PushState(new PauseState());
+	//else if (Engine::Instance().KeyDown(SDL_SCANCODE_X))
+	//	Engine::Instance().GetFSM().ChangeState(new TitleState());
 }
 
 void GameState::Render() //render for game state
 {
-	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), 255, 255, 255, 255);
-	SDL_RenderClear(Engine::Instance().GetRenderer());
+	//SDL_RenderClear(Engine::Instance().GetRenderer());
+	TheGame::Instance()->render();
 	//Texture::Instance()->draw("level1Map", 0, 0, Engine::Instance().GetRenderer(), false);
 	if (dynamic_cast<GameState*>(Engine::Instance().GetFSM().GetStates().back()))
 	State::Render();
+}
+
+void GameState::HandleEvents() //handle events for game state 
+{
+	TheGame::Instance()->handleEvents();
 }
 
 void GameState::Exit() //"on exit" for game state
@@ -179,10 +180,12 @@ void LevelSelectState::Render() //render for title state
 	Texture::Instance()->draw("titleScreen", 0, 0, Engine::Instance().GetRenderer(), false);
 	//Texture::Instance()->draw("title", (1028 / 2) - 7, 768 / 3, Engine::Instance().GetRenderer(), true);
 	//Texture::Instance()->draw("begin", 1028 / 2, 768 / 2, Engine::Instance().GetRenderer(), true);
-	for (int i = 0; i < (int)m_vButtons.size(); i++)
-		if (i <= 2) m_vButtons[i]->Render();
+	for (int i = 0; i < m_vButtons.size(); i++)
+		m_vButtons[i]->Render();
 	State::Render();
 }
+
+void LevelSelectState::HandleEvents() {} //handle events for level select state 
 
 void LevelSelectState::Exit() //"on exit" for title state
 {
@@ -244,11 +247,12 @@ void TitleState::Render() //render for title state
 	//Texture::Instance()->draw("title", (1028/2)-7, 768/3, Engine::Instance().GetRenderer(), true);
 	//Texture::Instance()->draw("begin", 1028 / 2, 768 / 2, Engine::Instance().GetRenderer(), true);
 	for (int i = 0; i < m_vButtons.size(); i++)
-	{
 		m_vButtons[i]->Render();
-	}
 	State::Render();
 }
+
+void TitleState::HandleEvents() {} // handle events for title state
+
 
 void TitleState::Exit() //"on exit" for title state
 {
@@ -288,6 +292,13 @@ void FSM::Render()
 	if (!m_vStates.empty())
 		m_vStates.back()->Render(); // Invokes the Render of the current state.
 }
+
+void FSM::HandleEvents()
+{
+	if (!m_vStates.empty())
+		m_vStates.back()->HandleEvents(); // Invokes the Handle Events of the current state.
+}
+
 void FSM::ChangeState(State* pState)
 {
 	if (!m_vStates.empty())
