@@ -127,6 +127,7 @@ private:
 	int numOfEnemies = 0;
 	int numOfMinerals = 0;
 	int numOfKeys = 0;
+	int numOfChests = 0;
 
 	//Private Methods
 	void createGameObjects();
