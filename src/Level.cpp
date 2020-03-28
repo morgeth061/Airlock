@@ -4,6 +4,7 @@ using namespace std;
 
 Level* Level::s_pInstance = 0;
 
+// Level Ctor
 Level::Level()
 {
 	/*Array represents grid-based game map with a width of 29 cells and a height of 15 cells.
@@ -153,11 +154,13 @@ Level::Level()
 
 }
 
+//Level De-Ctor
 Level::~Level()
 {
 	
 }
 
+//Level Setter
 void Level::setLevel(int levelSelect)
 {
 	if (levelSelect == LEVEL1)
@@ -178,6 +181,7 @@ void Level::setLevel(int levelSelect)
 	}
 }
 
+// Level Object Setter
 void Level::setObjects(int levelSelect)
 {
 	if (levelSelect == LEVEL1)
@@ -198,11 +202,13 @@ void Level::setObjects(int levelSelect)
 	}
 }
 
+//Level Getter
 array_type* Level::getLevel()
 {
 	return &m_pLevelPtr;
 }
 
+//Level Object Getter
 array_type* Level::getObjects()
 {
 	return &m_pObjectPtr;

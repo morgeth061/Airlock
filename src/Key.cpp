@@ -1,7 +1,14 @@
+/* 
+KEY Class
+Deals with all Key functionality
+*/
+
+
 #include "Key.h"
 #include "Game.h"
 #include "Engine.h"
 
+//Key Ctor
 Key::Key()
 {
 	Texture::Instance()->load("../Assets/textures/ChestKey.png", "chestKey", Game::Instance()->getRenderer());
@@ -16,10 +23,12 @@ Key::Key()
 	setType(GameObjectType::CHEST_KEY);
 }
 
+//Key De-Ctor
 Key::~Key()
 {
 }
 
+// Key Draw to Buffer
 void Key::draw()
 {
 	if(m_pIsActive == true)
@@ -32,34 +41,39 @@ void Key::draw()
 	}
 }
 
+// Key Update
 void Key::update()
 {
 }
 
+// Key Clean on Exit
 void Key::clean()
 {
 }
 
+// Key Spawnpoint Setter
 void Key::setSpawnPoint(glm::vec2 spawn)
 {
 	m_keySpawnPoint = spawn;
 }
 
+// Key is Active Setter
 void Key::setIsActive(bool active)
 {
 	m_pIsActive = active;
 }
 
+// Key Spawnpoint Getter
 glm::vec2 Key::getSpawnPoint()
 {
 	return m_keySpawnPoint;
 }
-
+// Key is Active Getter
 bool Key::getIsActive()
 {
 	return m_pIsActive;
 }
-
+// Key Reset
 void Key::m_reset()
 {
 	setIsColliding(false);

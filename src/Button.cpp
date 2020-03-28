@@ -1,3 +1,10 @@
+
+/*
+	Button Class
+	- Deals with functinality of all buttons in the game( pause, resume, level selector, etc.)
+
+*/
+
 #include <iostream>
 #include "Button.h"
 #include "Engine.h"
@@ -7,6 +14,7 @@
 
 using namespace std;
 
+// Button Ctor
 Button::Button(const char* s, SDL_Rect src, SDL_Rect dst)
 	: m_rSrc(src), m_rDst(dst), m_state(STATE_UP)
 {
@@ -15,11 +23,13 @@ Button::Button(const char* s, SDL_Rect src, SDL_Rect dst)
 	m_pText = IMG_LoadTexture(Engine::Instance().GetRenderer(), s);
 }
 
+// Button De-Ctor
 Button::~Button()
 {
 	SDL_DestroyTexture(m_pText);
 }
 
+// Check is Button is in collision with mouse
 bool Button::MouseCollision()
 {
 	int mx = Engine::Instance().GetMousePos().x;
@@ -28,6 +38,7 @@ bool Button::MouseCollision()
 		    my < (m_rDst.y + m_rDst.h) && my > m_rDst.y);
 }
 
+// Button Update
 bool Button::Update()
 {
 	bool col = MouseCollision();
@@ -61,6 +72,7 @@ bool Button::Update()
 	return 0;
 }
 
+//Button Render
 void Button::Render()
 {
 	m_rSrc.x = m_rSrc.w * (int)m_state;
@@ -69,6 +81,7 @@ void Button::Render()
 
 // Yes, the downside of the command pattern is we need a subclass for each unique type of button.
 
+//Execution of Play Button
 PlayButton::PlayButton(const char * s, SDL_Rect src, SDL_Rect dst):Button(s, src, dst){}
 void PlayButton::Execute()
 {
@@ -76,18 +89,21 @@ void PlayButton::Execute()
 	Engine::Instance().GetFSM().ChangeState(new GameState());
 }
 
+// Execution of Menu Button
 MenuButton::MenuButton(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
 void MenuButton::Execute()
 {
 	Engine::Instance().GetFSM().ChangeState(new TitleState());
 }
 
+// Execution of Level Selector Button
 LevelSelectButton::LevelSelectButton(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
 void LevelSelectButton::Execute()
 {
 	Engine::Instance().GetFSM().ChangeState(new LevelSelectState());
 }
 
+// Execution of Level 1 Button
 Level1Button::Level1Button(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
 void Level1Button::Execute()
 {
@@ -95,6 +111,7 @@ void Level1Button::Execute()
 	Engine::Instance().GetFSM().ChangeState(new GameState());
 }
 
+// Execution of Level 2 Button
 Level2Button::Level2Button(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
 void Level2Button::Execute()
 {
@@ -102,6 +119,7 @@ void Level2Button::Execute()
 	Engine::Instance().GetFSM().ChangeState(new GameState());
 }
 
+// Execution of Level 3 Button
 Level3Button::Level3Button(const char* s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
 void Level3Button::Execute()
 {
@@ -109,12 +127,14 @@ void Level3Button::Execute()
 	Engine::Instance().GetFSM().ChangeState(new GameState());
 }
 
+// Execution of Exit Button
 ExitButton::ExitButton(const char * s, SDL_Rect src, SDL_Rect dst):Button(s, src, dst){}
 void ExitButton::Execute()
 {
 	exit(EXIT_SUCCESS);
 }
 
+// Execution of Resume Button
 ResumeButton::ResumeButton(const char * s, SDL_Rect src, SDL_Rect dst) :Button(s, src, dst) {}
 void ResumeButton::Execute()
 {
