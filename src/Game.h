@@ -77,8 +77,6 @@ public:
 	glm::vec2 getTargetPosition();
 	int getTargetHealth();
 	int getCurrentLevel();
-	int getMineralCounter();
-	int getkeyCounter();
 
 	//Game Objects
 	Target* m_pTarget;
@@ -130,8 +128,6 @@ private:
 	int numOfMinerals = 0;
 	int numOfKeys = 0;
 	int numOfChests = 0;
-	int mineralCounter = 0;
-	int keyCounter = 0;
 
 	//Private Methods
 	void createGameObjects();
