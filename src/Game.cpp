@@ -24,6 +24,16 @@ int Game::getCurrentLevel()
 	return m_currentLevel;
 }
 
+int Game::getMineralCounter()
+{
+	return mineralCounter;
+}
+
+int Game::getkeyCounter()
+{
+	return keyCounter;
+}
+
 void Game::setCurrentLevel(int level)
 {
 	m_currentLevel = level;
@@ -275,6 +285,15 @@ void Game::render()
 
 		//Draw Inventory
 		Texture::Instance()->draw("playerInv", 715, 875, TheGame::Instance()->getRenderer(), false);
+		Texture::Instance()->draw("invSMG", 715, 875, TheGame::Instance()->getRenderer(), false);
+		if (getMineralCounter() > 0)
+		{
+			Texture::Instance()->draw("minerals", 715 + 64, 875, TheGame::Instance()->getRenderer(), false);
+		}
+		if (getkeyCounter() > 0)
+		{
+			Texture::Instance()->draw("chestKey", 715 + (64 * 2), 875, TheGame::Instance()->getRenderer(), false);
+		}
 		Texture::Instance()->draw("playerInvSelected", 715 + (64 * (m_pTarget->getInvIndex())), 875, TheGame::Instance()->getRenderer(), false);
 	}
 
@@ -311,7 +330,7 @@ void Game::update()
 		//cout << "KEY ";
 		if (Collision::squaredRadiusCheck(m_pTarget, keys, 0.25f) && keys->getIsActive() == true)
 		{
-			
+			keyCounter += 1;
 		}
 	}
 
@@ -432,7 +451,7 @@ void Game::objectPickUp()
 			m_pTarget->setPlayerHealth(100);
 			m_pTarget->setPlayerScore(m_pTarget->getPlayerScore() + 500);
 			cout << "GAINED: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
-
+			mineralCounter += 1;
 		}
 	}
 }

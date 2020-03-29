@@ -93,6 +93,7 @@ void GameState::Enter() //"on enter" of game state
 	Texture::Instance()->load("../Assets/textures/ScoreScreen_v1.png", "WonScreen", TheGame::Instance()->getRenderer());	Texture::Instance()->load("../Assets/textures/BreakableRock.png", "breakableRock", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/Chest_Open.png", "chestOpen", TheGame::Instance()->getRenderer());
 	Texture::Instance()->load("../Assets/textures/Chest_Closed.png", "chestClosed", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/Inv_SMG.png", "invSMG", TheGame::Instance()->getRenderer());
 
 	//load sounds
 	SoundManager::Instance()->load("../Assets/audio/Sound/Enemy_Hurt.wav", "enemyHurt", SOUND_SFX);
