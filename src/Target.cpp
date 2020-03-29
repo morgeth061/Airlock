@@ -283,6 +283,7 @@ void Target::m_playerKilled()
 	{
 		m_playerDeath = true;
 		cout << "player died" << endl;
+		SoundManager::Instance()->playSound("playerDeath", 0);
 		//exit(EXIT_SUCCESS);
 	}
 }

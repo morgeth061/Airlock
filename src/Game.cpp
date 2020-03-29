@@ -24,6 +24,16 @@ int Game::getCurrentLevel()
 	return m_currentLevel;
 }
 
+int Game::getMineralCounter()
+{
+	return mineralCounter;
+}
+
+int Game::getkeyCounter()
+{
+	return keyCounter;
+}
+
 void Game::setCurrentLevel(int level)
 {
 	m_currentLevel = level;
@@ -275,6 +285,15 @@ void Game::render()
 
 		//Draw Inventory
 		Texture::Instance()->draw("playerInv", 715, 875, TheGame::Instance()->getRenderer(), false);
+		Texture::Instance()->draw("invSMG", 715, 875, TheGame::Instance()->getRenderer(), false);
+		if (getMineralCounter() > 0)
+		{
+			Texture::Instance()->draw("minerals", 715 + 64, 875, TheGame::Instance()->getRenderer(), false);
+		}
+		if (m_pTarget->getKeysHeld() > 0)
+		{
+			Texture::Instance()->draw("chestKey", 715 + (64 * 2), 875, TheGame::Instance()->getRenderer(), false);
+		}
 		Texture::Instance()->draw("playerInvSelected", 715 + (64 * (m_pTarget->getInvIndex())), 875, TheGame::Instance()->getRenderer(), false);
 	}
 
@@ -432,7 +451,7 @@ void Game::objectPickUp()
 			m_pTarget->setPlayerHealth(100);
 			m_pTarget->setPlayerScore(m_pTarget->getPlayerScore() + 500);
 			cout << "GAINED: " << m_pTarget->getPlayerName() << " = Health: " << m_pTarget->getPlayerHealth() << endl;
-
+			mineralCounter += 1;
 		}
 	}
 }
@@ -453,6 +472,7 @@ void Game::playerAttack()
 				m_pEnemy[j]->setEnemyHealth(m_pEnemy[j]->getEnemyHealth() - BullVec[i]->getBulletDmg());
 				//cout << "Enemy HP = " << m_pEnemy[j]->getEnemyHealth() << endl;
 				BullVec[i]->active = false;
+				SoundManager::Instance()->playSound("enemyHurt", 0);
 				if (m_pEnemy[j]->getEnemyHealth() <= 0)
 				{
 					//if enemy health <= 0, enemy objects deleted
@@ -541,6 +561,8 @@ void Game::handleEvents()
 					{
 						m_pEnemy[i]->setEnemyHealth((m_pEnemy[i]->getEnemyHealth())-25);
 						cout << "ENEMY HIT" << " " << m_pEnemy[i]->getEnemyHealth() << endl;
+						SoundManager::Instance()->playSound("playerSlash", 0);
+						SoundManager::Instance()->playSound("enemyHurt", 0);
 					}
 				}
 				break;
@@ -621,6 +643,8 @@ void Game::handleEvents()
 				{
 					if (canShoot)
 					{
+
+						SoundManager::Instance()->playSound("playerShot1", 0);
 						BullVec.push_back(new Bullet({ 0,0,10,10 }, { (int)m_pTarget->getPosition().x,(int)m_pTarget->getPosition().y,10,10 }, 30));
 						bulletFrame = 0;
 						canShoot = false;
@@ -674,6 +698,7 @@ void Game::handleEvents()
 				if (enemies->getIsHit() == true && CollisionManager::squaredRadiusCheck(m_pTarget, enemies,0.25f))
 				{
 					enemies->setIsHit(false);
+					SoundManager::Instance()->playSound("playerHurt", 0);
 				}
 			}
 
@@ -716,6 +741,7 @@ void Game::handleEvents()
 
 					if(m_pTarget->getKeysHeld() > 0)
 					{
+						mineralCounter++;
 						m_pChests[count]->m_openChest();
 						m_pTarget->setKeysHeld(m_pTarget->getKeysHeld() - 1);
 					}
