@@ -17,7 +17,6 @@ public:
 	virtual void Enter() = 0;
 	virtual void Update() = 0;
 	virtual void Render();
-	virtual void HandleEvents() = 0;
 	virtual void Exit() = 0;
 	virtual void Resume();
 };
@@ -29,7 +28,6 @@ public:
 	void Enter();
 	void Update();
 	void Render();
-	void HandleEvents();
 	void Exit();
 };
 
@@ -40,7 +38,6 @@ public:
 	void Enter();
 	void Update();
 	void Render();
-	void HandleEvents();
 	void Exit();
 	void Resume();
 };
@@ -54,7 +51,6 @@ public:
 	void Enter();
 	void Update();
 	void Render();
-	void HandleEvents();
 	void Exit();
 };
 
@@ -68,7 +64,6 @@ public:
 	void Enter();
 	void Update();
 	void Render();
-	void HandleEvents();
 	void Exit();
 };
 
@@ -81,7 +76,6 @@ public:
 	~FSM();
 	void Update();
 	void Render();
-	void HandleEvents();
 	void ChangeState(State* pState); // Normal state change.
 	void PushState(State* pState); // GameState to PauseState.
 	void PopState(); // PauseState to GameState.

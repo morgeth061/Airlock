@@ -32,7 +32,7 @@ Enemy::Enemy()
 	setIsHit(false);
 	setType(GameObjectType::ENEMY);
 	setSteeringState(SteeringState::IDLE);
-	m_maxSpeed = 5.0f;
+	m_maxSpeed = 1.0f;
 	m_currentDirection = 0.0;
 	m_turnSpeed = 2.0f;
 	m_steerForce = 0.5f;
