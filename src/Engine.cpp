@@ -68,32 +68,30 @@ void Engine::Sleep()
 
 void Engine::HandleEvents()
 {
-	if (TheGame::Instance()->running() == true) m_pFSM->HandleEvents();
-	else{
-		SDL_Event event;
-		while (SDL_PollEvent(&event))
+	m_pFSM->HandleEvents();
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+	{
+		switch (event.type)
 		{
-			switch (event.type)
-			{
-			case SDL_QUIT: // User pressed window's 'x' button.
+		case SDL_QUIT: // User pressed window's 'x' button.
+			m_bRunning = false;
+			break;
+		case SDL_KEYDOWN: // Try SDL_KEYUP instead.
+			if (event.key.keysym.sym == SDLK_ESCAPE)
 				m_bRunning = false;
-				break;
-			case SDL_KEYDOWN: // Try SDL_KEYUP instead.
-				if (event.key.keysym.sym == SDLK_ESCAPE)
-					m_bRunning = false;
-				break;
-			case SDL_MOUSEBUTTONDOWN:
-				if (event.button.button >= 1 && event.button.button <= 3)
-					m_MouseState[event.button.button - 1] = true;
-				break;
-			case SDL_MOUSEBUTTONUP:
-				if (event.button.button >= 1 && event.button.button <= 3)
-					m_MouseState[event.button.button - 1] = false;
-				break;
-			case SDL_MOUSEMOTION:
-				SDL_GetMouseState(&m_MousePos.x, &m_MousePos.y);
-				break;
-			}
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (event.button.button >= 1 && event.button.button <= 3)
+				m_MouseState[event.button.button - 1] = true;
+			break;
+		case SDL_MOUSEBUTTONUP:
+			if (event.button.button >= 1 && event.button.button <= 3)
+				m_MouseState[event.button.button - 1] = false;
+			break;
+		case SDL_MOUSEMOTION:
+			SDL_GetMouseState(&m_MousePos.x, &m_MousePos.y);
+			break;
 		}
 	}
 }
