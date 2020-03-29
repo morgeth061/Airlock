@@ -72,7 +72,8 @@ void Button::Render()
 PlayButton::PlayButton(const char * s, SDL_Rect src, SDL_Rect dst):Button(s, src, dst){}
 void PlayButton::Execute()
 {
-	Game::Instance()->setCurrentLevel(DEBUG);
+	Game::Instance()->setCurrentLevel(LEVEL1);
+	//Game::Instance()->setCurrentLevel(DEBUG);
 	Engine::Instance().GetFSM().ChangeState(new GameState());
 }
 
