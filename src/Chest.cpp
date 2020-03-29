@@ -77,6 +77,7 @@ void Chest::m_openChest()
 	if(getIsOpen() == false)
 	{
 		setIsOpen(true);
+		SoundManager::Instance()->playSound("playerPickup", 0);
 	}
 }
 
