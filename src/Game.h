@@ -68,6 +68,10 @@ public:
 	{
 		return m_bRunning;
 	}
+	void setRunning(bool m_bRunning)
+	{
+		this->m_bRunning = m_bRunning;
+	}
 
 	//Setters
 	void setCurrentLevel(int);
@@ -91,6 +95,9 @@ public:
 
 	//Keystate Method
 	bool KeyDown(SDL_Scancode c);
+
+	//Points tracker for level
+	Label* LevelPointsLabel{};
 	
 private:
 	//Ctor.

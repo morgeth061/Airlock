@@ -113,6 +113,7 @@ void Level3Button::Execute()
 ExitButton::ExitButton(const char * s, SDL_Rect src, SDL_Rect dst):Button(s, src, dst){}
 void ExitButton::Execute()
 {
+	Engine::Instance().GetFSM().GetStates().back()->Exit();
 	exit(EXIT_SUCCESS);
 }
 

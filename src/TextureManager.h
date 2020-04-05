@@ -9,16 +9,18 @@
 #ifndef __TEXTURE_MANAGER__
 #define __TEXTURE_MANAGER__
 
-// Core Libraries
+ // Core Libraries
 #include <iostream>
 #include <string>
-#include <map> 
+#include <unordered_map>
 
-#include <glm\vec2.hpp>
+#include "glm/vec2.hpp"
 
-//SDL
+// SDL Libraries
 #include<SDL.h>
 #include<SDL_image.h>
+
+#include "Config.h"
 
 
 class TextureManager {
@@ -36,7 +38,7 @@ public:
 	}
 
 
-	bool load(std::string fileName, std::string id, SDL_Renderer* pRenderer);
+	bool load(const std::string& file_name, const std::string& id, SDL_Renderer* renderer);
 
 	void draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	void draw(std::string id, int x, int y, SDL_Renderer* pRenderer, bool centered = false, SDL_RendererFlip flip = SDL_FLIP_NONE);
@@ -49,7 +51,12 @@ public:
 	void drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* pRenderer, double angle, int alpha, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	void drawFrame(std::string id, int x, int y, int currentRow, int currentFrame, SDL_Renderer* pRenderer, double angle, int alpha, bool centered = false, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
+	void drawText(const std::string& id, int x, int y, SDL_Renderer* renderer, double angle, int alpha, bool centered = false, SDL_RendererFlip flip = SDL_FLIP_NONE);
+
 	glm::vec2 getTextureSize(std::string id);
+
+	bool addTexture(const std::string& id, std::shared_ptr<SDL_Texture> texture);
+	SDL_Texture* getTexture(const std::string& id);
 
 	void setAlpha(std::string id, Uint8 newAlpha);
 
@@ -64,7 +71,10 @@ private:
 	~TextureManager();
 
 	//texture map
-	std::map<std::string, SDL_Texture*> m_textureMap;
+	std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> m_textureMap;
+
+	bool m_exists(const std::string& id);
+
 
 	//singleton
 	static TextureManager* s_pInstance;

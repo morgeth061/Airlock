@@ -52,10 +52,14 @@ SDL_Renderer* Game::getRenderer()
 //ctor.
 Game::Game()
 {
+	const SDL_Color white = { 255, 255, 255, 255 };
+
 	bulletFrame = 0;
 	bulletFrameMax = 120;
 	isLoading = false;
 	canShoot = true;
+
+	LevelPointsLabel = new Label("Player Points Label", "Consolas", 50, white, glm::vec2(120.0f, 750.0f));
 }
 
 //de-ctor.
@@ -158,7 +162,7 @@ void Game::createGameObjects()
 
 void Game::deleteGameObjects()
 {
-	//m_pTarget = nullptr;
+	m_pTarget = nullptr;
 
 	if(m_pEnemy.empty() == false)
 	{
@@ -227,9 +231,8 @@ void Game::render()
 	if(isLoading == true)
 	{
 		Texture::Instance()->draw("loadingScreen", 0, 0, TheGame::Instance()->getRenderer(), false);
-
 	}
-	else if(isLoading == false)
+	else if (isLoading == false)
 	{
 		if (getCurrentLevel() == LEVEL1)
 		{
@@ -245,7 +248,7 @@ void Game::render()
 		}
 		else if (getCurrentLevel() == DEBUG)
 		{
-			Texture::Instance()->draw("Debug", 0, 0, TheGame::Instance()->getRenderer(), false);			
+			Texture::Instance()->draw("Debug", 0, 0, TheGame::Instance()->getRenderer(), false);
 		}
 
 
@@ -264,7 +267,7 @@ void Game::render()
 		//Draw Keys
 		for (auto keys : m_pKeys)
 		{
-			if(keys->getIsActive() == true)
+			if (keys->getIsActive() == true)
 			{
 				keys->draw();
 			}
@@ -275,26 +278,30 @@ void Game::render()
 		{
 			chests->draw();
 		}
-			
+
 		//Draw player
-		m_pTarget->draw();
-
-		//Draw Health Bar
-		Texture::Instance()->draw("playerHealthBack", 0, 0, TheGame::Instance()->getRenderer(), false);
-		Texture::Instance()->draw("playerHealthBar", 100, 12, m_pTarget->getPlayerHealth() * 4, 40, TheGame::Instance()->getRenderer());
-
-		//Draw Inventory
-		Texture::Instance()->draw("playerInv", 715, 875, TheGame::Instance()->getRenderer(), false);
-		Texture::Instance()->draw("invSMG", 715, 875, TheGame::Instance()->getRenderer(), false);
-		if (getMineralCounter() > 0)
+		if (m_pTarget != nullptr)
 		{
-			Texture::Instance()->draw("minerals", 715 + 64, 875, TheGame::Instance()->getRenderer(), false);
+			m_pTarget->draw();
+
+			//Draw Health Bar
+			Texture::Instance()->draw("playerHealthBack", 0, 0, TheGame::Instance()->getRenderer(), false);
+			Texture::Instance()->draw("playerHealthBar", 100, 12, m_pTarget->getPlayerHealth() * 4, 40, TheGame::Instance()->getRenderer());
+
+
+			//Draw Inventory
+			Texture::Instance()->draw("playerInv", 715, 875, TheGame::Instance()->getRenderer(), false);
+			Texture::Instance()->draw("invSMG", 715, 875, TheGame::Instance()->getRenderer(), false);
+			if (getMineralCounter() > 0)
+			{
+				Texture::Instance()->draw("minerals", 715 + 64, 875, TheGame::Instance()->getRenderer(), false);
+			}
+			if (m_pTarget->getKeysHeld() > 0)
+			{
+				Texture::Instance()->draw("chestKey", 715 + (64 * 2), 875, TheGame::Instance()->getRenderer(), false);
+			}
+			Texture::Instance()->draw("playerInvSelected", 715 + (64 * (m_pTarget->getInvIndex())), 875, TheGame::Instance()->getRenderer(), false);
 		}
-		if (m_pTarget->getKeysHeld() > 0)
-		{
-			Texture::Instance()->draw("chestKey", 715 + (64 * 2), 875, TheGame::Instance()->getRenderer(), false);
-		}
-		Texture::Instance()->draw("playerInvSelected", 715 + (64 * (m_pTarget->getInvIndex())), 875, TheGame::Instance()->getRenderer(), false);
 	}
 
 	//Draw to the screen
@@ -316,8 +323,6 @@ void Game::update()
 	//Check for mineral/player collision
 	for (auto minerals : m_pMinerals)
 	{
-
-		
 		if (Collision::squaredRadiusCheck(m_pTarget, minerals, 0.25f))
 		{
 			//m_pMinerals[count]->update();
@@ -344,7 +349,7 @@ void Game::update()
 		}
 	}
 	
-	m_pTarget->update();
+	if (m_pTarget != nullptr) m_pTarget->update();
 
 	//updates bullet objects
 	for (int i = 0; i < BullVec.size(); i++)
@@ -381,7 +386,7 @@ void Game::update()
 	}
 
 	//player death/respawn
-	if(m_pTarget->getPlayerStatus() == true)
+	if(m_pTarget != nullptr && m_pTarget->getPlayerStatus() == true)
 	{
 		m_pTarget->m_reset();
 
@@ -412,17 +417,15 @@ void Game::update()
 	}
 	//cout << m_pKeys[0]->getPosition().x / 64 << " " << m_pKeys[0]->getPosition().y /64 << endl;
 	//cout << m_pKeys[0]->getIsActive() << " ";
-	//cout << "Player Score: " << m_pTarget->getPlayerScore() << endl;
 }
 
 //Clean game on exit
 void Game::clean()
 {
 	std::cout << "cleaning game" << std::endl;
-
-	SDL_DestroyRenderer(m_pRenderer);
-	SDL_DestroyWindow(m_pWindow);
-	SDL_Quit();
+	mineralCounter = 0;
+	keyCounter = 0;
+	deleteGameObjects();
 }
 
 //Enemy attack function -> Reduces player health
@@ -445,7 +448,7 @@ void Game::objectPickUp()
 {
 	for (auto minerals : m_pMinerals)
 	{
-		if (Collision::squaredRadiusCheck(m_pTarget, minerals, 0.25f))
+		if (minerals->getIsHit() == true)
 		{
 			//testing player's health functions (will remove in future updates)
 			m_pTarget->setPlayerHealth(100);
@@ -490,7 +493,10 @@ void Game::playerAttack()
 
 void Game::levelChange(int newLevel)
 {
-	m_pTarget->setPlayerScore((m_pTarget->getPlayerScore()) + (m_pTarget->getPlayerHealth()));
+	//updating points each time level changes (then restart level)
+	Engine::Instance().LevelPointsVec.push_back(m_pTarget->getPlayerScore());
+	m_pTarget->setPlayerScore(0);
+
 	deleteGameObjects();
 	setCurrentLevel(newLevel);
 	isLoading = true;
