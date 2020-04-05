@@ -6,7 +6,9 @@
  */
 #pragma once
 #include <vector>
+#include <numeric>
 #include "Button.h"
+#include "Label.h"
 using namespace std;
 
 class State // Abstract base class.
@@ -29,6 +31,20 @@ public:
 	void Update();
 	void Render();
 	void Exit();
+};
+
+class WinState : public State
+{
+public:
+	WinState();
+	void Enter();
+	void Update();
+	void Render();
+	void Exit();
+private:
+	Label* m_pPlayerScoreLabel{};
+	vector <Label*> m_pLevelScoreLabel{};
+	Label* InstructionsLabel{};
 };
 
 class GameState : public State

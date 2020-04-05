@@ -47,5 +47,9 @@ public:
 	FSM& GetFSM();
 	SDL_Point& GetMousePos();
 	bool GetMouseState(int idx);
-	void SetGameWon();
+
+	bool returnTitle = false; //check if user can go to title screen.
+	bool gameWon = false; // check if user won
+
+	vector <int> LevelPointsVec; //vector for points of each level
 };

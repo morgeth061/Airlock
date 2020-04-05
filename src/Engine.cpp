@@ -78,6 +78,11 @@ void Engine::HandleEvents()
 			m_bRunning = false;
 			break;
 		case SDL_KEYDOWN: // Try SDL_KEYUP instead.
+			if (returnTitle == true)
+			{
+				returnTitle = false;
+				Engine::Instance().GetFSM().ChangeState(new TitleState());
+			}
 			if (event.key.keysym.sym == SDLK_ESCAPE)
 				m_bRunning = false;
 			break;
@@ -169,10 +174,3 @@ FSM& Engine::GetFSM()
 SDL_Point& Engine::GetMousePos() { return m_MousePos; }
 
 bool Engine::GetMouseState(int idx) { return m_MouseState[idx]; }
-
-void Engine::SetGameWon()
-{
-	m_bRunning = false;
-	Clean();
-	exit(EXIT_SUCCESS);
-}

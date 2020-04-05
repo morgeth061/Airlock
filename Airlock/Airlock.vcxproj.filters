@@ -54,9 +54,6 @@
     <ClCompile Include="..\src\Target.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\TextManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -77,6 +74,12 @@
     </ClCompile>
     <ClCompile Include="..\src\SoundManager.cpp">
       <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\FontManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Label.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,9 +113,6 @@
     <ClInclude Include="..\src\Target.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\TextManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\GameObjectType.h">
       <Filter>Enums</Filter>
     </ClInclude>
@@ -139,6 +139,15 @@
     </ClInclude>
     <ClInclude Include="..\src\SoundManager.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\FontManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Label.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

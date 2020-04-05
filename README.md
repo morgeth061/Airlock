@@ -63,6 +63,15 @@ Description:
 		- Press 'Q' to shoot upwards only
 		- Press 'E' to shoot downwards only
 		- To turn off shooting up, press 'Q' again & to turn off shooting down, press 'E' again
+Author:Sojung (Serena) Lee
+Date: Apr/05/2020
+Description:
+	- Added points label to show how much points earned in each level
+	- updated deleteGameObjects (target = nullptr)
+	- updated render (if target is not null, draw)
+	- updated clean (doesn't destroy SDL anymore, just deletes game objects)
+	- fixed mineral bug (only one mineral should be hit, not all)
+	- updated levelChange (updates points when level changes)
 
 
 ----------
@@ -176,6 +185,12 @@ Date: Mar/01/2020
 Description:
 	- Updated title state with play button & level select button
 	- Added select level state (player chooses which level to start with)
+Author: Sojung (Serena) Lee
+Date: Apr/05/2020
+Description:
+	- Added win state (shows game won screen & total game score)
+	- Updated GameState update (update points after winning game; exits while loop that controls game)
+	- Added quit button in TitleState (game no longer exits by itself, now exits only through button)
 
 
 ----------
@@ -192,6 +207,12 @@ Author: Sojung (Serena) Lee
 Date: Mar/01/2020
 Description:
 	- Added Mouse position (Up, down, motion) for buttons
+Author: Sojung (Serena) Lee
+Date: Apr/05/2020
+Description:
+	- removed setGameWon
+	- updated handleEvents
+		- if the user won the game, they can press any key to return to title state
 
 ----------
 LEVEL CLASS
@@ -240,6 +261,12 @@ Author:Sojung (Serena) Lee
 Date: Mar/01/2020
 Description:
 	- Added won screen after player reaches exit (if levelarray == 3)
+Author:Sojung (Serena) Lee
+Date: Apr/05/2020
+Description:
+	- After player moves towards exit (levelArray == 3), show points to screen using label
+	- If player finishes last level, set gameWon to true & exit game loop (in FSM)
+	- OPTIONAL: If player lost all heath, added "Game Over" screen (commented temporarily)
 
 
 ----------
@@ -283,3 +310,49 @@ Description:
 	- Added bullet class
 	- Adapted from GAME1017 Assignment 1 (Starting Project)
 	- Defined play button, exit button, select level button, level 1 2 3 buttons
+
+----------
+CONFIG CLASS
+----------
+
+Config class
+Author: Sojung (Serena) Lee
+Date: Apr/05/2020
+Description:
+	- Added Config class for text and font manager
+	- Adapted from GAME3001 Assignment 3
+	
+----------
+FONT MANAGER CLASS
+----------
+
+Font Manager class
+Author: Sojung (Serena) Lee
+Date: Apr/05/2020
+Description:
+	- Added font manager class for text and label (replaced text manager)
+	- Adapted from GAME3001 Assignment 3
+	
+----------
+LABEL MANAGER CLASS
+----------
+
+Label class
+Author: Sojung (Serena) Lee
+Date: Apr/05/2020
+Description:
+	- Added label class for text
+	- Adapted from GAME3001 Assignment 3
+	
+----------
+TEXTURE MANAGER CLASS
+----------
+
+Texture Manager class
+Author: Sojung (Serena) Lee
+Date: Apr/05/2020
+Description:
+	- Updated texture manager (based on GAME3001 Template 10D)
+	- Uses unordered map (not regular map) (uses shared ptr)
+	- updated/changed load function
+	- added drawText & addTexture functions

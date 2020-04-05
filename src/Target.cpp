@@ -168,6 +168,14 @@ void Target::m_move()
 		if(Game::Instance()->getCurrentLevel() == LEVEL1)
 		{
 			Texture::Instance()->draw("WonScreen", 0, 0, TheGame::Instance()->getRenderer(), false);
+
+			Game::Instance()->m_pTarget->setPlayerScore((Game::Instance()->m_pTarget->getPlayerScore()) + (Game::Instance()->m_pTarget->getPlayerHealth()));
+
+			Game::Instance()->LevelPointsLabel->setText("LEVEL SCORE [ " + to_string(Game::Instance()->m_pTarget->getPlayerScore()) + " ] POINTS");
+			Game::Instance()->LevelPointsLabel->setPosition(glm::vec2((1856 / 2), (960 / 2) + 100));
+			Game::Instance()->LevelPointsLabel->draw();
+
+
 			SDL_RenderPresent(Game::Instance()->getRenderer());
 			this_thread::sleep_for(chrono::milliseconds(1500));
 			Game::Instance()->levelChange(LEVEL2);
@@ -175,21 +183,24 @@ void Target::m_move()
 		else if(Game::Instance()->getCurrentLevel() == LEVEL2)
 		{
 			Texture::Instance()->draw("WonScreen", 0, 0, TheGame::Instance()->getRenderer(), false);
+
+			Game::Instance()->m_pTarget->setPlayerScore((Game::Instance()->m_pTarget->getPlayerScore()) + (Game::Instance()->m_pTarget->getPlayerHealth()));
+
+			Game::Instance()->LevelPointsLabel->setText("LEVEL SCORE [ " + to_string(Game::Instance()->m_pTarget->getPlayerScore()) + " ] POINTS");
+			Game::Instance()->LevelPointsLabel->setPosition(glm::vec2((1856 / 2), (960 / 2) + 100));
+			Game::Instance()->LevelPointsLabel->draw();
+
 			SDL_RenderPresent(Game::Instance()->getRenderer());
 			this_thread::sleep_for(chrono::milliseconds(1500));
 			Game::Instance()->levelChange(LEVEL3);
-			//Engine::Instance().SetGameWon();
 		}
 		else if (Game::Instance()->getCurrentLevel() == LEVEL3)
 		{
-			Texture::Instance()->draw("WonScreen", 0, 0, TheGame::Instance()->getRenderer(), false);
-			SDL_RenderPresent(Game::Instance()->getRenderer());
-			this_thread::sleep_for(chrono::milliseconds(1500));
-			Engine::Instance().SetGameWon();
-		}
-		else
-		{
-			Engine::Instance().SetGameWon();
+			Game::Instance()->m_pTarget->setPlayerScore((Game::Instance()->m_pTarget->getPlayerScore()) + (Game::Instance()->m_pTarget->getPlayerHealth()));
+
+			//exits game while loop
+			Engine::Instance().gameWon = true;
+			Game::Instance()->setRunning(false);
 		}
 	}
 }
@@ -281,10 +292,15 @@ void Target::m_playerKilled()
 {
 	if (m_playerHealth <= 0)
 	{
-		m_playerDeath = true;
+
 		cout << "player died" << endl;
 		SoundManager::Instance()->playSound("playerDeath", 0);
-		//exit(EXIT_SUCCESS);
+
+		//Texture::Instance()->draw("LoseScreen", 0, 0, TheGame::Instance()->getRenderer(), false);
+		//SDL_RenderPresent(Game::Instance()->getRenderer());
+		//this_thread::sleep_for(chrono::milliseconds(1500));
+
+		m_playerDeath = true;
 	}
 }
 
