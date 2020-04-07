@@ -1,36 +1,132 @@
-﻿  Button.cpp
-  Game.cpp
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(253,21): warning C4018:  '<': signed/unsigned mismatch
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(350,20): warning C4018:  '<': signed/unsigned mismatch
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,45): warning C4838:  conversion from 'T' to 'int' requires a narrowing conversion
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,45): warning C4838:         with
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,45): warning C4838:         [
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,45): warning C4838:             T=float
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,45): warning C4838:         ]
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,45): warning C4244:  'initializing': conversion from 'T' to 'int', possible loss of data
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,45): warning C4244:         with
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,45): warning C4244:         [
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,45): warning C4244:             T=float
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,45): warning C4244:         ]
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,78): warning C4838:  conversion from 'T' to 'int' requires a narrowing conversion
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,78): warning C4838:         with
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,78): warning C4838:         [
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,78): warning C4838:             T=float
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,78): warning C4838:         ]
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,78): warning C4244:  'initializing': conversion from 'T' to 'int', possible loss of data
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,78): warning C4244:         with
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,78): warning C4244:         [
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,78): warning C4244:             T=float
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(468,78): warning C4244:         ]
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(530,36): warning C4244:  '=': conversion from 'Sint32' to 'T', possible loss of data
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(530,36): warning C4244:         with
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(530,36): warning C4244:         [
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(530,36): warning C4244:             T=float
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(530,36): warning C4244:         ]
-  Generating Code...
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(531,36): warning C4244:  '=': conversion from 'Sint32' to 'T', possible loss of data
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(531,36): warning C4244:         with
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(531,36): warning C4244:         [
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(531,36): warning C4244:             T=float
-D:\OneDrive\Documents\GitHub\Airlock\src\Game.cpp(531,36): warning C4244:         ]
-  Airlock.vcxproj -> D:\OneDrive\Documents\GitHub\Airlock\Debug\Airlock.exe
+﻿  Enemy.cpp
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(29,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(29,15): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(29,15): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(29,15): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(29,15): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(30,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(30,16): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(30,16): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(30,16): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(30,16): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(60,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(60,17): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(60,17): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(60,17): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(60,17): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(61,17): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(61,17): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(61,17): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(61,17): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(61,17): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(118,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(118,11): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(118,11): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(118,11): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(118,11): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(119,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(119,11): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(119,11): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(119,11): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(119,11): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,39): warning C4244: 'argument': conversion from 'T' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,39): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,39): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,39): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,39): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,96): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,96): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,96): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,96): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,96): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,147): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,147): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,147): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,147): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(123,147): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(124,43): warning C4244: 'argument': conversion from 'double' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(124,103): warning C4244: 'argument': conversion from 'double' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(125,48): warning C4244: 'argument': conversion from 'double' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(125,107): warning C4244: 'argument': conversion from 'double' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(126,48): warning C4244: 'argument': conversion from 'double' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(126,107): warning C4244: 'argument': conversion from 'double' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(128,45): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(128,45): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(128,45): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(128,45): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(128,45): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(128,96): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(128,96): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(128,96): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(128,96): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(128,96): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(129,49): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(129,49): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(129,49): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(129,49): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(129,49): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(129,106): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(129,106): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(129,106): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(129,106): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(129,106): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(142,50): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(142,50): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(142,50): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(142,50): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(142,50): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(142,101): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(142,101): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(142,101): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(142,101): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(142,101): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(143,49): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(143,49): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(143,49): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(143,49): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(143,49): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(143,106): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(143,106): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(143,106): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(143,106): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(143,106): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(157,41): warning C4244: 'argument': conversion from 'T' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(157,41): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(157,41): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(157,41): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(157,41): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(157,95): warning C4244: 'argument': conversion from 'T' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(157,95): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(157,95): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(157,95): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(157,95): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(158,44): warning C4244: 'argument': conversion from 'double' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(158,104): warning C4244: 'argument': conversion from 'double' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(171,41): warning C4244: 'argument': conversion from 'T' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(171,41): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(171,41): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(171,41): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(171,41): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(171,95): warning C4244: 'argument': conversion from 'T' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(171,95): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(171,95): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(171,95): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(171,95): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(172,44): warning C4244: 'argument': conversion from 'double' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(172,104): warning C4244: 'argument': conversion from 'double' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,44): warning C4244: 'argument': conversion from 'T' to 'std::array<row_type,15>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,44): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,44): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,44): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,44): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,101): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,101): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,101): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,101): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,101): warning C4244:         ]
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,152): warning C4244: 'argument': conversion from 'T' to 'std::array<int,29>::size_type', possible loss of data
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,152): warning C4244:         with
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,152): warning C4244:         [
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,152): warning C4244:             T=float
+C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\src\Enemy.cpp(186,152): warning C4244:         ]
+  Airlock.vcxproj -> C:\Users\oliet\OneDrive\Documents\GitHub\Airlock\Debug\Airlock.exe

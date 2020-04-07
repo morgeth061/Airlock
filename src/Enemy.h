@@ -18,6 +18,8 @@ private:
 	int m_enemyAtkDmg;
 	bool m_enemyDeath;
 	glm::vec2 m_enemySpawnPoint;
+	SDL_Rect enemyHealthBarBack;
+	SDL_Rect enemyHealthBarFore;
 
 	void m_checkState();
 	void m_checkBounds();
