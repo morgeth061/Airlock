@@ -15,6 +15,10 @@ Enemy::Enemy()
 {
 	Texture::Instance()->load("../Assets/textures/enemy1.png",
 		"Enemy", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/enemyHealthBack.png",
+		"HealthBack", TheGame::Instance()->getRenderer());
+	Texture::Instance()->load("../Assets/textures/enemyHealthFore.png",
+		"HealthFore", TheGame::Instance()->getRenderer());
 
 //Generates level and level collision
 	levelPtr = Level::Instance()->getLevel();
@@ -56,6 +60,8 @@ void Enemy::draw()
 	int yComponent = getPosition().y;
 
 	Texture::Instance()->draw("Enemy", xComponent, yComponent, TheGame::Instance()->getRenderer(), m_currentDirection, 255, true);
+	Texture::Instance()->draw("HealthBack", xComponent - 25, yComponent - 45, 50, 5, TheGame::Instance()->getRenderer(), getFlip());
+	Texture::Instance()->draw("HealthFore", xComponent - 25, yComponent - 45, getEnemyHealth() / 2, 5, TheGame::Instance()->getRenderer(), getFlip());
 }
 
 //Checks steering state of the enemy(Either seek or idle)
