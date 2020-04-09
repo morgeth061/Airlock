@@ -40,22 +40,22 @@ void Bullet::update()
 	if (Game::Instance()->m_pTarget->up == true)
 	{ 
 		m_dst.y -= speed;
-		m_dst.x = Game::Instance()->m_pTarget->getPosition().x;
+		//m_dst.x = Game::Instance()->m_pTarget->getPosition().x;
 	}
 	else if (Game::Instance()->m_pTarget->bottom == true)
 	{
 		m_dst.y += speed;
-		m_dst.x = Game::Instance()->m_pTarget->getPosition().x;
+		//m_dst.x = Game::Instance()->m_pTarget->getPosition().x;
 	}
 	else if (headRight)
 	{
 		m_dst.x += speed;
-		m_dst.y = Game::Instance()->m_pTarget->getPosition().y;
+		//m_dst.y = Game::Instance()->m_pTarget->getPosition().y;
 	}
 	else
 	{
 		m_dst.x -= speed;
-		m_dst.y = Game::Instance()->m_pTarget->getPosition().y;
+		//m_dst.y = Game::Instance()->m_pTarget->getPosition().y;
 	}
 	if (m_dst.x > TheGame::Instance()->getTargetPosition().x + 150 || m_dst.x < TheGame::Instance()->getTargetPosition().x - 150 || m_dst.y < TheGame::Instance()->getTargetPosition().y - 150)
 	{
